@@ -4,7 +4,7 @@
       <div class="content">
         <div class="header">
           <div class="circle"></div>
-          <span class="code-class">.{{ codeClass }}</span>
+          <span class="code-class">{{ codeClass }}</span>
         </div>
         <div class="code" v-show="!edit" ref="codeHtml">
           <highlightjs language="Java" :autodetect="true" :code="editContent" />
@@ -40,6 +40,7 @@ const route = useRoute();
 const textArea = ref();
 // 点击“我也要分享代码”按钮之后
 function editFunc(): void {
+  codeClass.value = '';
   edit.value = true;
   editContent.value = '';
   // textarea元素自动获取焦点
@@ -57,14 +58,12 @@ async function verifyFunc(): Promise<void> {
     randomValue: randomValue,
     editContent: editContent.value,
   };
-  console.log(data);
-
   await addCodeStick(data);
-  router.go(0);
+  // router.go(0);
 }
 
 const codeHtml = ref(); // 获取元素实例
-const codeClass = ref(null); // 定义初始代码类型
+var codeClass: Ref<string> = ref(''); // 定义初始代码类型
 
 // 拉取代码
 async function getCode() {

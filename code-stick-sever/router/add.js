@@ -4,7 +4,8 @@ const addRouter = new Router()
 
 addRouter.post('/:randomValue', async (ctx) => {
     const { editContent, randomValue } = ctx.request.body;
-    const content = editContent.replace(/"/g, "'")
+    const content = editContent.replace(/"/g, '\\"');
+    console.log('content:', content);
     const res = getUsersInfo(`insert into codestick (randomValue, content) values('${randomValue}', "${content}"); `)
     ctx.body = {
         code: 1,
