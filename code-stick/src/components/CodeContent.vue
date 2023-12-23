@@ -52,11 +52,18 @@ function editFunc(): void {
 // 确认添加代码
 async function verifyFunc(): Promise<void> {
   var randomValue = Math.random().toString(36).substr(2); // 生成随机字符串
+  // 获取当前时间的时间戳
+  var currentTimeStamp = Date.now();
+  // 设置要增加的天数
+  var daysToAdd = 5;
+  // 计算未来的时间戳
+  var dealLineTime = currentTimeStamp + daysToAdd * 24 * 60 * 60 * 1000;
   router.push(randomValue);
   edit.value = false;
   const data = {
     randomValue: randomValue,
     editContent: editContent.value,
+    dealLineTime: dealLineTime,
   };
   await addCodeStick(data);
   // router.go(0);
