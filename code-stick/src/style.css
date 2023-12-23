@@ -1,11 +1,15 @@
 :root[data-theme='dark'] {
   --bg-color: #080f14;
   --line-color: rgba(75, 75, 75, 0.45);
+  --btn-color: #202021;
+  --btn-bg-color: #fff;
 }
 
 :root[data-theme='light'] {
   --bg-color: #f1f2f0;
   --line-color: rgba(0, 0, 0, 0.25);
+  --btn-color: #fff;
+  --btn-bg-color: #202021;
 }
 
 body {

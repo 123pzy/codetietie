@@ -18,10 +18,10 @@
       </div>
     </main>
     <div class="btn">
-      <button class="btn-verify" @click="verifyFunc" v-show="edit">确定</button>
-      <button class="btn-edit" @click="editFunc" v-show="!edit">
+      <div class="btn-verify" @click="verifyFunc" v-show="edit">确定</div>
+      <div class="btn-edit" @click="editFunc" v-show="!edit">
         我也要分享代码
-      </button>
+      </div>
     </div>
   </div>
 </template>
@@ -189,15 +189,17 @@ main {
 }
 .btn-verify,
 .btn-edit {
-  border: none;
+  color: var(--btn-color);
   height: 5vh;
+  width: fit-content;
+  text-align: center;
   line-height: 5vh;
-  font-size: 1rem;
-  cursor: pointer;
+  font-size: 1.05rem;
   padding: 0 1rem 0 1rem;
-  background-color: #0a7fa5;
+  background-color: var(--btn-bg-color);
   border-radius: 2rem;
-  color: #fff;
+  cursor: pointer;
+  border: 1.6px solid #000;
 }
 /* 设置滚动条的大小 */
 .edit-box::-webkit-scrollbar,
