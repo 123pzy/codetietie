@@ -4,7 +4,7 @@
       <div class="content">
         <div class="header">
           <div class="circle"></div>
-          <span class="code-class">{{ codeClass }}</span>
+          <span class="code-class hljs">{{ codeClass }}</span>
         </div>
         <div class="code" v-show="!edit" ref="codeHtml">
           <highlightjs language="Java" :autodetect="true" :code="editContent" />

@@ -18,3 +18,8 @@ body {
   padding: 0;
   margin: 0;
 }
+
+.hljs {
+  font-family: Fira Code, sans-serif;
+  /* 其他样式 */
+}
