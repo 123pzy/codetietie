@@ -6,17 +6,28 @@
       <img src="../../public/theme-dark.svg" v-show="theme == 'dark'" />
       <img src="../../public/theme-light.svg" v-show="theme == 'light'" />
     </div>
+    <div class="options">
+      <!-- 设置过期时间 -->
+      <div class="deal-line">
+        <n-space style="height: 300px; justify-content: center">
+          <n-slider :default-value="dealLineTime" vertical reverse />
+        </n-space>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue';
+import { NSlider, NSpace } from 'naive-ui';
 // 初始主题
 var theme = ref('dark');
 // 切换主题
 function changeTheme() {
   theme.value = theme.value == 'dark' ? 'light' : 'dark';
 }
+// 设置过期时间
+const dealLineTime = ref(32);
 // 主题切换后调用
 watchEffect(() => {
   document.documentElement.dataset.theme = theme.value;
@@ -27,6 +38,8 @@ watchEffect(() => {
 .container {
   height: 100vh;
   width: 17vw;
+  display: flex;
+  flex-wrap: wrap;
   background-color: var(--bg-color);
   position: absolute;
   color: #fff;
@@ -54,6 +67,10 @@ watchEffect(() => {
   position: absolute;
   right: 10px;
   top: 20.5px;
+}
+.options {
+  position: absolute;
+  top: 80px;
 }
 
 @media (max-width: 768px) {
