@@ -4,10 +4,30 @@
       <div class="content">
         <div class="header">
           <div class="circle"></div>
-          <span class="code-class hljs">{{ codeClass }}</span>
+          <div class="aside">
+            <n-space>
+              <n-tooltip
+                :style="{ maxWidth: '100px' }"
+                placement="top"
+                trigger="click"
+                v-model:show="showTooltip"
+              >
+                <template #trigger>
+                  <img
+                    src="../assets/copyIcon.svg"
+                    alt=""
+                    class="copy-icon"
+                    @click="copyCode"
+                  />
+                </template>
+                {{ copyStatus }}
+              </n-tooltip>
+            </n-space>
+            <div class="code-class hljs">{{ codeClass }}</div>
+          </div>
         </div>
         <div class="code" v-show="!edit" ref="codeHtml">
-          <highlightjs language="Java" :autodetect="true" :code="editContent" />
+          <highlightjs :autodetect="true" :code="editContent" />
         </div>
         <textarea
           v-show="edit"
@@ -30,6 +50,7 @@
 import { ref, onMounted, nextTick, Ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { addCodeStick, getCodeStick } from '../api/request.js';
+import { NTooltip, NSpace } from 'naive-ui';
 
 const edit: Ref<boolean> = ref(false);
 const editContent: Ref<string> = ref('');
@@ -101,6 +122,26 @@ watch(
     getCodeClass(); // 更新代码类型
   }
 );
+
+// 一键复制代码
+const copyStatus = ref('');
+const showTooltip: Ref<boolean> = ref(false);
+function copyCode() {
+  navigator.clipboard
+    .writeText(editContent.value)
+    .then(() => {
+      copyStatus.value = 'copied!';
+    })
+    .catch(() => {
+      copyStatus.value = 'failed!';
+    })
+    .finally(() => {
+      showTooltip.value = true;
+    });
+  setTimeout(() => {
+    showTooltip.value = false;
+  }, 2800);
+}
 </script>
 
 <style scoped>
@@ -146,7 +187,7 @@ main {
   padding-left: 1rem;
   background-color: #1e1e1e;
   display: flex;
-  align-items: start;
+  align-items: center;
 }
 .circle {
   height: 11px;
@@ -155,8 +196,6 @@ main {
   background-color: #fdbc30;
   position: relative;
   left: 1.5rem;
-  top: 1.2rem;
-  /* display: inline-block; */
 }
 .circle::before {
   content: '';
@@ -176,10 +215,21 @@ main {
   border-radius: 50%;
   background-color: #28c840;
 }
+.aside {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 0.68rem;
+}
+.copy-icon {
+  height: 1.16rem;
+  position: relative;
+  top: 0.15rem;
+  cursor: pointer;
+}
 .code-class {
-  position: absolute;
-  right: 18px;
-  top: -2px;
+  margin-right: 1rem;
 }
 .edit-box {
   height: 50vh;
