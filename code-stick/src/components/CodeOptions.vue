@@ -9,7 +9,7 @@
     <div class="options">
       <!-- 设置过期时间 -->
       <div class="deal-line">
-        <n-space style="height: 300px">
+        <n-space class="nspace">
           <n-slider
             :default-value="dealLineTime"
             vertical
@@ -91,6 +91,10 @@ watchEffect(() => {
 .options {
   position: absolute;
   top: 80px;
+}
+.nspace{
+  height: 300px;
+  color: var(--nslider-color);
 }
 
 @media (max-width: 768px) {
