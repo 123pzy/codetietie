@@ -9,8 +9,16 @@
     <div class="options">
       <!-- 设置过期时间 -->
       <div class="deal-line">
-        <n-space style="height: 300px; justify-content: center">
-          <n-slider :default-value="dealLineTime" vertical reverse />
+        <n-space style="height: 300px">
+          <n-slider
+            :default-value="dealLineTime"
+            vertical
+            reverse
+            :tooltip="false"
+            :marks="marks"
+            step="mark"
+            @dragend="test"
+          />
         </n-space>
       </div>
     </div>
@@ -26,11 +34,23 @@ var theme = ref('dark');
 function changeTheme() {
   theme.value = theme.value == 'dark' ? 'light' : 'dark';
 }
+function test(): void {
+  console.log('value');
+}
 // 设置过期时间
-const dealLineTime = ref(32);
+const dealLineTime = ref(30);
+const marks = ref({
+  1: '1天',
+  7: '1周',
+  15: '半个月',
+  30: '1个月',
+  60: '2个月',
+  100: '100天',
+});
 // 主题切换后调用
 watchEffect(() => {
   document.documentElement.dataset.theme = theme.value;
+  console.log(dealLineTime.value);
 });
 </script>
 
