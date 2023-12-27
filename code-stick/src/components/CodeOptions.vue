@@ -28,6 +28,9 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue';
 import { NSlider, NSpace } from 'naive-ui';
+// import { useState } from '../stores/state.js';
+
+// const state = useState();
 // 初始主题
 var theme = ref('dark');
 // 切换主题
@@ -92,7 +95,7 @@ watchEffect(() => {
   position: absolute;
   top: 80px;
 }
-.nspace{
+.nspace {
   height: 300px;
   color: var(--nslider-color);
 }

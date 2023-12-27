@@ -18,6 +18,7 @@
                     alt=""
                     class="copy-icon"
                     @click="copyCode"
+                    v-show="!state.state"
                   />
                 </template>
                 {{ copyStatus }}
@@ -51,6 +52,7 @@ import { ref, onMounted, nextTick, Ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { addCodeStick, getCodeStick } from '../api/request.js';
 import { NTooltip, NSpace } from 'naive-ui';
+import { useState } from '../stores/state.js';
 
 const edit: Ref<boolean> = ref(false);
 const editContent: Ref<string> = ref('');
@@ -60,7 +62,9 @@ const route = useRoute();
 
 const textArea = ref();
 // 点击“我也要分享代码”按钮之后
+const state = useState();
 function editFunc(): void {
+  state.state = true;
   codeClass.value = '';
   edit.value = true;
   editContent.value = '';
@@ -87,6 +91,7 @@ async function verifyFunc(): Promise<void> {
     dealLineTime: dealLineTime,
   };
   await addCodeStick(data);
+  state.state = false;
   // router.go(0);
 }
 
@@ -130,10 +135,10 @@ function copyCode() {
   navigator.clipboard
     .writeText(editContent.value)
     .then(() => {
-      copyStatus.value = 'copied!';
+      copyStatus.value = 'copied!😎';
     })
     .catch(() => {
-      copyStatus.value = 'failed!';
+      copyStatus.value = 'failed~😥';
     })
     .finally(() => {
       showTooltip.value = true;
