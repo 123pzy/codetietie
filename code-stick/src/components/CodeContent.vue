@@ -1,47 +1,48 @@
 <template>
-  <div class="container">
-    <main>
-      <div class="content">
-        <div class="header">
-          <div class="circle"></div>
-          <div class="aside">
-            <n-space>
-              <n-tooltip
-                :style="{ maxWidth: '100px' }"
-                placement="top"
-                trigger="click"
-                v-model:show="showTooltip"
-              >
-                <template #trigger>
-                  <img
-                    src="../assets/copyIcon.svg"
-                    alt=""
-                    class="copy-icon"
-                    @click="copyCode"
-                    v-show="!state.state"
-                  />
-                </template>
-                {{ copyStatus }}
-              </n-tooltip>
-            </n-space>
-            <div class="code-class hljs">{{ codeClass }}</div>
+  <div class="code-content-container">
+    <div class="code-box">
+      <main>
+        <div class="content">
+          <div class="header">
+            <div class="circle"></div>
+            <div class="aside">
+              <n-space>
+                <n-tooltip
+                  placement="top"
+                  trigger="click"
+                  v-model:show="showTooltip"
+                >
+                  <template #trigger>
+                    <img
+                      src="../assets/copyIcon.svg"
+                      alt=""
+                      class="copy-icon"
+                      @click="copyCode"
+                      v-show="!state.state"
+                    />
+                  </template>
+                  {{ copyStatus }}
+                </n-tooltip>
+              </n-space>
+              <div class="code-class hljs">{{ codeClass }}</div>
+            </div>
           </div>
+          <div class="code" v-show="!edit" ref="codeHtml">
+            <highlightjs :autodetect="true" :code="editContent" />
+          </div>
+          <textarea
+            v-show="edit"
+            class="edit-box"
+            v-model="editContent"
+            ref="textArea"
+          ></textarea>
         </div>
-        <div class="code" v-show="!edit" ref="codeHtml">
-          <highlightjs :autodetect="true" :code="editContent" />
+      </main>
+      <div class="btn">
+        <div class="btn-verify" @click="verifyFunc" v-show="edit">确定</div>
+        <div class="btn-edit" @click="editFunc" v-show="!edit">
+          我也要分享代码
         </div>
-        <textarea
-          v-show="edit"
-          class="edit-box"
-          v-model="editContent"
-          ref="textArea"
-        ></textarea>
-      </div>
-    </main>
-    <div class="btn">
-      <div class="btn-verify" @click="verifyFunc" v-show="edit">确定</div>
-      <div class="btn-edit" @click="editFunc" v-show="!edit">
-        我也要分享代码
       </div>
     </div>
   </div>
@@ -80,7 +81,7 @@ async function verifyFunc(): Promise<void> {
   // 获取当前时间的时间戳
   var currentTimeStamp = Date.now();
   // 设置要增加的天数
-  var daysToAdd = 5;
+  var daysToAdd = state.daysToAdd;
   // 计算未来的时间戳
   var dealLineTime = currentTimeStamp + daysToAdd * 24 * 60 * 60 * 1000;
   router.push(randomValue);
@@ -150,24 +151,29 @@ function copyCode() {
 </script>
 
 <style scoped>
-.container {
+.code-content-container {
+  flex: 1;
   height: 100vh;
-  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--bg-color);
+}
+.code-box {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
   background-image: linear-gradient(
       90deg,
-      var(--line-color) 3%,
+      var(--line-color) 2.5%,
       rgba(0, 0, 0, 0) 3%
     ),
-    linear-gradient(360deg, var(--line-color) 3%, rgba(0, 0, 0, 0) 3%);
+    linear-gradient(360deg, var(--line-color) 2.5%, rgba(0, 0, 0, 0) 3%);
   background-size: 20px 20px;
   background-position: center center;
 }
 main {
   height: 100%;
-  width: 80vw;
-  position: relative;
-  left: 17vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,7 +181,6 @@ main {
 .content {
   height: fit-content;
   width: fit-content;
-  /* width: 66vw; */
   max-height: 68vh;
   min-height: 20vh;
   min-width: 20vw;
@@ -245,7 +250,7 @@ main {
 .btn {
   position: absolute;
   bottom: 5rem;
-  left: 57vw;
+  left: 50%;
   transform: translateX(-50%);
 }
 .btn-verify,

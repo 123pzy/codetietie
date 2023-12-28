@@ -1,15 +1,9 @@
 <template>
-  <CodeOptions v-show="state.state"/>
-  <CodeContent />
+  <HomePage />
 </template>
 
 <script lang="ts" setup>
-import CodeContent from './components/CodeContent.vue';
-import CodeOptions from './components/CodeOptions.vue';
-import { useState } from './stores/state.js';
-
-const state = useState();
-
+import  HomePage  from './pages/HomePage.vue';
 </script>
 
 <style scoped></style>

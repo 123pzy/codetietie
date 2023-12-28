@@ -1,23 +1,16 @@
 <template>
-  <div class="container">
-    <img src="../../public/vite.svg" alt="" class="logo" />
-    <h2 class="websit-name">代码贴贴</h2>
-    <div class="theme-box" @click="changeTheme">
-      <img src="../../public/theme-dark.svg" v-show="theme == 'dark'" />
-      <img src="../../public/theme-light.svg" v-show="theme == 'light'" />
-    </div>
+  <div class="code-options-container">
     <div class="options">
       <!-- 设置过期时间 -->
       <div class="deal-line">
-        <n-space class="nspace">
+        <div class="deal-line-title">设置过期时间：</div>
+        <n-space vertical class="nspace">
           <n-slider
-            :default-value="dealLineTime"
-            vertical
-            reverse
-            :tooltip="false"
-            :marks="marks"
-            step="mark"
-            @dragend="test"
+            :default-value="daysToAdd"
+            @update:value="updateValue"
+            @dragend="dragend"
+            :format-tooltip="formatTooltip"
+            :marks="mark"
           />
         </n-space>
       </div>
@@ -26,112 +19,65 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import { NSlider, NSpace } from 'naive-ui';
-// import { useState } from '../stores/state.js';
+import { useState } from '../stores/state.js';
 
-// const state = useState();
-// 初始主题
-var theme = ref('dark');
-// 切换主题
-function changeTheme() {
-  theme.value = theme.value == 'dark' ? 'light' : 'dark';
-}
-function test(): void {
-  console.log('value');
-}
 // 设置过期时间
-const dealLineTime = ref(30);
-const marks = ref({
-  1: '1天',
-  7: '1周',
-  15: '半个月',
-  30: '1个月',
-  60: '2个月',
-  100: '100天',
+const daysToAdd = ref(30);
+// 设置滑条样式
+function formatTooltip(value) {
+  if (value !== 100) {
+    return value + '天';
+  } else {
+    return '永不过期';
+  }
+}
+const mark = ref({
+  100: '永不过期',
 });
-// 主题切换后调用
-watchEffect(() => {
-  document.documentElement.dataset.theme = theme.value;
-  console.log(dealLineTime.value);
-});
+
+// 过期时间更新之后的回调
+function updateValue(value) {
+  daysToAdd.value = value;
+}
+// 拖拽结束之后的回调
+const state = useState();
+function dragend() {
+  state.daysToAdd = daysToAdd.value;
+}
 </script>
 
 <style scoped>
-.container {
-  height: 100vh;
-  width: 17vw;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: var(--bg-color);
-  position: absolute;
+.code-options-container {
   color: #fff;
-}
-.logo {
-  height: 30px;
-  position: relative;
-  top: 20.5px;
-}
-.websit-name {
-  /* 设置颜色为与背景颜色的差值 */
-  mix-blend-mode: difference;
+  height: 60vh;
+  width: 17vw;
+  background-color: var(--bg-color);
+  border: 2px solid #999;
+  padding: 1rem;
+  border-radius: 1rem;
   position: absolute;
-  left: 38px;
-  display: inline-block;
+  top: 45%;
+  left: 4.5vw;
+  transform: translateY(-50%);
 }
-.theme-box {
-  height: 32px;
-  width: 32px;
+.deal-line {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  box-shadow: 0px 0px 0px 0.5px var(--line-color);
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  top: 20.5px;
+  flex-wrap: wrap;
+  width: 100%;
 }
-.options {
-  position: absolute;
-  top: 80px;
-}
-.nspace {
-  height: 300px;
+.deal-line-title {
+  font-size: 1rem;
+  letter-spacing: 1.6px;
   color: var(--nslider-color);
 }
-
-@media (max-width: 768px) {
-  .container {
-    height: 100vh;
-    width: 17vw;
-    background-color: var(--bg-color);
-    position: absolute;
-    top: 10vh;
-    color: #fff;
-  }
-  .logo {
-    height: 30px;
-    position: relative;
-    top: 20.5px;
-  }
-  .websit-name {
-    /* 设置颜色为与背景颜色的差值 */
-    mix-blend-mode: difference;
-    position: absolute;
-    left: 38px;
-    display: inline-block;
-  }
-  .theme-box {
-    height: 32px;
-    width: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 0px 0px 0.5px var(--line-color);
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 20.5px;
-  }
+.nspace {
+  height: 50px;
+  width: 100%;
+  font-size: 0.7rem;
+  color: var(--nslider-color);
 }
 </style>

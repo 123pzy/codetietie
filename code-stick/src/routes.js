@@ -1,4 +1,3 @@
-import CodeContent from './components/CodeContent.vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -10,7 +9,7 @@ const routes = [
     {
         path: "/:randomValue",
         name: 'randomValue',
-        compontent: CodeContent,
+        compontent: App,
     }
 ]
 
