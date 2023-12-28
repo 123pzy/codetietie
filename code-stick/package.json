@@ -11,6 +11,7 @@
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
     "axios": "^1.6.2",
+    "dom-to-image": "^2.6.0",
     "highlight.js": "^11.9.0",
     "pinia": "^2.1.7",
     "prismjs": "^1.29.0",

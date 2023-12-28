@@ -26,7 +26,7 @@ import { useState } from '../stores/state.js';
 // 设置过期时间
 const daysToAdd = ref(30);
 // 设置滑条样式
-function formatTooltip(value) {
+function formatTooltip(value: number) {
   if (value !== 100) {
     return value + '天';
   } else {
