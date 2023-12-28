@@ -181,14 +181,20 @@ main {
 .content {
   height: fit-content;
   width: fit-content;
-  max-height: 68vh;
-  min-height: 20vh;
   min-width: 20vw;
-  overflow: auto;
-  box-sizing: border-box;
+  box-sizing: content-box;
   background-color: #1e1e1e;
+  overflow: auto;
   border-radius: 1.2rem;
   transform: translateY(-6vh);
+}
+pre{
+  margin-top: -1rem;
+}
+.code {
+  max-height: 68vh;
+  min-height: 20vh;
+  overflow: auto;
 }
 .header {
   color: #fff;
@@ -269,20 +275,22 @@ main {
 }
 /* 设置滚动条的大小 */
 .edit-box::-webkit-scrollbar,
-.content::-webkit-scrollbar {
+.code::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
 .edit-box::-webkit-scrollbar-thumb,
-.content::-webkit-scrollbar-thumb {
+.code::-webkit-scrollbar-thumb {
   border-radius: 5px;
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-  background: rgba(0, 0, 0, 0.2);
+  /* background: rgba(0, 0, 0, 0.2); */
+  background: #999;
 }
 .edit-box::-webkit-scrollbar-track,
-.content::-webkit-scrollbar-track {
+.code::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 0;
-  background: rgba(0, 0, 0, 0.1);
+  /* background: rgba(0, 0, 0, 0.1); */
+  background: #1e1e1e;
 }
 </style>
