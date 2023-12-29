@@ -1,11 +1,24 @@
 <template>
   <div class="code-content-container">
     <div class="code-box">
-      <main>
+      <main ref="codeDOM">
         <div class="content">
           <div class="header">
             <div class="circle"></div>
             <div class="aside">
+              <n-space>
+                <n-tooltip placement="top" trigger="hover">
+                  <template #trigger>
+                    <img
+                      src="../assets/download-image.svg"
+                      class="download-img-icon"
+                      @click="downloadImg"
+                      v-show="!state.state"
+                    />
+                  </template>
+                  下载为图片
+                </n-tooltip>
+              </n-space>
               <n-space>
                 <n-tooltip
                   placement="top"
@@ -15,7 +28,6 @@
                   <template #trigger>
                     <img
                       src="../assets/copyIcon.svg"
-                      alt=""
                       class="copy-icon"
                       @click="copyCode"
                       v-show="!state.state"
@@ -54,6 +66,7 @@ import { useRouter, useRoute } from 'vue-router';
 import { addCodeStick, getCodeStick } from '../api/request.js';
 import { NTooltip, NSpace } from 'naive-ui';
 import { useState } from '../stores/state.js';
+import domtoimage from 'dom-to-image';
 
 const edit: Ref<boolean> = ref(false);
 const editContent: Ref<string> = ref('');
@@ -148,6 +161,20 @@ function copyCode() {
     showTooltip.value = false;
   }, 2800);
 }
+
+// 下载代码为图片
+var codeDOM = ref(null);
+function downloadImg() {
+  domtoimage.toBlob(codeDOM.value).then(function (blob) {
+    downloadBlob(blob, 'image.png');
+  });
+}
+function downloadBlob(blob, fileName) {
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = fileName;
+  link.click();
+}
 </script>
 
 <style scoped>
@@ -188,7 +215,7 @@ main {
   border-radius: 1.2rem;
   transform: translateY(-6vh);
 }
-pre{
+pre {
   margin-top: -1rem;
 }
 .code {
@@ -236,8 +263,9 @@ pre{
   width: 100%;
   display: flex;
   justify-content: end;
-  gap: 0.68rem;
+  gap: 1rem;
 }
+.download-img-icon,
 .copy-icon {
   height: 1.16rem;
   position: relative;
