@@ -185,6 +185,7 @@ function downloadBlob(blob, fileName) {
   justify-content: center;
   align-items: center;
   background-color: var(--bg-color);
+  overflow: hidden;
 }
 .code-box {
   height: 100vh;
@@ -198,12 +199,15 @@ function downloadBlob(blob, fileName) {
     linear-gradient(360deg, var(--line-color) 2.5%, rgba(0, 0, 0, 0) 3%);
   background-size: 20px 20px;
   background-position: center center;
+  display: flex;
+  justify-content: center;
 }
 main {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 92vw;
 }
 .content {
   height: fit-content;
