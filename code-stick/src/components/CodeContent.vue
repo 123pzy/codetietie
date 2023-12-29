@@ -1,55 +1,53 @@
 <template>
   <div class="code-content-container">
     <div class="code-box">
-      <main ref="codeDOM">
-        <div class="content">
-          <div class="header">
-            <div class="circle"></div>
-            <div class="aside">
-              <n-space>
-                <n-tooltip placement="top" trigger="hover">
-                  <template #trigger>
-                    <img
-                      src="../assets/download-image.svg"
-                      class="download-img-icon"
-                      @click="downloadImg"
-                      v-show="!state.state"
-                    />
-                  </template>
-                  下载为图片
-                </n-tooltip>
-              </n-space>
-              <n-space>
-                <n-tooltip
-                  placement="top"
-                  trigger="click"
-                  v-model:show="showTooltip"
-                >
-                  <template #trigger>
-                    <img
-                      src="../assets/copyIcon.svg"
-                      class="copy-icon"
-                      @click="copyCode"
-                      v-show="!state.state"
-                    />
-                  </template>
-                  {{ copyStatus }}
-                </n-tooltip>
-              </n-space>
-              <div class="code-class hljs">{{ codeClass }}</div>
-            </div>
+      <div class="content" ref="codeDOM">
+        <div class="header">
+          <div class="circle"></div>
+          <div class="aside">
+            <n-space>
+              <n-tooltip placement="top" trigger="hover">
+                <template #trigger>
+                  <img
+                    src="../assets/download-image.svg"
+                    class="download-img-icon"
+                    @click="downloadImg"
+                    v-show="!state.state"
+                  />
+                </template>
+                下载为图片
+              </n-tooltip>
+            </n-space>
+            <n-space>
+              <n-tooltip
+                placement="top"
+                trigger="click"
+                v-model:show="showTooltip"
+              >
+                <template #trigger>
+                  <img
+                    src="../assets/copyIcon.svg"
+                    class="copy-icon"
+                    @click="copyCode"
+                    v-show="!state.state"
+                  />
+                </template>
+                {{ copyStatus }}
+              </n-tooltip>
+            </n-space>
+            <div class="code-class hljs">{{ codeClass }}</div>
           </div>
-          <div class="code" v-show="!edit" ref="codeHtml">
-            <highlightjs :autodetect="true" :code="editContent" />
-          </div>
-          <textarea
-            v-show="edit"
-            class="edit-box"
-            v-model="editContent"
-            ref="textArea"
-          ></textarea>
         </div>
-      </main>
+        <div class="code" v-show="!edit" ref="codeHtml">
+          <highlightjs :autodetect="true" :code="editContent" />
+        </div>
+        <textarea
+          v-show="edit"
+          class="edit-box"
+          v-model="editContent"
+          ref="textArea"
+        ></textarea>
+      </div>
       <div class="btn">
         <div class="btn-verify" @click="verifyFunc" v-show="edit">确定</div>
         <div class="btn-edit" @click="editFunc" v-show="!edit">
@@ -189,7 +187,7 @@ function downloadBlob(blob, fileName) {
 }
 .code-box {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   box-sizing: border-box;
   background-image: linear-gradient(
       90deg,
@@ -201,13 +199,8 @@ function downloadBlob(blob, fileName) {
   background-position: center center;
   display: flex;
   justify-content: center;
-}
-main {
-  height: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  max-width: 92vw;
+  padding-bottom: 5rem;
 }
 .content {
   height: fit-content;
@@ -217,7 +210,8 @@ main {
   background-color: #1e1e1e;
   overflow: auto;
   border-radius: 1.2rem;
-  transform: translateY(-6vh);
+  position: relative;
+  z-index: 999;
 }
 pre {
   margin-top: -1rem;
@@ -287,7 +281,7 @@ pre {
 }
 .btn {
   position: absolute;
-  bottom: 5rem;
+  bottom: 7vh;
   left: 50%;
   transform: translateX(-50%);
 }

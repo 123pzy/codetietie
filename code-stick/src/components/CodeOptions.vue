@@ -3,7 +3,7 @@
     <div class="options">
       <!-- 设置过期时间 -->
       <div class="deal-line">
-        <div class="deal-line-title">设置过期时间：</div><div class="deal-line-title">设置过期时间：</div><div class="deal-line-title">设置过期时间：</div><div class="deal-line-title">设置过期时间：</div><div class="deal-line-title">设置过期时间：</div>
+        <div class="deal-line-title">设置过期时间：</div>
         <n-space vertical class="nspace">
           <n-slider
             :default-value="daysToAdd"
