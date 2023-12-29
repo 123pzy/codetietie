@@ -1,9 +1,47 @@
 <template>
   <div class="homepage-container">
     <div class="websit-name">代码贴贴</div>
-    <div class="theme-box" @click="changeTheme">
-      <img src="../../public/theme-dark.svg" v-show="theme == 'dark'" />
-      <img src="../../public/theme-light.svg" v-show="theme == 'light'" />
+    <div class="btn">
+      <div class="theme-box" @click="changeTheme">
+        <img
+          src="../../public/theme-dark.svg"
+          v-show="theme == 'dark'"
+          style="height: 80%"
+        />
+        <img
+          src="../../public/theme-light.svg"
+          v-show="theme == 'light'"
+          style="height: 80%"
+        />
+      </div>
+      <div class="github-icon" @click="openMyGithub">
+        <img
+          src="../assets/github-dark.svg"
+          v-show="theme == 'dark'"
+          alt=""
+          style="height: 80%"
+        />
+        <img
+          src="../assets/github-light.svg"
+          v-show="theme == 'light'"
+          alt=""
+          style="height: 80%"
+        />
+      </div>
+      <div class="coffee-icon" @click="openMyByuMecoffee">
+        <img
+          src="../assets/coffee-dark.svg"
+          v-show="theme == 'dark'"
+          alt=""
+          style="height: 80%"
+        />
+        <img
+          src="../assets/coffee-light.svg"
+          v-show="theme == 'light'"
+          alt=""
+          style="height: 80%"
+        />
+      </div>
     </div>
     <CodeOptions v-show="state.state" />
     <CodeContent />
@@ -27,6 +65,14 @@ function changeTheme() {
 watchEffect(() => {
   document.documentElement.dataset.theme = theme.value;
 });
+// 跳转到我的GitHub
+function openMyGithub() {
+  window.open('https://github.com/123pzy/codetieite');
+}
+// 跳转到我的Buy me a coffee
+function openMyByuMecoffee() {
+  window.open('https://www.buymeacoffee.com/123pzy');
+}
 </script>
 
 <style scoped>
@@ -37,17 +83,26 @@ watchEffect(() => {
   width: 100vw;
   color: #fff;
 }
-.theme-box {
-  height: 32px;
-  width: 32px;
+.btn {
+  height: 50px;
+  width: 200px;
+  position: absolute;
+  top: 0.29rem;
+  right: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 0px 0.5px var(--line-color);
+  gap: 1.2rem;
+}
+.theme-box,
+.github-icon,
+.coffee-icon {
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  position: absolute;
-  right: 15px;
-  top: 15px;
 }
 .websit-name {
   font-size: 1.45rem;

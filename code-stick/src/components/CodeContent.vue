@@ -167,7 +167,7 @@ function downloadImg() {
     downloadBlob(blob, 'image.png');
   });
 }
-function downloadBlob(blob, fileName) {
+function downloadBlob(blob:Blob, fileName:string) {
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
   link.download = fileName;
