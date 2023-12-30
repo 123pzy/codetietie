@@ -50,16 +50,18 @@
       </div>
       <!-- 用来生成图片的DOM -->
       <div class="content-copy" ref="codeDOM">
-        <div class="header">
-          <div class="circle"></div>
-          <div class="aside">
-            <div class="code-class hljs">{{ codeClass }}</div>
+        <div class="copy-box">
+          <div class="header">
+            <div class="circle"></div>
+            <div class="aside">
+              <div class="code-class hljs">{{ codeClass }}</div>
+            </div>
           </div>
+          <div class="code-copy" v-show="!edit" ref="codeHtml">
+            <highlightjs :autodetect="true" :code="editContent" />
+          </div>
+          <div class="websit-URL">codetietie.cn</div>
         </div>
-        <div class="code-copy" v-show="!edit" ref="codeHtml">
-          <highlightjs :autodetect="true" :code="editContent" />
-        </div>
-        <div class="websit-URL">codetietie.cn</div>
       </div>
       <div class="btn">
         <div class="edit-btn">
@@ -241,23 +243,33 @@ function downloadBlob(blob: Blob, fileName: string) {
   position: absolute;
 }
 .content-copy {
+  padding: 2rem;
+  background-image: linear-gradient(to top right, #0d2bd8, #e9b459);
+  position: relative;
   z-index: -1;
-  background-color: #202021;
+}
+.copy-box {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  overflow: auto;
+  background-color: #1e1e1e;
 }
 pre {
   margin: 0;
-}
-.code-copy {
 }
 .websit-URL {
   height: 1.6rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 700;
   color: rgba(220, 221, 225, 0.8);
-  float: right;
   display: flex;
+  justify-content: end;
   align-items: center;
   margin-right: 1.2rem;
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0;
 }
 pre {
   margin-top: -1rem;
