@@ -7,6 +7,7 @@ import 'highlight.js/styles/vs2015.css';
 import 'highlight.js/lib/common';
 import hljsVuePlugin from '@highlightjs/vue-plugin';
 import { createPinia } from 'pinia';
+import './assets/fonts/font.css'
 
 //注册组件
 

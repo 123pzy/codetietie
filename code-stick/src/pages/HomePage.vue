@@ -1,6 +1,8 @@
 <template>
   <div class="homepage-container">
-    <div class="websit-name">代码贴贴</div>
+    <div class="websit-name">
+      {{ state.CN === 'Chinese' ? '代码贴贴' : 'CODETIETIE' }}
+    </div>
     <div class="btn">
       <div class="theme-box" @click="changeTheme">
         <img
@@ -10,6 +12,18 @@
         />
         <img
           src="../../public/theme-light.svg"
+          v-show="theme == 'light'"
+          style="height: 80%"
+        />
+      </div>
+      <div class="CN-shift" @click="changeCN">
+        <img
+          src="../assets/chinese-dark.svg"
+          v-show="theme == 'dark'"
+          style="height: 80%"
+        />
+        <img
+          src="../assets/chinese-light.svg"
           v-show="theme == 'light'"
           style="height: 80%"
         />
@@ -56,7 +70,7 @@ import { useState } from '../stores/state.js';
 
 const state = useState();
 // 初始主题
-var theme = ref('dark');
+var theme = ref(localStorage.getItem('theme') || 'light');
 // 切换主题
 function changeTheme() {
   theme.value = theme.value == 'dark' ? 'light' : 'dark';
@@ -64,7 +78,15 @@ function changeTheme() {
 // 主题切换后调用
 watchEffect(() => {
   document.documentElement.dataset.theme = theme.value;
+  localStorage.setItem('theme', theme.value);
 });
+watchEffect(() => {
+  localStorage.setItem('CN', state.CN);
+});
+// 切换中英文
+function changeCN() {
+  state.CN = state.CN == 'Chinese' ? 'English' : 'Chinese';
+}
 // 跳转到我的GitHub
 function openMyGithub() {
   window.open('https://github.com/123pzy/codetieite');
@@ -95,6 +117,7 @@ function openMyByuMecoffee() {
   gap: 1.2rem;
 }
 .theme-box,
+.CN-shift,
 .github-icon,
 .coffee-icon {
   height: 2rem;
@@ -104,13 +127,18 @@ function openMyByuMecoffee() {
   align-items: center;
   cursor: pointer;
 }
+.CN-shift {
+  display: flex;
+  align-items: end;
+}
 .websit-name {
+  font-family: 'Luckiest_Guy', 'Browood-Regular';
+  letter-spacing: 1px;
   font-size: 1.45rem;
-  font-weight: 700;
   color: var(--websit-name-bg);
   position: absolute;
-  top: 15px;
-  left: 32px;
+  top: 0.9rem;
+  left: 1.6rem;
   display: inline-block;
   z-index: 999;
 }

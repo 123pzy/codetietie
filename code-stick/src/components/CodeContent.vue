@@ -1,7 +1,7 @@
 <template>
   <div class="code-content-container">
     <div class="code-box">
-      <div class="content" ref="codeDOM">
+      <div class="content">
         <div class="header">
           <div class="circle"></div>
           <div class="aside">
@@ -48,10 +48,30 @@
           ref="textArea"
         ></textarea>
       </div>
+      <!-- 用来生成图片的DOM -->
+      <div class="content-copy" ref="codeDOM">
+        <div class="header">
+          <div class="circle"></div>
+          <div class="aside">
+            <div class="code-class hljs">{{ codeClass }}</div>
+          </div>
+        </div>
+        <div class="code-copy" v-show="!edit" ref="codeHtml">
+          <highlightjs :autodetect="true" :code="editContent" />
+        </div>
+        <div class="websit-URL">codetietie.cn</div>
+      </div>
       <div class="btn">
-        <div class="btn-verify" @click="verifyFunc" v-show="edit">确定</div>
+        <div class="edit-btn">
+          <div class="btn-confirm" @click="confirmFunc" v-show="edit">
+            {{ state.CN === 'Chinese' ? '确定' : 'Confirm' }}
+          </div>
+          <div class="btn-cancel" @click="cancelFunc" v-show="edit">
+            {{ state.CN === 'Chinese' ? '取消' : 'Cancel' }}
+          </div>
+        </div>
         <div class="btn-edit" @click="editFunc" v-show="!edit">
-          我也要分享代码
+          {{ state.CN === 'Chinese' ? '分享代码' : 'Share code' }}
         </div>
       </div>
     </div>
@@ -87,7 +107,7 @@ function editFunc(): void {
 }
 
 // 确认添加代码
-async function verifyFunc(): Promise<void> {
+async function confirmFunc(): Promise<void> {
   var randomValue = Math.random().toString(36).substr(2); // 生成随机字符串
   // 获取当前时间的时间戳
   var currentTimeStamp = Date.now();
@@ -105,6 +125,13 @@ async function verifyFunc(): Promise<void> {
   await addCodeStick(data);
   state.state = false;
   // router.go(0);
+}
+// 取消添加代码
+async function cancelFunc() {
+  getCode();
+  getCodeClass();
+  state.state = false;
+  edit.value = false;
 }
 
 const codeHtml = ref(); // 获取元素实例
@@ -167,7 +194,7 @@ function downloadImg() {
     downloadBlob(blob, 'image.png');
   });
 }
-function downloadBlob(blob:Blob, fileName:string) {
+function downloadBlob(blob: Blob, fileName: string) {
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
   link.download = fileName;
@@ -200,18 +227,37 @@ function downloadBlob(blob:Blob, fileName:string) {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
 }
 .content {
   height: fit-content;
   width: fit-content;
   min-width: 20vw;
+  max-width: 92vw;
   box-sizing: content-box;
   background-color: #1e1e1e;
   overflow: auto;
   border-radius: 1.2rem;
-  position: relative;
-  z-index: 999;
+  position: absolute;
+}
+.content-copy {
+  z-index: -1;
+  background-color: #202021;
+}
+pre {
+  margin: 0;
+}
+.code-copy {
+}
+.websit-URL {
+  height: 1.6rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 700;
+  color: rgba(220, 221, 225, 0.8);
+  float: right;
+  display: flex;
+  align-items: center;
+  margin-right: 1.2rem;
 }
 pre {
   margin-top: -1rem;
@@ -285,8 +331,14 @@ pre {
   left: 50%;
   transform: translateX(-50%);
 }
-.btn-verify,
+.edit-btn {
+  display: flex;
+  gap: 1.6rem;
+}
+.btn-confirm,
+.btn-cancel,
 .btn-edit {
+  font-family: 'Browood-Regular', 'Luckiest_Guy';
   color: var(--btn-color);
   height: 5vh;
   width: fit-content;
@@ -299,6 +351,7 @@ pre {
   cursor: pointer;
   border: 1.6px solid #000;
 }
+
 /* 设置滚动条的大小 */
 .edit-box::-webkit-scrollbar,
 .code::-webkit-scrollbar {
