@@ -41,12 +41,20 @@
         <div class="code" v-show="!edit" ref="codeHtml">
           <highlightjs :autodetect="true" :code="editContent" />
         </div>
-        <textarea
-          v-show="edit"
-          class="edit-box"
-          v-model="editContent"
-          ref="textArea"
-        ></textarea>
+        <n-space vertical>
+          <n-input
+            class="edit-box"
+            v-show="edit"
+            v-model:value="editContent"
+            ref="textArea"
+            type="textarea"
+            :placeholder="
+              state.CN === 'Chinese'
+                ? '请输入待分享的代码...'
+                : 'Please enter the code to be shared...'
+            "
+          />
+        </n-space>
       </div>
       <!-- 用来生成图片的DOM -->
       <div class="content-copy" ref="codeDOM">
@@ -84,7 +92,7 @@
 import { ref, onMounted, nextTick, Ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { addCodeStick, getCodeStick } from '../api/request.js';
-import { NTooltip, NSpace } from 'naive-ui';
+import { NTooltip, NSpace, NInput } from 'naive-ui';
 import { useState } from '../stores/state.js';
 import domtoimage from 'dom-to-image';
 
@@ -186,7 +194,7 @@ function copyCode() {
     });
   setTimeout(() => {
     showTooltip.value = false;
-  }, 2800);
+  }, 2000);
 }
 
 // 下载代码为图片
@@ -229,7 +237,7 @@ function downloadBlob(blob: Blob, fileName: string) {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 3rem;
+  padding-bottom: 5rem;
 }
 .content {
   height: fit-content;
@@ -243,8 +251,8 @@ function downloadBlob(blob: Blob, fileName: string) {
   position: absolute;
 }
 .content-copy {
-  padding: 2rem;
-  background-image: linear-gradient(to top right, #0d2bd8, #e9b459);
+  padding: 2.05rem;
+  background-image: linear-gradient(to top right, #8720fd, #ffc832);
   position: relative;
   z-index: -1;
 }
@@ -332,14 +340,15 @@ pre {
   margin-right: 1rem;
 }
 .edit-box {
-  height: 50vh;
-  width: 100%;
-  background-color: #f1f2f8;
-  border: none;
+  height: 100%;
+  min-height: 50vh;
+  width: 50vw;
+  min-width: 20rem;
+  background-color: #f1f1f2;
 }
 .btn {
   position: absolute;
-  bottom: 7vh;
+  bottom: 6vh;
   left: 50%;
   transform: translateX(-50%);
 }

@@ -3,7 +3,7 @@
     <div class="options">
       <!-- 设置过期时间 -->
       <div class="deal-line">
-        <div class="deal-line-title">设置过期时间：</div>
+        <div class="deal-line-title">1.设置过期时间：</div>
         <n-space vertical class="nspace">
           <n-slider
             :default-value="daysToAdd"
@@ -51,23 +51,26 @@ function dragend() {
 <style scoped>
 .code-options-container {
   color: #fff;
-  height: 60vh;
-  width: 17vw;
+  height: 8vh;
+  width: 80vw;
   background-color: var(--bg-color);
-  border: 2px solid #999;
+  border: 1px solid #999;
   padding: 1rem;
   border-radius: 1rem;
   position: absolute;
-  top: 45%;
-  left: 4.5vw;
-  transform: translateY(-50%);
+  bottom: 13vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.options{
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
 }
 .deal-line {
   display: flex;
   justify-content: start;
   align-items: center;
   flex-wrap: wrap;
-  width: 100%;
 }
 .deal-line-title {
   font-size: 1rem;
@@ -76,7 +79,7 @@ function dragend() {
 }
 .nspace {
   height: 50px;
-  width: 100%;
+  width: 10rem;
   font-size: 0.7rem;
   color: var(--nslider-color);
 }
