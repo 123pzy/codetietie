@@ -5,6 +5,8 @@
   --btn-bg-color: #fff;
   --nslider-color: #fff;
   --websit-name-bg: #f2f5f7;
+  --burn-true-color:#fff;
+  --burn-false-color:#2d333a;
 }
 
 :root[data-theme='light'] {
@@ -14,6 +16,8 @@
   --btn-bg-color: #202021;
   --nslider-color: #202021;
   --websit-name-bg: #000;
+  --burn-true-color:#000;
+  --burn-false-color:#e1e7ef;
 }
 
 body {

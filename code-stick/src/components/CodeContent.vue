@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="code" v-show="!edit" ref="codeHtml">
-          <highlightjs :autodetect="true" :code="editContent" />
+          <highlightjs :autodetect="true" :code="content" />
         </div>
         <n-space vertical>
           <n-input
@@ -66,7 +66,7 @@
             </div>
           </div>
           <div class="code-copy" v-show="!edit" ref="codeHtml">
-            <highlightjs :autodetect="true" :code="editContent" />
+            <highlightjs :autodetect="true" :code="content" />
           </div>
           <div class="websit-URL">codetietie.cn</div>
         </div>
@@ -97,19 +97,21 @@ import { useState } from '../stores/state.js';
 import domtoimage from 'dom-to-image';
 
 const edit: Ref<boolean> = ref(false);
-const editContent: Ref<string> = ref('');
+const content: Ref<string> = ref('');
 
 const router = useRouter();
 const route = useRoute();
+var randomValue = ref('');
 
 const textArea = ref();
 // 点击“我也要分享代码”按钮之后
 const state = useState();
+const editContent = ref('');
 function editFunc(): void {
+  editContent.value = '';
   state.state = true;
   codeClass.value = '';
   edit.value = true;
-  editContent.value = '';
   // textarea元素自动获取焦点
   nextTick(() => {
     textArea.value.focus();
@@ -118,27 +120,32 @@ function editFunc(): void {
 
 // 确认添加代码
 async function confirmFunc(): Promise<void> {
-  var randomValue = Math.random().toString(36).substr(2); // 生成随机字符串
-  // 获取当前时间的时间戳
-  var currentTimeStamp = Date.now();
-  // 设置要增加的天数
-  var daysToAdd = state.daysToAdd;
-  // 计算未来的时间戳
-  var dealLineTime = currentTimeStamp + daysToAdd * 24 * 60 * 60 * 1000;
-  router.push(randomValue);
-  edit.value = false;
-  const data = {
-    randomValue: randomValue,
-    editContent: editContent.value,
-    dealLineTime: dealLineTime,
-  };
-  await addCodeStick(data);
-  state.state = false;
-  // router.go(0);
+  if (!editContent.value) {
+    alert('不能分享空代码');
+  } else {
+    content.value = editContent.value;
+    randomValue.value = Math.random().toString(36).substr(2); // 生成随机字符串
+    // 获取当前时间的时间戳
+    var currentTimeStamp = Date.now();
+    // 设置要增加的天数
+    var daysToAdd = state.daysToAdd;
+    // 计算未来的时间戳
+    var dealLineTime = currentTimeStamp + daysToAdd * 24 * 60 * 60 * 1000;
+    router.push(randomValue.value);
+    edit.value = false;
+    const data = {
+      randomValue: randomValue.value,
+      editContent: editContent.value,
+      dealLineTime: dealLineTime,
+      burn: state.burn,
+    };
+    await addCodeStick(data);
+    state.state = false;
+  }
 }
 // 取消添加代码
 async function cancelFunc() {
-  getCode();
+  editContent.value = '';
   getCodeClass();
   state.state = false;
   edit.value = false;
@@ -150,7 +157,7 @@ var codeClass: Ref<string> = ref(''); // 定义初始代码类型
 // 拉取代码
 async function getCode() {
   const res = await getCodeStick(route.params.randomValue);
-  editContent.value = res.data.data;
+  content.value = res.data.data;
 }
 // 更新代码类型查询
 function getCodeClass() {
@@ -172,7 +179,10 @@ onMounted(async () => {
 watch(
   () => route.params,
   async () => {
-    await getCode();
+    if (randomValue.value && route.params.randomValue !== randomValue.value) {
+      await getCode();
+      console.log('randomValue.value', randomValue.value);
+    }
     getCodeClass(); // 更新代码类型
   }
 );
@@ -182,7 +192,7 @@ const copyStatus = ref('');
 const showTooltip: Ref<boolean> = ref(false);
 function copyCode() {
   navigator.clipboard
-    .writeText(editContent.value)
+    .writeText(content.value)
     .then(() => {
       copyStatus.value = 'copied!😎';
     })

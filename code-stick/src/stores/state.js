@@ -5,7 +5,8 @@ export const useState = defineStore("state", {
         return {
             state: false,
             CN: localStorage.getItem('CN') || 'English',
-            daysToAdd: 30
+            daysToAdd: 30,
+            burn: false
         };
     },
     actions: {

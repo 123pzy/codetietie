@@ -1,15 +1,24 @@
-import App from './App.vue'
+import HomePage from './pages/HomePage.vue'
+import NotFoundPage from './pages/NotFoundPage.vue'
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
     {
         path: "/",
-        compontent: App,
+        name: 'Root',
+        compontent: HomePage,
+        children: [
+            {
+                path: "/:randomValue",
+                name: 'randomValue',
+                compontent: HomePage,
+            }
+        ]
     },
     {
-        path: "/:randomValue",
-        name: 'randomValue',
-        compontent: App,
+        path: '/not_found',
+        name: 'notFound',
+        compontent: NotFoundPage
     }
 ]
 
