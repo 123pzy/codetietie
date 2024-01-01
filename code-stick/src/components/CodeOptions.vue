@@ -84,12 +84,12 @@ const railStyle = ({
   if (checked) {
     style.background = 'var(--burn-true-color)';
     if (focused) {
-      style.boxShadow = '0 0 0 2px #d0305040';
+      style.boxShadow = '0 0 0 1px var(--burn-true-color)';
     }
   } else {
     style.background = 'var(--burn-false-color)';
     if (focused) {
-      style.boxShadow = '0 0 0 2px #2080f040';
+      style.boxShadow = '0 0 0 1px var(--burn-false-color)';
     }
   }
   return style;
