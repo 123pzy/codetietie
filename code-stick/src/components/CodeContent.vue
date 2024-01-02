@@ -157,7 +157,11 @@ var codeClass: Ref<string> = ref(''); // 定义初始代码类型
 // 拉取代码
 async function getCode() {
   const res = await getCodeStick(route.params.randomValue);
-  content.value = res.data.data;
+  if (res.data.code === 0) {
+    router.push('/not_found');
+  } else {
+    content.value = res.data.data;
+  }
 }
 // 更新代码类型查询
 function getCodeClass() {
