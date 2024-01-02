@@ -6,7 +6,8 @@ export const useState = defineStore("state", {
             state: false,
             CN: localStorage.getItem('CN') || 'English',
             daysToAdd: 30,
-            burn: false
+            burn: false,
+            theme:localStorage.getItem('theme') || 'light'
         };
     },
     actions: {

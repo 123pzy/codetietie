@@ -1,4 +1,5 @@
 import App from './App.vue'
+import Index from './pages/Index.vue'
 import HomePage from './pages/HomePage.vue'
 import NotFoundPage from './pages/NotFoundPage.vue'
 import { createRouter, createWebHistory } from "vue-router";
@@ -7,7 +8,7 @@ const routes = [
     {
         path: "/",
         name: 'Root',
-        component: App,
+        component: Index,
     },
     {
         path: "/:randomValue",

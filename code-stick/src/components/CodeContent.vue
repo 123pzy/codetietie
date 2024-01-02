@@ -183,7 +183,7 @@ onMounted(async () => {
 watch(
   () => route.params,
   async () => {
-    if (randomValue.value && route.params.randomValue !== randomValue.value) {
+    if (route.params.randomValue !== randomValue.value) {
       await getCode();
       console.log('randomValue.value', randomValue.value);
     }
@@ -265,6 +265,9 @@ function downloadBlob(blob: Blob, fileName: string) {
   position: absolute;
 }
 .content-copy {
+  height: fit-content;
+  width: fit-content;
+  min-width: 20vw;
   padding: 2.05rem;
   background-image: linear-gradient(to top right, #8720fd, #ffc832);
   position: relative;
@@ -375,13 +378,13 @@ pre {
 .btn-edit {
   font-family: 'Browood-Regular', 'Luckiest_Guy';
   color: var(--btn-color);
+  background-color: var(--btn-bg-color);
   height: 5vh;
   width: fit-content;
   text-align: center;
   line-height: 5vh;
   font-size: 1.05rem;
   padding: 0 1rem 0 1rem;
-  background-color: var(--btn-bg-color);
   border-radius: 2rem;
   cursor: pointer;
   border: 1.6px solid #000;
