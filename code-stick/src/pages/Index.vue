@@ -54,9 +54,8 @@ function go() {
 }
 .font {
   width: 70vw;
-  display: flex;
+  display: grid;
   justify-content: center;
-  flex-wrap: wrap;
 }
 .introduce {
   color: var(--websit-name-bg);
@@ -66,10 +65,12 @@ function go() {
   font-weight: 700;
   margin-top: 15vh;
   margin-bottom: 1rem;
+  justify-self: center;
 }
 .text {
   width: 50rem;
   color: var(--websit-name-bg);
+  justify-self: center;
 }
 .start-btn {
   width: 10rem;
