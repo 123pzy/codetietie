@@ -1,6 +1,6 @@
 <template>
   <div class="index-container">
-    <Header :name_distance="15" :btn_distance="15" />
+    <Header :name_distance="9" :btn_distance="9" />
     <div class="box">
       <div class="font">
         <p class="introduce">Create and share beautiful code</p>
@@ -45,6 +45,7 @@ function go() {
   justify-content: center;
   overflow: auto;
   box-sizing: border-box;
+  padding-bottom: 5vh;
 }
 .box {
   height: fit-content;
@@ -83,6 +84,6 @@ function go() {
   cursor: pointer;
 }
 .index-img {
-  width: 60vw;
+  width: 70vw;
 }
 </style>

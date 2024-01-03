@@ -107,8 +107,7 @@ function openMyByuMecoffee() {
   color: var(--websit-name-bg);
   position: absolute;
   top: 2vh;
-  left: v-bind(name_distance + 'rem');
-  display: inline-block;
+  left: v-bind(name_distance + 'vw');
   z-index: 999;
   cursor: pointer;
 }
@@ -117,11 +116,11 @@ function openMyByuMecoffee() {
   width: 200px;
   position: absolute;
   top: 0.29rem;
-  right: v-bind(btn_distance + 'rem');
+  right: v-bind(btn_distance + 'vw');
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1vw;
 }
 .theme-box,
 .CN-shift,
