@@ -256,7 +256,7 @@ function downloadBlob(blob: Blob, fileName: string) {
 .content {
   height: fit-content;
   width: fit-content;
-  min-width: 20vw;
+  min-width: 18rem;
   max-width: 92vw;
   box-sizing: content-box;
   background-color: #1e1e1e;

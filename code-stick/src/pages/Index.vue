@@ -39,11 +39,12 @@ function go() {
 
 <style scoped>
 .index-container {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
   background-color: var(--bg-color);
   display: flex;
   justify-content: center;
+  overflow: auto;
+  box-sizing: border-box;
 }
 .box {
   height: fit-content;
@@ -82,6 +83,6 @@ function go() {
   cursor: pointer;
 }
 .index-img {
-  height: 30rem;
+  width: 60vw;
 }
 </style>
