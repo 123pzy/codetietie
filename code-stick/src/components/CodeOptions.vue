@@ -48,7 +48,7 @@ import { NSlider, NSpace, NSwitch } from 'naive-ui';
 import { useState } from '../stores/state.js';
 
 // 设置过期时间
-const daysToAdd = ref(30);
+const daysToAdd = ref(80);
 // 设置滑条样式
 function formatTooltip(value: number) {
   if (value !== 100) {
@@ -102,7 +102,6 @@ function handleChangeBurnActive(value: boolean) {
 
 <style scoped>
 .code-options-container {
-  color: #fff;
   height: 6vh;
   width: 80vw;
   background-color: var(--bg-color);
@@ -115,8 +114,7 @@ function handleChangeBurnActive(value: boolean) {
   transform: translateX(-50%);
 }
 .options {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
   gap: 1.6rem;
 }
 .deal-line {
@@ -130,7 +128,7 @@ function handleChangeBurnActive(value: boolean) {
 .read-burn-title {
   font-size: 1rem;
   letter-spacing: 1.6px;
-  color: var(--nslider-color);
+  color: var(--font-color);
 }
 .read-burn {
   display: flex;
@@ -144,6 +142,50 @@ function handleChangeBurnActive(value: boolean) {
   height: 50px;
   width: 15rem;
   font-size: 0.7rem;
-  color: var(--nslider-color);
+  color: var(--font-color);
+}
+
+@media (max-width: 768px) {
+  .code-options-container {
+    height: 80%;
+    width: 100%;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border: 0;
+    border-radius: 0;
+    position: relative;
+    bottom: 0;
+  }
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .deal-line {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .deal-line-title,
+  .read-burn-title {
+    font-size: 1rem;
+    letter-spacing: 1.6px;
+    color: var(--nslider-color);
+  }
+  .read-burn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .read-burn-icon {
+    height: 1rem;
+  }
+  .nspace {
+    height: 3rem;
+    width: 100%;
+    font-size: 0.7rem;
+    color: var(--font-color);
+  }
 }
 </style>

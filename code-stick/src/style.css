@@ -33,3 +33,9 @@ body {
   font-size: 0.87rem;
   font-family: Fira Code, sans-serif;
 }
+
+@media (max-width: 768px) {
+  .hljs {
+    font-size: 0.8rem;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="homepage-container">
     <Header :name_distance="2" :btn_distance="1.5" />
-    <CodeOptions v-show="state.state" />
+    <CodeOptions v-show="state.state" class="options" />
     <CodeContent />
   </div>
 </template>
@@ -21,5 +21,11 @@ const state = useState();
   height: 100vh;
   width: 100vw;
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  .options {
+    display: none;
+  }
 }
 </style>

@@ -87,4 +87,32 @@ function go() {
 .index-img {
   width: 70vw;
 }
+
+@media (max-width: 768px) {
+  .box {
+    width: 80vw;
+  }
+  .font {
+    width: 80vw;
+    display: grid;
+    justify-content: center;
+  }
+  .introduce {
+    width: 80vw;
+    max-width: 80vw;
+    font-size: 2.15rem;
+  }
+  .text {
+    width: 80vw;
+    font-size: 0.9rem;
+  }
+  .start-btn {
+    width: 6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .index-img {
+    width: 80vw;
+  }
+}
 </style>

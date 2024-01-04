@@ -1,5 +1,6 @@
 <template>
   <div class="code-content-container">
+    <Drawer v-show="edit" />
     <div class="code-box">
       <div class="content">
         <div class="header">
@@ -95,6 +96,7 @@ import { addCodeStick, getCodeStick } from '../api/request.js';
 import { NTooltip, NSpace, NInput } from 'naive-ui';
 import { useState } from '../stores/state.js';
 import domtoimage from 'dom-to-image';
+import Drawer from './Drawer.vue';
 
 const edit: Ref<boolean> = ref(false);
 const content: Ref<string> = ref('');
@@ -257,7 +259,7 @@ function downloadBlob(blob: Blob, fileName: string) {
   height: fit-content;
   width: fit-content;
   min-width: 18rem;
-  max-width: 92vw;
+  max-width: 90vw;
   box-sizing: content-box;
   background-color: #1e1e1e;
   overflow: auto;
