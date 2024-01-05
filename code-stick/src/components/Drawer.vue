@@ -1,10 +1,11 @@
 <template>
   <div class="drawer">
-    <n-button-group>
-      <n-button @click="activate('left')"
-        ><img src="../assets/drawer-light.svg" alt="" style="height: 2rem"
-      /></n-button>
-    </n-button-group>
+    <img
+      @click="activate('left')"
+      src="../assets/drawer-light.svg"
+      alt=""
+      style="height: 2rem"
+    />
     <n-drawer v-model:show="active" :width="260" :placement="placement">
       <n-drawer-content
         title="设置"
@@ -23,7 +24,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import CodeOptions from './CodeOptions.vue';
-import { NButtonGroup, NDrawer, NDrawerContent } from 'naive-ui';
+import { NDrawer, NDrawerContent } from 'naive-ui';
 import type { DrawerPlacement } from 'naive-ui';
 
 // 抽屉

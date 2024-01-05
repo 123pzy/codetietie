@@ -35,6 +35,7 @@ const { theme } = storeToRefs(state);
 function go() {
   window.location.href = '/codetietie';
 }
+console.log('https://www.codetietie.cn');
 </script>
 
 <style scoped>
