@@ -90,10 +90,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, nextTick, Ref, watch } from 'vue';
+import { ref, onMounted, nextTick, Ref, watch, h } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { addCodeStick, getCodeStick } from '../api/request.js';
-import { NTooltip, NSpace, NInput } from 'naive-ui';
+import { NTooltip, NSpace, NInput, useMessage, NIcon } from 'naive-ui';
+import { ReceiptOutline } from '@vicons/ionicons5';
 import { useState } from '../stores/state.js';
 import domtoimage from 'dom-to-image';
 import Drawer from './Drawer.vue';
@@ -121,9 +122,13 @@ function editFunc(): void {
 }
 
 // 确认添加代码
+const message = useMessage();
 async function confirmFunc(): Promise<void> {
   if (!editContent.value) {
-    alert('不能分享空代码');
+    // 提示不能分享空代码
+    message.warning('输入代码不能为空~', {
+      icon: () => h(NIcon, null, { default: () => h(ReceiptOutline) }),
+    });
   } else {
     content.value = editContent.value;
     randomValue.value = Math.random().toString(36).substr(2); // 生成随机字符串
