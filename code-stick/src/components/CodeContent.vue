@@ -275,10 +275,13 @@ function downloadBlob(blob: Blob, fileName: string) {
   height: fit-content;
   width: fit-content;
   min-width: 20vw;
-  padding: 2.05rem;
+  padding: 2.5rem;
   background-image: linear-gradient(to top right, #8720fd, #ffc832);
   position: relative;
   z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .copy-box {
   height: 100%;
@@ -286,6 +289,7 @@ function downloadBlob(blob: Blob, fileName: string) {
   border-radius: 12px;
   overflow: auto;
   background-color: #1e1e1e;
+  zoom: 1.5;
 }
 pre {
   margin: 0;
@@ -300,7 +304,6 @@ pre {
   align-items: center;
   margin-right: 1.2rem;
   position: absolute;
-  bottom: 0.3rem;
   right: 0;
 }
 pre {
