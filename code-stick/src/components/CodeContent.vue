@@ -275,7 +275,7 @@ function downloadBlob(blob: Blob, fileName: string) {
   height: fit-content;
   width: fit-content;
   min-width: 20vw;
-  padding: 2.5rem;
+  padding: 2.8rem;
   background-image: linear-gradient(to top right, #8720fd, #ffc832);
   position: relative;
   z-index: -1;
@@ -289,25 +289,19 @@ function downloadBlob(blob: Blob, fileName: string) {
   border-radius: 12px;
   overflow: auto;
   background-color: #1e1e1e;
-  zoom: 1.5;
+  zoom: 2;
 }
 pre {
-  margin: 0;
+  margin: -1rem 0 0 0;
 }
 .websit-URL {
-  height: 1.6rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Fira Code, sans-serif;
   font-weight: 700;
   color: rgba(220, 221, 225, 0.8);
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  margin-right: 1.2rem;
+  margin-right: 0.5rem;
   position: absolute;
   right: 0;
-}
-pre {
-  margin-top: -1rem;
+  bottom: 0;
 }
 .code {
   max-height: 68vh;
