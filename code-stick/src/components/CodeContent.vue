@@ -285,7 +285,7 @@ function downloadBlob(blob: Blob, fileName: string) {
 }
 .copy-box {
   height: 100%;
-  width: 100%;
+  width: calc(100% + 0.5px);
   border-radius: 12px;
   overflow: auto;
   background-color: #1e1e1e;
