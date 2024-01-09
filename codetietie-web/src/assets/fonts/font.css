@@ -18,3 +18,10 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: "Firacode_Medium";
+    src: url('./FiraCode-Regular-1.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -30,12 +30,13 @@ body {
 }
 
 .hljs {
-  font-size: 0.87rem;
-  font-family: Fira Code, sans-serif;
+  font-size: 0.92rem;
+  font-family: Firacode_Medium, sans-serif;
+  /* font-family: Fira Code, sans-serif; */
 }
 
 @media (max-width: 768px) {
   .hljs {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
