@@ -25,4 +25,4 @@
 - [x] 适配手机端
 - [x] 增加“阅后即焚”功能
 - [ ] 增加设置密钥功能
-- [ ] 部署到http://www.codetietie.cn
+- [x] 部署到http://codetietie.cn
