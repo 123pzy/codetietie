@@ -58,18 +58,20 @@
         </n-space>
       </div>
       <!-- 用来生成图片的DOM -->
-      <div class="content-copy" ref="codeDOM">
-        <div class="copy-box">
-          <div class="header">
-            <div class="circle"></div>
-            <div class="aside">
-              <div class="code-class hljs">{{ codeClass }}</div>
+      <div>
+        <div class="content-copy" ref="codeDOM">
+          <div class="copy-box">
+            <div class="header">
+              <div class="circle"></div>
+              <div class="aside">
+                <div class="code-class hljs">{{ codeClass }}</div>
+              </div>
             </div>
+            <div class="code-copy" v-show="!edit" ref="codeHtml">
+              <highlightjs :autodetect="true" :code="content" />
+            </div>
+            <div class="websit-URL">codetietie.cn</div>
           </div>
-          <div class="code-copy" v-show="!edit" ref="codeHtml">
-            <highlightjs :autodetect="true" :code="content" />
-          </div>
-          <div class="websit-URL">codetietie.cn</div>
         </div>
       </div>
       <div class="btn">
@@ -277,7 +279,7 @@ function downloadBlob(blob: Blob, fileName: string) {
   height: fit-content;
   width: fit-content;
   min-width: 20vw;
-  padding: 2.8rem;
+  padding: 4.5rem;
   background-image: linear-gradient(to top right, #8720fd, #ffc832);
   position: relative;
   z-index: -1;
@@ -291,6 +293,7 @@ function downloadBlob(blob: Blob, fileName: string) {
   border-radius: 12px;
   overflow: auto;
   background-color: #1e1e1e;
+  box-shadow: 0px 20px 15px 5px rgba(34, 34, 36, 0.26);
   zoom: 2;
 }
 pre {
