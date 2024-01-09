@@ -206,17 +206,16 @@ watch(
 const copyStatus = ref('');
 const showTooltip: Ref<boolean> = ref(false);
 function copyCode() {
-  navigator.clipboard
-    .writeText(content.value)
-    .then(() => {
-      copyStatus.value = 'copied!😎';
-    })
-    .catch(() => {
-      copyStatus.value = 'failed~😥';
-    })
-    .finally(() => {
-      showTooltip.value = true;
-    });
+  const textarea = document.createElement('textarea');
+  textarea.value = content.value;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+
+  copyStatus.value = 'copied!😎';
+  showTooltip.value = true;
+
   setTimeout(() => {
     showTooltip.value = false;
   }, 2000);
