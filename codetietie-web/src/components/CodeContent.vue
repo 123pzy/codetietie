@@ -146,7 +146,9 @@ async function confirmFunc(): Promise<void> {
       dealLineTime: dealLineTime,
       burn: state.burn,
     };
-    await addCodeStick(data);
+    console.log('addCodeStick');
+    const res = await addCodeStick(data);
+    console.log('res.data.msg::', res.data.msg);
     state.state = false;
   }
 }

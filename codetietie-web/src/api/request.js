@@ -1,6 +1,6 @@
 import instance from "./index.js";
 
-const path = import.meta.env.MODE == "development" ? "/api" : "";
+const path = import.meta.env.MODE == "development" ? "" : "";
 
 // 添加内容
 export const addCodeStick = (data) => {
