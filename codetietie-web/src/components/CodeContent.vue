@@ -6,6 +6,26 @@
         <div class="header">
           <div class="circle"></div>
           <div class="aside">
+            <!-- "代码剩余电量" -->
+            <n-space style="cursor: pointer">
+              <n-tooltip placement="top" trigger="hover">
+                <template #trigger>
+                  <div class="battery-box">
+                    <div class="battery-body">
+                      <div class="bar"></div>
+                      <div class="electric-quantity">
+                        {{ timeBar.toFixed(0) }}%
+                      </div>
+                    </div>
+                    <div class="battery-header"></div>
+                  </div>
+                </template>
+                <img src="../assets/power.svg" alt="" style="height: 16px" />{{
+                  state.text.codeElectricQuantity
+                }}{{ timeBar.toFixed(1) }}%
+              </n-tooltip>
+            </n-space>
+            <!-- 下载为图片 -->
             <n-space>
               <n-tooltip placement="top" trigger="hover">
                 <template #trigger>
@@ -19,6 +39,7 @@
                 {{ state.text.downPNG }}
               </n-tooltip>
             </n-space>
+            <!-- 复制代码 -->
             <n-space>
               <n-tooltip
                 placement="top"
@@ -119,7 +140,7 @@ function editFunc(): void {
   });
 }
 
-// 确认添加代码
+// 点击确认添加之后
 const message = useMessage();
 async function confirmFunc(): Promise<void> {
   if (!editContent.value) {
@@ -129,6 +150,7 @@ async function confirmFunc(): Promise<void> {
     });
   } else {
     content.value = editContent.value;
+    timeBar.value = 100;
     randomValue.value = Math.random().toString(36).substr(2); // 生成随机字符串
     // 获取当前时间的时间戳
     var currentTimeStamp = Date.now();
@@ -144,7 +166,7 @@ async function confirmFunc(): Promise<void> {
       dealLineTime: dealLineTime,
       burn: state.burn,
     };
-    const res = await addCodeStick(data);
+    await addCodeStick(data);
     state.state = false;
   }
 }
@@ -160,12 +182,23 @@ const codeHtml = ref(); // 获取元素实例
 var codeClass: Ref<string> = ref(''); // 定义初始代码类型
 
 // 拉取代码
+const timeBar = ref(52);
 async function getCode() {
   const res = await getCodeStick(route.params.randomValue);
   if (res.data.code === 0) {
     router.push('/not_found');
+  } else if (res.data.code === -1) {
+    timeBar.value = 0;
+    content.value = res.data.msg;
   } else {
-    content.value = res.data.data;
+    // 计算代码剩余电量
+    const currentTimeStamp = new Date();
+    timeBar.value =
+      ((res.data.data.timestamp_out - currentTimeStamp) /
+        (res.data.data.timestamp_out - res.data.data.timestamp_in)) *
+      100;
+    console.log(timeBar.value, res.data.data);
+    content.value = res.data.data.content;
   }
 }
 // 更新代码类型查询
@@ -345,7 +378,53 @@ pre {
   width: 100%;
   display: flex;
   justify-content: end;
+  align-items: center;
   gap: 1rem;
+}
+.battery-box {
+  position: relative;
+  bottom: 1.69px;
+  right: 2px;
+}
+
+.battery-body {
+  height: 1.04rem;
+  width: 2rem;
+  border: 0.1rem solid #f9fafd;
+  border-radius: 6.6px;
+  position: relative;
+  overflow: hidden;
+}
+.electric-quantity {
+  color: #ccc8c8;
+  mix-blend-mode: difference;
+  font-size: 0.56rem;
+  font-family: Firacode_Medium;
+  font-weight: 900;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.battery-header {
+  height: 0.3rem;
+  width: 0.1rem;
+  position: absolute;
+  right: -0.15rem;
+  background-color: #f9fafd;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0 25px 25px 0;
+}
+
+.bar {
+  height: 100%;
+  width: v-bind(timeBar + '%');
+  background-color: #7ffc6f;
+  position: absolute;
 }
 .download-img-icon,
 .copy-icon {

@@ -27,6 +27,15 @@ getRouter.get('/getContent', async (ctx) => {
         const burn = res[0].burn;
         const dateObj = new Date(Number(dateStr));
         const timestamp = dateObj.getTime();
+        const dateString = res[0].timestamp_in;
+        // 转化构建代码的文字格式时间戳为数字格式：
+        const dateObject = new Date(dateString);
+        const timestamp_in = dateObject.getTime();
+        const data = {
+            content: res[0].content,
+            timestamp_in,
+            timestamp_out: res[0].timestamp_out,
+        }
         if (burn) {
             await getUsersInfo(`delete from codestick where randomValue = "${randomValue}";`)
         }
@@ -34,13 +43,12 @@ getRouter.get('/getContent', async (ctx) => {
             ctx.body = {
                 code: 1,
                 msg: `获取到content了:${res}!`,
-                data: res[0].content
+                data,
             }
         } else {
             ctx.body = {
-                code: 1,
-                msg: `获取到content了:${res}!`,
-                data: '已过期！'
+                code: -1,
+                msg: `分享已过期！`,
             }
         }
     }
