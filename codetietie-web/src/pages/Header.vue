@@ -31,7 +31,7 @@
       <div class="github-icon" @click="openMyGithub">
         <n-tooltip placement="bottom" trigger="hover">
           <template #trigger>
-            <n-icon size="32">
+            <n-icon size="30">
               <img
                 src="../assets/github-dark.svg"
                 v-show="theme == 'dark'"
@@ -52,7 +52,7 @@
       <div class="coffee-icon" @click="openMyByuMecoffee">
         <n-tooltip placement="bottom" trigger="hover">
           <template #trigger>
-            <n-icon size="32">
+            <n-icon size="30">
               <img
                 src="../assets/coffee-dark.svg"
                 v-show="theme == 'dark'"
