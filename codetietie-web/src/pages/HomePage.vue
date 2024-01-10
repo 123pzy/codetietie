@@ -12,12 +12,12 @@
             <img src="../assets/weixin.svg" alt="" style="height: 2vh" />
           </n-icon>
         </template>
-        <div style="display: flex; flex-wrap: wrap; width: 6vw">
+        <div style="display: flex; flex-wrap: wrap; width: 10vh">
           {{ state.text.callMe }}
           <img
             src="../assets/two_dimensional_code.png"
             alt=""
-            style="height: 6vw"
+            style="height: 10vh"
           />
         </div>
       </n-tooltip>

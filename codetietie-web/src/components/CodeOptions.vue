@@ -127,7 +127,6 @@ function handleChangeBurnActive(value: boolean) {
 .deal-line-title,
 .read-burn-title {
   font-size: 1rem;
-  letter-spacing: 1.6px;
   color: var(--font-color);
 }
 .read-burn {
