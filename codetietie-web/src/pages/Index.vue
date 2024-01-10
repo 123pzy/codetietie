@@ -3,7 +3,7 @@
     <Header :name_distance="9" :btn_distance="9" />
     <div class="box">
       <div class="font">
-        <p class="introduce">{{ state.text.website_description }}</p>
+        <p class="introduce" v-html="state.text.website_description"></p>
         <p class="text">
           {{ state.text.website_subject }}
         </p>

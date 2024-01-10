@@ -1,6 +1,7 @@
 <template>
   <div class="header-container">
     <div class="websit-name" @click="goHome">
+      <img src="../assets/logo.svg" alt="" style="height: 2rem;transform: translateY(2.8px);">
       {{ state.text.website_title }}
     </div>
     <div class="btn">
@@ -129,6 +130,9 @@ function openMyByuMecoffee() {
 
 <style scoped>
 .websit-name {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
   font-family: 'Luckiest_Guy', 'Browood-Regular';
   letter-spacing: 1px;
   font-size: 1.45rem;
