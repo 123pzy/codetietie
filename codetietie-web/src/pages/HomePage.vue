@@ -5,13 +5,30 @@
     <n-message-provider>
       <CodeContent />
     </n-message-provider>
+    <div class="weixin-icon">
+      <n-tooltip placement="top-end" trigger="hover" animated>
+        <template #trigger>
+          <n-icon size="32">
+            <img src="../assets/weixin.svg" alt="" style="height: 2vh" />
+          </n-icon>
+        </template>
+        <div style="display: flex; flex-wrap: wrap; width: 6vw">
+          {{ state.text.callMe }}
+          <img
+            src="../assets/two_dimensional_code.png"
+            alt=""
+            style="height: 6vw"
+          />
+        </div>
+      </n-tooltip>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import CodeContent from '../components/CodeContent.vue';
 import CodeOptions from '../components/CodeOptions.vue';
-import { NMessageProvider } from 'naive-ui';
+import { NMessageProvider, NTooltip, NIcon } from 'naive-ui';
 import Header from './Header.vue';
 import { useState } from '../stores/state.js';
 
@@ -24,6 +41,12 @@ const state = useState();
   height: 100vh;
   width: 100vw;
   color: #fff;
+}
+.weixin-icon {
+  height: 1rem;
+  position: fixed;
+  bottom: 2.5vh;
+  right: 1.2vw;
 }
 
 @media (max-width: 768px) {

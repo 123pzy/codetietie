@@ -26,3 +26,7 @@
 - [x] 增加“阅后即焚”功能
 - [ ] 增加设置密钥功能
 - [x] 部署到http://codetietie.cn
+
+
+
+![image-20240110132522087](http://panpan.dapanna.cn//image-20240110132522087.png)

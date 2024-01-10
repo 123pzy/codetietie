@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div class="websit-name" @click="goHome">
-      {{ state.CN === 'Chinese' ? '代码贴贴' : 'CODETIETIE' }}
+      {{ state.text.website_title }}
     </div>
     <div class="btn">
       <div class="theme-box" @click="changeTheme">
@@ -29,42 +29,57 @@
         />
       </div>
       <div class="github-icon" @click="openMyGithub">
-        <img
-          src="../assets/github-dark.svg"
-          v-show="theme == 'dark'"
-          alt=""
-          style="height: 80%"
-        />
-        <img
-          src="../assets/github-light.svg"
-          v-show="theme == 'light'"
-          alt=""
-          style="height: 80%"
-        />
+        <n-tooltip placement="bottom" trigger="hover">
+          <template #trigger>
+            <n-icon size="32">
+              <img
+                src="../assets/github-dark.svg"
+                v-show="theme == 'dark'"
+                alt=""
+                style="height: 80%"
+              />
+              <img
+                src="../assets/github-light.svg"
+                v-show="theme == 'light'"
+                alt=""
+                style="height: 80%"
+              />
+            </n-icon>
+          </template>
+          <span> {{ state.text.Github }} </span>
+        </n-tooltip>
       </div>
       <div class="coffee-icon" @click="openMyByuMecoffee">
-        <img
-          src="../assets/coffee-dark.svg"
-          v-show="theme == 'dark'"
-          alt=""
-          style="height: 80%"
-        />
-        <img
-          src="../assets/coffee-light.svg"
-          v-show="theme == 'light'"
-          alt=""
-          style="height: 80%"
-        />
+        <n-tooltip placement="bottom" trigger="hover">
+          <template #trigger>
+            <n-icon size="32">
+              <img
+                src="../assets/coffee-dark.svg"
+                v-show="theme == 'dark'"
+                alt=""
+                style="height: 80%"
+              />
+              <img
+                src="../assets/coffee-light.svg"
+                v-show="theme == 'light'"
+                alt=""
+                style="height: 80%"
+              />
+            </n-icon>
+          </template>
+          <span> {{ state.text.BuyMeACoffee }} </span>
+        </n-tooltip>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
+import { NTooltip, NIcon } from 'naive-ui';
 import { useState } from '../stores/state.js';
 
-const props = defineProps(['name_distance', 'btn_distance']);
+defineProps(['name_distance', 'btn_distance']);
 const state = useState();
 // 点击图标跳转index页面
 function goHome() {
@@ -85,6 +100,19 @@ watchEffect(() => {
 watchEffect(() => {
   localStorage.setItem('CN', state.CN);
 });
+
+if (state.CN === 'Chinese') {
+  state.text = state.text_cn;
+} else {
+  state.text = state.text_en;
+}
+
+watch(
+  () => state.CN,
+  () => {
+    state.changeCN();
+  }
+);
 // 切换中英文
 function changeCN() {
   state.CN = state.CN == 'Chinese' ? 'English' : 'Chinese';

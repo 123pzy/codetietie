@@ -3,21 +3,22 @@
     <Header :name_distance="2" :btn_distance="1.5" />
     <div class="box">
       <p class="code">404</p>
-      <p class="title">PAGE NOT FOUND</p>
+      <p class="title">{{ state.text.notFoundTitle }}</p>
       <p class="text">
-        The page you are looking for doesn't exist or the author has set "Burn
-        after reading", either way the code is gone.
+        {{ state.text.notFoundDescription }}
       </p>
-      <div class="action" @click="goHome">Take me home</div>
+      <div class="action" @click="goHome">{{ state.text.takeMeHome }}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
+import { useState } from '../stores/state';
 import Header from './Header.vue';
 
 const router = useRouter();
+const state = useState();
 function goHome() {
   router.push('/');
 }

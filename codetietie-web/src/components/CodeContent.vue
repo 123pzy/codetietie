@@ -16,7 +16,7 @@
                     v-show="!state.state"
                   />
                 </template>
-                下载为图片
+                {{ state.text.downPNG }}
               </n-tooltip>
             </n-space>
             <n-space>
@@ -49,11 +49,7 @@
             v-model:value="editContent"
             ref="textArea"
             type="textarea"
-            :placeholder="
-              state.CN === 'Chinese'
-                ? '请输入待分享的代码...'
-                : 'Please enter the code to be shared...'
-            "
+            :placeholder="state.text.placeholder"
           />
         </n-space>
       </div>
@@ -84,7 +80,7 @@
           </div>
         </div>
         <div class="btn-edit" @click="editFunc" v-show="!edit">
-          {{ state.CN === 'Chinese' ? '分享代码' : 'Share code' }}
+          {{ state.text.shareCodeBtn }}
         </div>
       </div>
     </div>
@@ -148,9 +144,7 @@ async function confirmFunc(): Promise<void> {
       dealLineTime: dealLineTime,
       burn: state.burn,
     };
-    console.log('addCodeStick');
     const res = await addCodeStick(data);
-    console.log('res.data.msg::', res.data.msg);
     state.state = false;
   }
 }
@@ -196,7 +190,6 @@ watch(
   async () => {
     if (route.params.randomValue !== randomValue.value) {
       await getCode();
-      console.log('randomValue.value', randomValue.value);
     }
     getCodeClass(); // 更新代码类型
   }
@@ -213,7 +206,7 @@ function copyCode() {
   document.execCommand('copy');
   document.body.removeChild(textarea);
 
-  copyStatus.value = 'copied!😎';
+  copyStatus.value = `${state.text.copySuccess}😎`;
   showTooltip.value = true;
 
   setTimeout(() => {
@@ -417,5 +410,10 @@ pre {
   border-radius: 0;
   /* background: rgba(0, 0, 0, 0.1); */
   background: #1e1e1e;
+}
+@media (max-width: 768px) {
+  .code-box {
+    padding-bottom: 3rem;
+  }
 }
 </style>

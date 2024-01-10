@@ -3,7 +3,7 @@
     <div class="options">
       <!-- 设置过期时间 -->
       <div class="deal-line">
-        <div class="deal-line-title">1.设置过期时间：</div>
+        <div class="deal-line-title">1.{{ state.text.setDealTime }}</div>
         <n-space vertical class="nspace">
           <n-slider
             :default-value="daysToAdd"
@@ -15,7 +15,7 @@
         </n-space>
       </div>
       <div class="read-burn">
-        <div class="read-burn-title">2.阅后即焚</div>
+        <div class="read-burn-title">2.{{ state.text.BurnAfterReading }}:</div>
         <n-space>
           <n-switch
             v-model:value="burnActive"
@@ -118,7 +118,7 @@ function handleChangeBurnActive(value: boolean) {
   gap: 1.6rem;
 }
 .deal-line {
-  width: 25rem;
+  width: 30vw;
   display: flex;
   justify-content: start;
   align-items: center;

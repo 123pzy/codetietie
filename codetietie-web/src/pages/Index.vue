@@ -3,14 +3,12 @@
     <Header :name_distance="9" :btn_distance="9" />
     <div class="box">
       <div class="font">
-        <p class="introduce">Create and share beautiful code</p>
+        <p class="introduce">{{ state.text.website_description }}</p>
         <p class="text">
-          Transform your code into visually captivating images with our powerful
-          tool. Personalize the background, choose themes, toggle the title bar,
-          add branding, and explore various features.
+          {{ state.text.website_subject }}
         </p>
       </div>
-      <div class="start-btn" @click="go">Get Started</div>
+      <div class="start-btn" @click="go">{{ state.text.getStarted }}</div>
       <img
         src="../assets/index-dark.png"
         class="index-img"
@@ -22,6 +20,10 @@
         v-show="theme == 'light'"
       />
     </div>
+    <footer>
+      <span>Copyright © 2024 - 2024 |</span>
+      <span @click="jumpICP"> 冀ICP备2022018813号</span>
+    </footer>
   </div>
 </template>
 
@@ -35,7 +37,13 @@ const { theme } = storeToRefs(state);
 function go() {
   window.location.href = '/codetietie';
 }
-console.log('https://www.codetietie.cn');
+function jumpICP() {
+  window.open('https://beian.miit.gov.cn');
+}
+console.log(
+  '%c欢迎关注公众号：学编程的GISer',
+  'color:skyblue;font-size:20px;font-weight:700'
+);
 </script>
 
 <style scoped>
@@ -47,6 +55,7 @@ console.log('https://www.codetietie.cn');
   overflow: auto;
   box-sizing: border-box;
   padding-bottom: 5vh;
+  position: relative;
 }
 .box {
   height: fit-content;
@@ -88,7 +97,13 @@ console.log('https://www.codetietie.cn');
 .index-img {
   width: 70vw;
 }
-
+footer {
+  position: absolute;
+  bottom: 1vh;
+}
+footer > span {
+  font-size: 0.68rem;
+}
 @media (max-width: 768px) {
   .box {
     width: 80vw;
@@ -114,6 +129,9 @@ console.log('https://www.codetietie.cn');
   }
   .index-img {
     width: 80vw;
+  }
+  footer > span {
+    font-size: 0.6rem;
   }
 }
 </style>
