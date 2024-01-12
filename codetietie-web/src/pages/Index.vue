@@ -98,6 +98,7 @@ console.log(
   width: 70vw;
 }
 footer {
+  color: var(--font-color);
   position: absolute;
   bottom: 1vh;
 }

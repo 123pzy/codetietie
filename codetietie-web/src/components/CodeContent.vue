@@ -406,7 +406,7 @@ pre {
 }
 
 .select {
-  width: 12vw;
+  width: 10vw;
   margin-right: 1.2rem;
 }
 .select > .n-select {
@@ -564,7 +564,7 @@ pre {
     padding-bottom: 3rem;
   }
   .select {
-    width: 14vw;
+    width: 20vw;
   }
 }
 </style>
