@@ -4,10 +4,21 @@
     <div class="code-box">
       <div class="content">
         <div class="header">
-          <div class="circle"></div>
-          <div class="aside">
+          <div class="aside-left">
+            <div class="circle"></div>
+            <!-- 代码文件选择 -->
+            <div class="select" ref="select">
+              <n-select
+                v-model:value="selectCode"
+                size="small"
+                :options="selectOptions"
+                :render-tag="renderTag"
+              />
+            </div>
+          </div>
+          <div class="aside-right">
             <!-- "代码剩余电量" -->
-            <n-space style="cursor: pointer">
+            <n-space style="cursor: pointer" v-show="!state.state">
               <n-tooltip placement="top" trigger="hover">
                 <template #trigger>
                   <div class="battery-box">
@@ -80,7 +91,7 @@
           <div class="copy-box">
             <div class="header">
               <div class="circle"></div>
-              <div class="aside">
+              <div class="aside-right">
                 <div class="code-class hljs">{{ codeClass }}</div>
               </div>
             </div>
@@ -112,7 +123,15 @@
 import { ref, onMounted, nextTick, Ref, watch, h } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { addCodeStick, getCodeStick } from '../api/request.js';
-import { NTooltip, NSpace, NInput, useMessage, NIcon } from 'naive-ui';
+import {
+  NTooltip,
+  NSpace,
+  NInput,
+  useMessage,
+  NIcon,
+  NSelect,
+  NTag,
+} from 'naive-ui';
 import { ReceiptOutline } from '@vicons/ionicons5';
 import { useState } from '../stores/state.js';
 import domtoimage from 'dom-to-image';
@@ -197,7 +216,6 @@ async function getCode() {
       ((res.data.data.timestamp_out - currentTimeStamp) /
         (res.data.data.timestamp_out - res.data.data.timestamp_in)) *
       100;
-    console.log(timeBar.value, res.data.data);
     content.value = res.data.data.content;
   }
 }
@@ -228,6 +246,54 @@ watch(
   }
 );
 
+// 选择代码文件
+const select = ref();
+// nextTick(() => {
+//   select.value.childNodes[0].childNodes[1].style.setProperty(
+//     '--n-border',
+//     'none'
+//   );
+//   select.value.childNodes[0].childNodes[1].style.setProperty(
+//     '--n-border-hover',
+//     'none'
+//   );
+// });
+const selectCode = ref(null);
+const selectOptions = ref([
+  {
+    label: 'Drive My Car',
+    value: 'song1',
+  },
+  {
+    label: 'Norwegian Wood',
+    value: 'song2',
+  },
+  {
+    label: "You Won't See",
+    value: 'song3',
+  },
+  {
+    label: 'Nowhere Man',
+    value: 'song4',
+  },
+]);
+const renderTag = ({ option, handleClose }) => {
+  return h(
+    NTag,
+    {
+      type: option.type as 'success' | 'warning' | 'error',
+      closable: false,
+      onMousedown: (e: FocusEvent) => {
+        e.preventDefault();
+      },
+      onClose: (e: MouseEvent) => {
+        e.stopPropagation();
+        handleClose();
+      },
+    },
+    { default: () => option.label }
+  );
+};
 // 一键复制代码
 const copyStatus = ref('');
 const showTooltip: Ref<boolean> = ref(false);
@@ -347,6 +413,22 @@ pre {
   display: flex;
   align-items: center;
 }
+.aside-left {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.select {
+  width: 12vw;
+}
+.select > .n-select {
+  display: flex;
+}
+.n-base-selection {
+  --n-color: red !important;
+}
 .circle {
   height: 11px;
   width: 11px;
@@ -373,7 +455,8 @@ pre {
   border-radius: 50%;
   background-color: #28c840;
 }
-.aside {
+
+.aside-right {
   height: 100%;
   width: 100%;
   display: flex;
@@ -421,7 +504,7 @@ pre {
 }
 
 .bar {
-  height: 100%;
+  height: 105%;
   width: v-bind(timeBar + '%');
   background-color: #7ffc6f;
   position: absolute;
@@ -494,5 +577,9 @@ pre {
   .code-box {
     padding-bottom: 3rem;
   }
+  .select {
+    width: 16vw;
+  }
 }
 </style>
+<style></style>

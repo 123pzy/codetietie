@@ -30,13 +30,50 @@ body {
 }
 
 .hljs {
-  font-size: 0.92rem;
-  font-family: Firacode_Medium, sans-serif;
-  /* font-family: Fira Code, sans-serif; */
+  font-size: 0.9rem;
+  font-family: Fira Code, Firacode_Medium;
+}
+
+/* 设置n-select样式 */
+.n-base-selection {
+  font-size: 0.75rem;
+  padding: 0px;
+  --n-color: #353535 !important;
+  --n-border-hover: 0px solid #36ad6a !important;
+  --n-border: 0 !important;
+  --n-border-active: 0px solid #18a058 !important;
+  --n-border-focus: 0px solid #36ad6a !important;
+  --n-caret-color: #353535 !important;
+  --n-color-active: #353535 !important;
+  --n-box-shadow-active: 0 0 0 1px #353535 !important;
+  --n-box-shadow-focus: 0 0 0 1px #353535 !important;
+}
+.n-base-selection-placeholder__inner{
+  width: 10vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.n-tag,
+.n-tag--closable {
+  color: #cfcfcf;
+  font-size: 0.75rem;
+  padding: 0;
+  --n-color: #353535 !important;
+  --n-border: none !important;
+}
+
+.n-tag__content {
+  width: calc(10vw - 1.3em);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 768px) {
   .hljs {
     font-size: 0.85rem;
+    font-family: Firacode_Medium, sans-serif;
   }
 }

@@ -45,8 +45,8 @@ const state = useState();
 .weixin-icon {
   height: 1rem;
   position: fixed;
-  bottom: 2.5vh;
-  right: 1.2vw;
+  bottom: 3.2vh;
+  right: 1.6vw;
 }
 
 @media (max-width: 768px) {
