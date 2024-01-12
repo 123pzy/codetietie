@@ -72,7 +72,7 @@ body {
 }
 
 .n-tag__content {
-  width: calc(10vw - 1.3em);
+  width: calc(9vw - 1.3em);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -99,5 +99,9 @@ body {
   .hljs {
     font-size: 0.85rem;
     font-family: Firacode_Medium, sans-serif;
+  }
+
+  .n-tag__content {
+    width: calc(16vw - 1.3em);
   }
 }
