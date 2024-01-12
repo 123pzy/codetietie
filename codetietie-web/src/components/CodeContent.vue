@@ -247,34 +247,19 @@ watch(
 );
 
 // 选择代码文件
-const select = ref();
-// nextTick(() => {
-//   select.value.childNodes[0].childNodes[1].style.setProperty(
-//     '--n-border',
-//     'none'
-//   );
-//   select.value.childNodes[0].childNodes[1].style.setProperty(
-//     '--n-border-hover',
-//     'none'
-//   );
-// });
 const selectCode = ref(null);
 const selectOptions = ref([
   {
-    label: 'Drive My CarDrive My CarDrive My CarDrive My CarDrive My CarDrive My CarDrive My Car',
+    label: "Everybody's Got Something to Hide Except Me and My Monkey",
+    value: 'song0',
+  },
+  {
+    label: 'Drive My Car',
     value: 'song1',
   },
   {
     label: 'Norwegian Wood',
     value: 'song2',
-  },
-  {
-    label: "You Won't See",
-    value: 'song3',
-  },
-  {
-    label: 'Nowhere Man',
-    value: 'song4',
   },
 ]);
 const renderTag = ({ option, handleClose }) => {
