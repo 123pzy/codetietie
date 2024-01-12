@@ -64,13 +64,13 @@ body {
   --n-border: none !important;
 }
 .n-base-select-menu{
-  color: #fff;
+  /* color: #fff; */
   width: fit-content;
   max-width: 60vw;
-  background-color: #363637;
+  /* background-color: #363637; */
 }
 .n-base-select-option__content{
-  color: #b8b4b4;
+  /* color: #b8b4b4; */
   width: 100%;
 }
 .n-tag__content {

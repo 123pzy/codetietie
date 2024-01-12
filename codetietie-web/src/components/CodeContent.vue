@@ -422,6 +422,7 @@ pre {
 
 .select {
   width: 12vw;
+  margin-right: 1.2rem;
 }
 .select > .n-select {
   display: flex;
@@ -578,7 +579,7 @@ pre {
     padding-bottom: 3rem;
   }
   .select {
-    width: 16vw;
+    width: 14vw;
   }
 }
 </style>
