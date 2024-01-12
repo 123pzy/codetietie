@@ -261,7 +261,7 @@ const select = ref();
 const selectCode = ref(null);
 const selectOptions = ref([
   {
-    label: 'Drive My Car',
+    label: 'Drive My CarDrive My CarDrive My CarDrive My CarDrive My CarDrive My CarDrive My Car',
     value: 'song1',
   },
   {
