@@ -53,5 +53,9 @@ const state = useState();
   .options {
     display: none;
   }
+  .weixin-icon {
+    bottom: 3.8vh;
+    right: 4vw;
+  }
 }
 </style>

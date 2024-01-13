@@ -290,7 +290,7 @@ function copyCode() {
   document.execCommand('copy');
   document.body.removeChild(textarea);
 
-  copyStatus.value = `${state.text.copySuccess}😎`;
+  copyStatus.value = `😎${state.text.copySuccess}`;
   showTooltip.value = true;
 
   setTimeout(() => {
@@ -562,6 +562,16 @@ pre {
 @media (max-width: 768px) {
   .code-box {
     padding-bottom: 3rem;
+  }
+  .content-copy {
+    padding: 3rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+  .copy-box {
+    zoom: 1.5;
   }
   .select {
     width: 20vw;
