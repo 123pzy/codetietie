@@ -7,18 +7,37 @@
           <div class="aside-left">
             <div class="circle"></div>
             <!-- 代码文件选择 -->
-            <div class="select" ref="select">
+            <div class="select">
+              <n-input
+                placeholder="给代码起个名字吧！"
+                v-model:value="codeTitle"
+                autosize
+                style="width: 100%"
+                v-show="state.state"
+              />
               <n-select
-                v-model:value="selectCode"
                 size="small"
+                placeholder="Select code"
                 :options="selectOptions"
                 :render-tag="renderTag"
+                :node-props="generateOptionProps"
+                @update:value="changeCodeContent"
+                v-show="!state.state"
+                :show-checkmark="false"
               />
+              <n-icon
+                size="25"
+                style="cursor: pointer"
+                @click="addCodeFile"
+                v-show="!state.state"
+              >
+                <Add />
+              </n-icon>
             </div>
           </div>
-          <div class="aside-right">
+          <div class="aside-right" v-show="!state.state">
             <!-- "代码剩余电量" -->
-            <n-space style="cursor: pointer" v-show="!state.state">
+            <n-space style="cursor: pointer">
               <n-tooltip placement="top" trigger="hover">
                 <template #trigger>
                   <div class="battery-box">
@@ -103,17 +122,17 @@
         </div>
       </div>
       <div class="btn">
-        <div class="edit-btn">
-          <div class="btn-confirm" @click="confirmFunc" v-show="edit">
-            {{ state.CN === 'Chinese' ? '确定' : 'Confirm' }}
-          </div>
-          <div class="btn-cancel" @click="cancelFunc" v-show="edit">
-            {{ state.CN === 'Chinese' ? '取消' : 'Cancel' }}
-          </div>
+        <div class="edit-btn" v-show="edit">
+          <CodeButton @click="confirmFunc(addFile)">{{
+            state.CN === 'Chinese' ? '确定' : 'Confirm'
+          }}</CodeButton>
+          <CodeButton @click="cancelFunc">{{
+            state.CN === 'Chinese' ? '取消' : 'Cancel'
+          }}</CodeButton>
         </div>
-        <div class="btn-edit" @click="editFunc" v-show="!edit">
-          {{ state.text.shareCodeBtn }}
-        </div>
+        <CodeButton @click="editFunc" v-show="!edit">{{
+          state.text.shareCodeBtn
+        }}</CodeButton>
       </div>
     </div>
   </div>
@@ -122,7 +141,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, nextTick, Ref, watch, h } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { addCodeStick, getCodeStick } from '../api/request.js';
+import { addCodeFolder, getCodeStick, updateCodeFile } from '../api/request.js';
 import {
   NTooltip,
   NSpace,
@@ -132,24 +151,29 @@ import {
   NSelect,
   NTag,
 } from 'naive-ui';
-import { ReceiptOutline } from '@vicons/ionicons5';
+import { ReceiptOutline, Add } from '@vicons/ionicons5';
 import { useState } from '../stores/state.js';
 import domtoimage from 'dom-to-image';
 import Drawer from './Drawer.vue';
+import CodeButton from './CodeButton.vue';
 
 const edit: Ref<boolean> = ref(false);
 const content: Ref<string> = ref('');
-
 const router = useRouter();
 const route = useRoute();
 var randomValue = ref('');
-
+const codeTitle = ref();
 const textArea = ref();
-// 点击“我也要分享代码”按钮之后
+var addFile: Ref<boolean> = ref(false);
+
+// 点击“分享代码”按钮之后
 const state = useState();
 const editContent = ref('');
 function editFunc(): void {
+  addFile.value = false;
+  selectOptions.value = [];
   editContent.value = '';
+  codeTitle.value = '';
   state.state = true;
   codeClass.value = '';
   edit.value = true;
@@ -159,36 +183,65 @@ function editFunc(): void {
   });
 }
 
+// 点击“➕”新增代码文件
+async function addCodeFile() {
+  addFile.value = true;
+  state.state = true;
+  editContent.value = '';
+  codeTitle.value = '';
+  edit.value = true;
+  // textarea元素自动获取焦点
+  nextTick(() => {
+    textArea.value.focus();
+  });
+}
+
 // 点击确认添加之后
 const message = useMessage();
-async function confirmFunc(): Promise<void> {
+async function confirmFunc(val) {
   if (!editContent.value) {
     // 提示不能分享空代码
     message.warning('输入代码不能为空~', {
       icon: () => h(NIcon, null, { default: () => h(ReceiptOutline) }),
     });
   } else {
-    content.value = editContent.value;
-    timeBar.value = 100;
-    randomValue.value = Math.random().toString(36).substr(2); // 生成随机字符串
-    // 获取当前时间的时间戳
-    var currentTimeStamp = Date.now();
-    // 设置要增加的天数
-    var daysToAdd = state.daysToAdd;
-    // 计算未来的时间戳
-    var dealLineTime = currentTimeStamp + daysToAdd * 24 * 60 * 60 * 1000;
-    router.push(randomValue.value);
+    if (!codeTitle.value) codeTitle.value = 'Anonymous code';
+    selectOptions.value.push({
+      label: codeTitle.value.toString(),
+      value: editContent.value,
+    });
+    if (!val) {
+      content.value = editContent.value;
+      timeBar.value = 100;
+      randomValue.value = Math.random().toString(36).substr(2); // 生成随机字符串
+      // 获取当前时间的时间戳
+      var currentTimeStamp = Date.now();
+      // 设置要增加的天数
+      var daysToAdd = state.daysToAdd;
+      // 计算未来的时间戳
+      var dealLineTime = currentTimeStamp + daysToAdd * 24 * 60 * 60 * 1000;
+      router.push(randomValue.value);
+      const data = {
+        randomValue: randomValue.value,
+        editContent: editContent.value,
+        label: codeTitle.value,
+        dealLineTime: dealLineTime,
+        burn: state.burn,
+      };
+      await addCodeFolder(data);
+    } else {
+      const data = {
+        randomValue: route.params.randomValue,
+        editContent: editContent.value,
+        label: codeTitle.value,
+      };
+      const res = await updateCodeFile(data);
+    }
     edit.value = false;
-    const data = {
-      randomValue: randomValue.value,
-      editContent: editContent.value,
-      dealLineTime: dealLineTime,
-      burn: state.burn,
-    };
-    await addCodeStick(data);
     state.state = false;
   }
 }
+
 // 取消添加代码
 async function cancelFunc() {
   editContent.value = '';
@@ -216,13 +269,17 @@ async function getCode() {
       ((res.data.data.timestamp_out - currentTimeStamp) /
         (res.data.data.timestamp_out - res.data.data.timestamp_in)) *
       100;
-    content.value = res.data.data.content;
+    selectOptions.value = JSON.parse(res.data.data.selectOptions);
+    content.value = selectOptions.value[0].value;
   }
 }
+
 // 更新代码类型查询
 function getCodeClass() {
-  codeClass.value =
-    codeHtml.value.childNodes[0].childNodes[0].classList[1] || 'txt';
+  nextTick(() => {
+    codeClass.value =
+      codeHtml.value.childNodes[0].childNodes[0].classList[1] || 'txt';
+  });
 }
 // 拉取代码并识别代码类型
 onMounted(async () => {
@@ -247,21 +304,7 @@ watch(
 );
 
 // 选择代码文件
-const selectCode = ref(null);
-const selectOptions = ref([
-  {
-    label: "Everybody's Got Something to Hide Except Me and My Monkey",
-    value: 'song0',
-  },
-  {
-    label: 'Drive My Car',
-    value: 'song1',
-  },
-  {
-    label: 'Norwegian Wood',
-    value: 'song2',
-  },
-]);
+var selectOptions: any = ref([{ label: '123', value: '456' }]);
 const renderTag = ({ option, handleClose }) => {
   return h(
     NTag,
@@ -279,6 +322,23 @@ const renderTag = ({ option, handleClose }) => {
     { default: () => option.label }
   );
 };
+
+// 下拉框的样式
+function generateOptionProps() {
+  return {
+    style: {
+      color: '#cfcfcf',
+      'font-size': '0.8rem',
+      'background-color': '#353535',
+      '--n-option-color-pending': 'rgb(68, 68, 68)',
+    },
+  };
+}
+// 根据代码名选择代码
+function changeCodeContent(value, option) {
+  content.value = value;
+  getCodeClass();
+}
 // 一键复制代码
 const copyStatus = ref('');
 const showTooltip: Ref<boolean> = ref(false);
@@ -403,9 +463,12 @@ pre {
   justify-content: start;
   align-items: center;
   gap: 3.5rem;
+  margin-right: 2rem;
 }
 
 .select {
+  display: flex;
+  gap: 0.3rem;
   width: 10vw;
   margin-right: 1.2rem;
 }
@@ -522,23 +585,6 @@ pre {
   display: flex;
   gap: 1.6rem;
 }
-.btn-confirm,
-.btn-cancel,
-.btn-edit {
-  font-family: 'Browood-Regular', 'Luckiest_Guy';
-  color: var(--btn-color);
-  background-color: var(--btn-bg-color);
-  height: 5vh;
-  width: fit-content;
-  text-align: center;
-  line-height: 5vh;
-  font-size: 1.05rem;
-  padding: 0 1rem 0 1rem;
-  border-radius: 2rem;
-  cursor: pointer;
-  border: 1.6px solid #000;
-}
-
 /* 设置滚动条的大小 */
 .edit-box::-webkit-scrollbar,
 .code::-webkit-scrollbar {
@@ -565,9 +611,7 @@ pre {
   }
   .content-copy {
     padding: 3rem;
-    position: fixed;
-    top: 0;
-    left: 0;
+    min-width: 80vw;
     display: block;
   }
   .copy-box {
@@ -578,4 +622,3 @@ pre {
   }
 }
 </style>
-<style></style>

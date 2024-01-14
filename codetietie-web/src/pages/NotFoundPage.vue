@@ -7,7 +7,7 @@
       <p class="text">
         {{ state.text.notFoundDescription }}
       </p>
-      <div class="action" @click="goHome">{{ state.text.takeMeHome }}</div>
+      <CodeButton @click="goHome" fontFamily="'Courier New'">{{ state.text.takeMeHome }}</CodeButton>
     </div>
   </div>
 </template>
@@ -16,6 +16,7 @@
 import { useRouter } from 'vue-router';
 import { useState } from '../stores/state';
 import Header from './Header.vue';
+import CodeButton from '../components/CodeButton.vue';
 
 const router = useRouter();
 const state = useState();
@@ -54,18 +55,5 @@ p {
 }
 .text {
   text-align: center;
-}
-.action {
-  height: 5vh;
-  width: fit-content;
-  color: var(--btn-color);
-  background-color: var(--btn-bg-color);
-  text-align: center;
-  line-height: 5vh;
-  font-size: 1.05rem;
-  padding: 0 1rem 0 1rem;
-  border-radius: 2rem;
-  cursor: pointer;
-  border: 1.6px solid #000;
 }
 </style>

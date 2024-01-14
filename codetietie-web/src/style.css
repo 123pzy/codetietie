@@ -72,6 +72,7 @@ body {
 }
 
 .n-tag__content {
+  font-size: 0.8rem !important;
   width: calc(9vw - 1.3em);
   overflow: hidden;
   white-space: nowrap;
@@ -81,14 +82,6 @@ body {
 .n-virtual-list {
   margin: 0;
   background-color: #353535;
-}
-
-/* 下拉框的样式 */
-.n-base-select-option {
-  color: #cfcfcf !important;
-  font-size: 0.8rem !important;
-  background-color: #353535 !important;
-  --n-option-color-pending: rgb(68, 68, 68) !important;
 }
 
 .n-base-select-option--selected::before {

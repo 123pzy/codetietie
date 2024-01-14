@@ -9,8 +9,6 @@ import hljsVuePlugin from '@highlightjs/vue-plugin';
 import { createPinia } from 'pinia';
 import './assets/fonts/font.css'
 
-//注册组件
-
 const app = createApp(App);
 app.use(router);
 app.use(hljsVuePlugin);

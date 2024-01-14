@@ -83,6 +83,7 @@ console.log(
   justify-self: center;
 }
 .start-btn {
+  font-size: 1rem;
   width: 10rem;
   color: var(--btn-color);
   background-color: var(--btn-bg-color);

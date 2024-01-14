@@ -14,8 +14,12 @@ function isTimestampAfterCurrent(timestamp) {
 
 getRouter.get('/getContent', async (ctx) => {
     const { randomValue } = ctx.request.query;
-    const res = await getUsersInfo(`select * from codestick where randomValue = "${randomValue}";`)
-    console.log(res[0]);
+    const res = await getUsersInfo(
+        `SELECT code_info.*, code_content.content, code_content.label
+        FROM code_info
+        INNER JOIN code_content ON code_info.randomValue = code_content.randomValue
+        WHERE code_info.randomValue = '${randomValue}';        
+    `)
     if (!res[0]) {
         ctx.body = {
             code: 0,
@@ -31,13 +35,22 @@ getRouter.get('/getContent', async (ctx) => {
         // 转化构建代码的文字格式时间戳为数字格式：
         const dateObject = new Date(dateString);
         const timestamp_in = dateObject.getTime();
+        const selectOptions = []
+        for (var i of res) {
+            selectOptions.push({
+                "label": i.label,
+                "value": i.content
+            })
+        }
+        const selectOptions_json = JSON.stringify(selectOptions)
         const data = {
-            content: res[0].content,
+            selectOptions: selectOptions_json,
             timestamp_in,
             timestamp_out: res[0].timestamp_out,
         }
         if (burn) {
-            await getUsersInfo(`delete from codestick where randomValue = "${randomValue}";`)
+            await getUsersInfo(`delete from code_info where randomValue = "${randomValue}";`)
+            getUsersInfo(`delete from code_code where randomValue = "${randomValue}";`)
         }
         if (isTimestampAfterCurrent(timestamp)) {
             ctx.body = {
