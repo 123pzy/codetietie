@@ -1,5 +1,5 @@
-import Index from './pages/Index.vue'
 import HomePage from './pages/HomePage.vue'
+import CodePage from './pages/CodePage.vue'
 import NotFoundPage from './pages/NotFoundPage.vue'
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -7,12 +7,12 @@ const routes = [
     {
         path: "/",
         name: 'Root',
-        component: Index,
+        component: HomePage,
     },
     {
         path: "/:randomValue",
         name: 'randomValue',
-        component: HomePage,
+        component: CodePage,
     },
     {
         path: '/not_found',

@@ -24,18 +24,24 @@
                 @update:value="changeCodeContent"
                 v-show="!state.state"
                 :show-checkmark="false"
+                v-if="path !== 'codetietie'"
               />
               <n-icon
                 size="25"
                 style="cursor: pointer"
                 @click="addCodeFile"
                 v-show="!state.state"
+                v-if="path !== 'codetietie'"
               >
                 <Add />
               </n-icon>
             </div>
           </div>
-          <div class="aside-right" v-show="!state.state">
+          <div
+            class="aside-right"
+            v-show="!state.state"
+            v-if="path !== 'codetietie'"
+          >
             <!-- "代码剩余电量" -->
             <n-space style="cursor: pointer">
               <n-tooltip placement="top" trigger="hover">
@@ -165,13 +171,13 @@ var randomValue = ref('');
 const codeTitle = ref();
 const textArea = ref();
 var addFile: Ref<boolean> = ref(false);
+const path = route.params.randomValue;
 
 // 点击“分享代码”按钮之后
 const state = useState();
 const editContent = ref('');
 function editFunc(): void {
   addFile.value = false;
-  selectOptions.value = [];
   editContent.value = '';
   codeTitle.value = '';
   state.state = true;
@@ -228,6 +234,9 @@ async function confirmFunc(val) {
         dealLineTime: dealLineTime,
         burn: state.burn,
       };
+      selectOptions.value = [
+        { label: codeTitle.value, value: editContent.value },
+      ];
       await addCodeFolder(data);
     } else {
       const data = {
@@ -304,7 +313,7 @@ watch(
 );
 
 // 选择代码文件
-var selectOptions: any = ref([{ label: '123', value: '456' }]);
+var selectOptions: any = ref([]);
 const renderTag = ({ option, handleClose }) => {
   return h(
     NTag,

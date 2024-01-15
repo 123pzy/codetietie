@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
 import { useState } from '../stores/state';
-import Header from './Header.vue';
+import Header from '../components/Header.vue';
 import CodeButton from '../components/CodeButton.vue';
 
 const router = useRouter();

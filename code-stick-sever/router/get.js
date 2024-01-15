@@ -49,8 +49,8 @@ getRouter.get('/getContent', async (ctx) => {
             timestamp_out: res[0].timestamp_out,
         }
         if (burn) {
+            await getUsersInfo(`delete from code_content where randomValue = "${randomValue}";`)
             await getUsersInfo(`delete from code_info where randomValue = "${randomValue}";`)
-            getUsersInfo(`delete from code_code where randomValue = "${randomValue}";`)
         }
         if (isTimestampAfterCurrent(timestamp)) {
             ctx.body = {
