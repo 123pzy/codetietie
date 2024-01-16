@@ -1,7 +1,7 @@
 <template>
   <div class="homepage-container">
     <Header :name_distance="2" :btn_distance="1.5" />
-    <CodeOptions v-show="state.state" class="options" />
+    <CodeOptions v-show="state.state && !addFileStatus" class="options" />
     <n-message-provider>
       <CodeContent />
     </n-message-provider>
@@ -38,8 +38,10 @@ import CodeOptions from '../components/CodeOptions.vue';
 import { NMessageProvider, NTooltip, NIcon } from 'naive-ui';
 import Header from '../components/Header.vue';
 import { useState } from '../stores/state.js';
+import { storeToRefs } from 'pinia';
 
 const state = useState();
+var { addFileStatus } = storeToRefs(state);
 </script>
 
 <style scoped>
@@ -49,8 +51,9 @@ const state = useState();
   width: 100vw;
 }
 .weixin-box {
-  background-color: #f9faf7;
-  box-shadow: 0px 0px 35px 0.5px #e4e0e0;
+  color: var(--font-color);
+  background-color: var(--call-me-bg-color);
+  box-shadow: 0px 0px 35px 0.5px var(--call-me-shallow-color);
   border-radius: 4px;
   height: fit-content;
   width: 2.2rem;
@@ -76,13 +79,13 @@ const state = useState();
   .options {
     display: none;
   }
-  .weixin-box{
+  .weixin-box {
     bottom: 7vh;
   }
   .weixin-text {
     display: none;
   }
-  .weixin-content{
+  .weixin-content {
     padding: 0;
   }
 }

@@ -11,9 +11,11 @@
             @dragend="dragend"
             :format-tooltip="formatTooltip"
             :marks="mark"
+            :disabled="addFileStatus"
           />
         </n-space>
       </div>
+      <!-- 设置阅后即焚 -->
       <div class="read-burn">
         <div class="read-burn-title">2.{{ state.text.BurnAfterReading }}:</div>
         <n-space>
@@ -22,6 +24,7 @@
             size="large"
             :rail-style="railStyle"
             @update:value="handleChangeBurnActive"
+            :disabled="addFileStatus"
           >
             <template #icon>
               <img
@@ -46,7 +49,10 @@
 import { ref, CSSProperties } from 'vue';
 import { NSlider, NSpace, NSwitch } from 'naive-ui';
 import { useState } from '../stores/state.js';
+import { storeToRefs } from 'pinia';
 
+const state = useState();
+var { addFileStatus } = storeToRefs(state);
 // 设置过期时间
 const daysToAdd = ref(80);
 // 设置滑条样式
@@ -66,7 +72,6 @@ function updateValue(value: number) {
   daysToAdd.value = value;
 }
 // 拖拽结束之后的回调
-const state = useState();
 function dragend() {
   state.daysToAdd = daysToAdd.value;
 }
@@ -102,44 +107,41 @@ function handleChangeBurnActive(value: boolean) {
 
 <style scoped>
 .code-options-container {
-  height: 6vh;
-  width: 80vw;
+  height: 50vh;
+  width: 18vw;
   background-color: var(--bg-color);
   border: 1px solid #999;
   padding: 1rem;
   border-radius: 1rem;
   position: absolute;
-  bottom: 13vh;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: calc(50% + 2rem);
+  left: 3vw;
+  transform: translateY(50%);
 }
 .options {
-  display: flex;
-  gap: 1.6rem;
+  display: grid;
+  align-items: start;
+  gap: 1rem 0;
 }
 .deal-line {
-  width: 30vw;
+  width: 20vw;
+}
+.read-burn{
   display: flex;
-  justify-content: start;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 1rem;
 }
 .deal-line-title,
 .read-burn-title {
   font-size: 1rem;
   color: var(--font-color);
 }
-.read-burn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 .read-burn-icon {
   height: 1rem;
 }
 .nspace {
   height: 50px;
-  width: 15rem;
+  width: calc(100% - 2.3rem);
   font-size: 0.7rem;
   color: var(--font-color);
 }

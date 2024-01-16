@@ -64,6 +64,7 @@ export const useState = defineStore("state", {
                 callMe: '',
                 codeElectricQuantity: ''
             },
+            addFileStatus:false
         };
     },
     actions: {

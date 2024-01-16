@@ -125,7 +125,7 @@
       </div>
       <div class="btn">
         <div class="edit-btn" v-show="edit">
-          <CodeButton @click="confirmFunc(addFile)">{{
+          <CodeButton @click="confirmFunc(addFileStatus)">{{
             state.CN === 'Chinese' ? '确定' : 'Confirm'
           }}</CodeButton>
           <CodeButton @click="cancelFunc">{{
@@ -157,6 +157,7 @@ import { ReceiptOutline, Add } from '@vicons/ionicons5';
 import { useState } from '../stores/state.js';
 import domtoimage from 'dom-to-image';
 import Drawer from './Drawer.vue';
+import { storeToRefs } from 'pinia';
 import CodeButton from './CodeButton.vue';
 
 const edit: Ref<boolean> = ref(false);
@@ -166,14 +167,14 @@ const route = useRoute();
 var randomValue = ref('');
 const codeTitle = ref();
 const textArea = ref();
-var addFile: Ref<boolean> = ref(false);
 const path = ref(route.params.randomValue == 'codetietie' ? false : true);
 
 // 点击“分享代码”按钮之后
 const state = useState();
+var { addFileStatus } = storeToRefs(state);
 const editContent = ref('');
 function editFunc(): void {
-  addFile.value = false;
+  addFileStatus.value = false;
   editContent.value = '';
   codeTitle.value = '';
   state.state = true;
@@ -187,7 +188,7 @@ function editFunc(): void {
 
 // 点击“➕”新增代码文件
 async function addCodeFile() {
-  addFile.value = true;
+  addFileStatus.value = true;
   state.state = true;
   editContent.value = '';
   codeTitle.value = '';
@@ -577,7 +578,7 @@ pre {
 .edit-box {
   height: 100%;
   min-height: 50vh;
-  width: 50vw;
+  width: 45vw;
   min-width: 20rem;
   background-color: #f1f1f2;
 }

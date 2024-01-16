@@ -8,6 +8,9 @@
   --websit-name-bg: #f2f5f7;
   --burn-true-color: #fff;
   --burn-false-color: #2d333a;
+  --call-me-bg-color: #2b2f32;
+  --call-me-shallow-color: #2b2f32;
+  --slider-color: #535151;
 }
 
 :root[data-theme='light'] {
@@ -20,6 +23,9 @@
   --websit-name-bg: #000;
   --burn-true-color: #000;
   --burn-false-color: #e1e7ef;
+  --call-me-bg-color: #dcdddb;
+  --call-me-shallow-color: #e4e0e0;
+  --slider-color: #080f14;
 }
 
 body {
@@ -86,6 +92,14 @@ body {
 
 .n-base-select-option--selected::before {
   background-color: #222222 !important;
+}
+
+/* 更改滑动选择的样式 */
+.n-slider-rail__fill,
+.n-slider-handles {
+  --n-fill-color: var(--slider-color) !important;
+  --n-fill-color-hover: var(--slider-color) !important;
+  --n-dot-border-active: var(--slider-color) !important;
 }
 
 @media (max-width: 768px) {
