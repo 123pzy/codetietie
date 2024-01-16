@@ -24,24 +24,20 @@
                 @update:value="changeCodeContent"
                 v-show="!state.state"
                 :show-checkmark="false"
-                v-if="path !== 'codetietie'"
+                v-if="path"
               />
               <n-icon
                 size="25"
                 style="cursor: pointer"
                 @click="addCodeFile"
                 v-show="!state.state"
-                v-if="path !== 'codetietie'"
+                v-if="path"
               >
                 <Add />
               </n-icon>
             </div>
           </div>
-          <div
-            class="aside-right"
-            v-show="!state.state"
-            v-if="path !== 'codetietie'"
-          >
+          <div class="aside-right" v-show="!state.state" v-if="path">
             <!-- "代码剩余电量" -->
             <n-space style="cursor: pointer">
               <n-tooltip placement="top" trigger="hover">
@@ -171,7 +167,7 @@ var randomValue = ref('');
 const codeTitle = ref();
 const textArea = ref();
 var addFile: Ref<boolean> = ref(false);
-const path = route.params.randomValue;
+const path = ref(route.params.randomValue == 'codetietie' ? false : true);
 
 // 点击“分享代码”按钮之后
 const state = useState();
@@ -308,6 +304,7 @@ watch(
     if (route.params.randomValue !== randomValue.value) {
       await getCode();
     }
+    path.value = route.params.randomValue == 'codetietie' ? false : true;
     getCodeClass(); // 更新代码类型
   }
 );

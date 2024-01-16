@@ -1,9 +1,9 @@
 import { createApp } from 'vue';
-import './style.css';
+import './styles/style.css';
 import App from './App.vue';
 import { router } from './routes.js';
 
-import 'highlight.js/styles/vs2015.css';
+import 'highlight.js/styles/vs2015.min.css';
 import 'highlight.js/lib/common';
 import hljsVuePlugin from '@highlightjs/vue-plugin';
 import { createPinia } from 'pinia';

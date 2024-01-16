@@ -8,7 +8,7 @@
     <div class="weixin-box">
       <n-tooltip placement="left" trigger="hover" animated>
         <template #trigger>
-          <div style="display: flex; justify-content: center;flex-wrap: wrap;cursor: pointer;padding: 2px;padding-bottom:10px">
+          <div class="weixin-content">
             <n-icon size="32">
               <img
                 src="../assets/weixin.svg"
@@ -49,14 +49,22 @@ const state = useState();
   width: 100vw;
 }
 .weixin-box {
-  background-color: #ffffff;
-  box-shadow: -2px 0px 55px 1px #999;
+  background-color: #f9faf7;
+  box-shadow: 0px 0px 35px 0.5px #e4e0e0;
   border-radius: 4px;
   height: fit-content;
   width: 2.2rem;
   position: fixed;
   bottom: 5.6vh;
   right: 0;
+}
+.weixin-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  padding: 2px;
+  padding-bottom: 10px;
 }
 .weixin-text {
   display: block;
@@ -68,9 +76,14 @@ const state = useState();
   .options {
     display: none;
   }
-  .weixin-box {
-    bottom: 3.8vh;
-    right: 4vw;
+  .weixin-box{
+    bottom: 7vh;
+  }
+  .weixin-text {
+    display: none;
+  }
+  .weixin-content{
+    padding: 0;
   }
 }
 </style>
