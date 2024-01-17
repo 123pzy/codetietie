@@ -584,8 +584,9 @@ pre {
 
 .choice-language {
   position: relative;
-  right: 3.2rem;
-  width: 9.2rem;
+  right: 4rem;
+  width: 10vw;
+  min-width:6rem;
 }
 .circle {
   height: 11px;
@@ -678,10 +679,8 @@ pre {
   margin-right: 1rem;
 }
 .edit-box {
-  height: 100%;
   min-height: 50vh;
-  width: 45vw;
-  min-width: 20rem;
+  min-width: 45vw;
   background-color: #f1f1f2;
 }
 .btn {
