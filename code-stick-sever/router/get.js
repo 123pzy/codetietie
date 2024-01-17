@@ -15,7 +15,7 @@ function isTimestampAfterCurrent(timestamp) {
 getRouter.get('/getContent', async (ctx) => {
     const { randomValue } = ctx.request.query;
     const res = await getUsersInfo(
-        `SELECT code_info.*, code_content.content, code_content.label
+        `SELECT code_info.*, code_content.content, code_content.label,code_content.language
         FROM code_info
         INNER JOIN code_content ON code_info.randomValue = code_content.randomValue
         WHERE code_info.randomValue = '${randomValue}';        
@@ -37,9 +37,11 @@ getRouter.get('/getContent', async (ctx) => {
         const timestamp_in = dateObject.getTime();
         const selectOptions = []
         for (var i of res) {
+            console.log('i::', i);
             selectOptions.push({
                 "label": i.label,
-                "value": i.content
+                "value": i.content,
+                "language": i.language
             })
         }
         const selectOptions_json = JSON.stringify(selectOptions)

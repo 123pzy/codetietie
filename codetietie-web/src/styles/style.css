@@ -10,7 +10,8 @@
   --burn-false-color: #2d333a;
   --call-me-bg-color: #2b2f32;
   --call-me-shallow-color: #2b2f32;
-  --slider-color: #535151;
+  --slider-color: #f1f2f0;
+  --slider-rail-color: #283549;
 }
 
 :root[data-theme='light'] {
@@ -23,9 +24,10 @@
   --websit-name-bg: #000;
   --burn-true-color: #000;
   --burn-false-color: #e1e7ef;
-  --call-me-bg-color: #dcdddb;
-  --call-me-shallow-color: #e4e0e0;
+  --call-me-bg-color: #dddfda;
+  --call-me-shallow-color: #cac7c7;
   --slider-color: #080f14;
+  --slider-rail-color: #d5d8db;
 }
 
 body {
@@ -41,7 +43,7 @@ body {
 }
 
 /* 设置n-select样式 */
-.n-base-selection {
+.select-code .n-base-selection {
   font-size: 0.8rem;
   padding: 0px;
   --n-color: #353535 !important;
@@ -64,8 +66,8 @@ body {
 
 /* 选择框的初始状态 */
 /* 全局设置，一般大型多人协作项目中不这么写，会影响其他样式 */
-.n-tag,
-.n-tag--closable {
+.select-code .n-tag,
+.select-code .n-tag--closable {
   color: #cfcfcf;
   padding: 0;
   --n-color: #353535 !important;
@@ -78,6 +80,7 @@ body {
 }
 
 .n-tag__content {
+  height: 1rem;
   font-size: 0.8rem !important;
   width: calc(9vw - 1.3em);
   overflow: hidden;
@@ -100,6 +103,12 @@ body {
   --n-fill-color: var(--slider-color) !important;
   --n-fill-color-hover: var(--slider-color) !important;
   --n-dot-border-active: var(--slider-color) !important;
+}
+
+.n-slider-rail {
+  --n-rail-color: var(--slider-rail-color) !important;
+  --n-rail-color-hover: var(--slider-rail-color) !important;
+  --n-rail-height: 6px;
 }
 
 @media (max-width: 768px) {

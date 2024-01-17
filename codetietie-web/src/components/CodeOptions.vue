@@ -46,8 +46,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, CSSProperties } from 'vue';
-import { NSlider, NSpace, NSwitch } from 'naive-ui';
+import { ref, CSSProperties, h } from 'vue';
+import { NSlider, NSpace, NSwitch, NSelect, NTag } from 'naive-ui';
 import { useState } from '../stores/state.js';
 import { storeToRefs } from 'pinia';
 
@@ -121,18 +121,19 @@ function handleChangeBurnActive(value: boolean) {
 .options {
   display: grid;
   align-items: start;
-  gap: 1rem 0;
+  gap: 3rem 0;
 }
 .deal-line {
   width: 20vw;
 }
-.read-burn{
+.read-burn {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 .deal-line-title,
-.read-burn-title {
+.read-burn-title,
+.choice-code-language-title {
   font-size: 1rem;
   color: var(--font-color);
 }
@@ -145,17 +146,18 @@ function handleChangeBurnActive(value: boolean) {
   font-size: 0.7rem;
   color: var(--font-color);
 }
+.choice-code-language {
+  width: 10rem;
+}
 
 @media (max-width: 768px) {
   .code-options-container {
     height: 80%;
-    width: 100%;
+    width: 200px;
     background-color: var(--bg-color);
     padding: 1rem;
     border: 0;
     border-radius: 0;
-    position: relative;
-    bottom: 0;
   }
   .options {
     display: flex;

@@ -7,7 +7,7 @@
           <div class="aside-left">
             <div class="circle"></div>
             <!-- 代码文件选择 -->
-            <div class="select">
+            <div class="select-code">
               <n-input
                 placeholder="给代码起个名字吧！"
                 v-model:value="codeTitle"
@@ -17,7 +17,7 @@
               />
               <n-select
                 size="small"
-                placeholder="Select code"
+                v-model:value="codeChoiced"
                 :options="selectOptions"
                 :render-tag="renderTag"
                 :node-props="generateOptionProps"
@@ -36,6 +36,17 @@
                 <Add />
               </n-icon>
             </div>
+          </div>
+          <div class="choice-language" v-show="state.state">
+            <n-select
+              size="small"
+              placeholder="选择代码语言"
+              v-model:value="codeLanguage"
+              :options="codeOptions"
+              :node-props="generateOptionProps"
+              @update:value="changeLanguage"
+              :show-checkmark="false"
+            />
           </div>
           <div class="aside-right" v-show="!state.state" v-if="path">
             <!-- "代码剩余电量" -->
@@ -93,7 +104,11 @@
           </div>
         </div>
         <div class="code" v-show="!edit" ref="codeHtml">
-          <highlightjs :autodetect="true" :code="content" />
+          <highlightjs
+            :autodetect="autodetect"
+            :code="content"
+            :language="currentLanguage"
+          />
         </div>
         <n-space vertical>
           <n-input
@@ -141,7 +156,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, nextTick, Ref, watch, h } from 'vue';
+import { ref, onMounted, nextTick, Ref, watch, h, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { addCodeFolder, getCodeStick, updateCodeFile } from '../api/request.js';
 import {
@@ -168,6 +183,10 @@ var randomValue = ref('');
 const codeTitle = ref();
 const textArea = ref();
 const path = ref(route.params.randomValue == 'codetietie' ? false : true);
+const codeLanguage = ref();
+var currentLanguage = ref('');
+const autodetect = ref();
+const codeChoiced = ref('Select code');
 
 // 点击“分享代码”按钮之后
 const state = useState();
@@ -209,9 +228,11 @@ async function confirmFunc(val) {
     });
   } else {
     if (!codeTitle.value) codeTitle.value = 'Anonymous code';
+    if (!codeLanguage.value) codeLanguage.value = '';
     selectOptions.value.push({
       label: codeTitle.value.toString(),
       value: editContent.value,
+      language: codeLanguage.value,
     });
     if (!val) {
       content.value = editContent.value;
@@ -228,11 +249,16 @@ async function confirmFunc(val) {
         randomValue: randomValue.value,
         editContent: editContent.value,
         label: codeTitle.value,
+        language: codeLanguage.value,
         dealLineTime: dealLineTime,
         burn: state.burn,
       };
       selectOptions.value = [
-        { label: codeTitle.value, value: editContent.value },
+        {
+          label: codeTitle.value,
+          value: editContent.value,
+          language: codeLanguage.value,
+        },
       ];
       await addCodeFolder(data);
     } else {
@@ -240,11 +266,17 @@ async function confirmFunc(val) {
         randomValue: route.params.randomValue,
         editContent: editContent.value,
         label: codeTitle.value,
+        language: codeLanguage.value,
       };
-      const res = await updateCodeFile(data);
+      await updateCodeFile(data);
     }
+    content.value = selectOptions.value.at(-1).value; // 点击确认之后自动显示刚刚添加的代码
+    codeChoiced.value = selectOptions.value.at(-1).label; // 自动显示刚刚添加的代码label
+    getCodeClass(); // 更新代码类型
+    currentLanguage.value = selectOptions.value.at(-1).language;
     edit.value = false;
     state.state = false;
+    codeLanguage.value = ''; // 重置代码语言类型
   }
 }
 
@@ -277,14 +309,16 @@ async function getCode() {
       100;
     selectOptions.value = JSON.parse(res.data.data.selectOptions);
     content.value = selectOptions.value[0].value;
+    currentLanguage.value = selectOptions.value[0].language;
   }
 }
 
 // 更新代码类型查询
 function getCodeClass() {
   nextTick(() => {
-    codeClass.value =
-      codeHtml.value.childNodes[0].childNodes[0].classList[1] || 'txt';
+    codeClass.value = currentLanguage.value
+      ? currentLanguage.value
+      : codeHtml.value.childNodes[0].childNodes[0].classList[1] || 'txt';
   });
 }
 // 拉取代码并识别代码类型
@@ -341,11 +375,63 @@ function generateOptionProps() {
     },
   };
 }
+// 选择代码类型
+const codeOptions = ref([
+  {
+    label: '自动推断 (默认)',
+    value: '',
+    language: 'java',
+  },
+  {
+    label: 'Java',
+    value: 'java',
+  },
+  {
+    label: 'JavaScript',
+    value: 'javascript',
+  },
+  {
+    label: 'Python',
+    value: 'python',
+  },
+  {
+    label: 'C++',
+    value: 'cpp',
+  },
+  {
+    label: 'C#',
+    value: 'csharp',
+  },
+  {
+    label: 'CSS',
+    value: 'css',
+  },
+  {
+    label: 'Go',
+    value: 'go',
+  },
+  {
+    label: 'Rust',
+    value: 'rust',
+  },
+  {
+    label: 'XML',
+    value: 'xml',
+  },
+]);
+
+function changeLanguage(value) {
+  codeLanguage.value = value;
+}
 // 根据代码名选择代码
 function changeCodeContent(value, option) {
   content.value = value;
+  currentLanguage.value = option.language;
   getCodeClass();
 }
+watchEffect(() => {
+  autodetect.value = currentLanguage.value ? false : true;
+});
 // 一键复制代码
 const copyStatus = ref('');
 const showTooltip: Ref<boolean> = ref(false);
@@ -369,7 +455,7 @@ function copyCode() {
 var codeDOM = ref(null);
 function downloadImg() {
   domtoimage.toBlob(codeDOM.value).then(function (blob) {
-    downloadBlob(blob, 'image.png');
+    downloadBlob(blob, 'codetietie-img.png');
   });
 }
 function downloadBlob(blob: Blob, fileName: string) {
@@ -470,20 +556,21 @@ pre {
   justify-content: start;
   align-items: center;
   gap: 3.5rem;
-  margin-right: 2rem;
+  margin-right: 3.2rem;
 }
 
-.select {
+.select-code {
   display: flex;
   gap: 0.3rem;
   width: 10vw;
   margin-right: 1.2rem;
 }
-.select > .n-select {
+.n-select {
   display: flex;
 }
-.n-base-selection {
-  --n-color: red !important;
+
+.choice-language {
+  width: 9.2rem;
 }
 .circle {
   height: 11px;
@@ -624,7 +711,7 @@ pre {
   .copy-box {
     zoom: 1.5;
   }
-  .select {
+  .select-code {
     width: 20vw;
   }
 }
