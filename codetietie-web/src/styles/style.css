@@ -76,6 +76,7 @@ body {
 
 .n-base-select-menu {
   width: fit-content;
+  min-width: 9.2rem;
   max-width: 60vw;
 }
 

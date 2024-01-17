@@ -37,9 +37,10 @@
               </n-icon>
             </div>
           </div>
+          <!-- 选择代码语言 -->
           <div class="choice-language" v-show="state.state">
             <n-select
-              size="small"
+              size="medium"
               placeholder="选择代码语言"
               v-model:value="codeLanguage"
               :options="codeOptions"
@@ -194,6 +195,7 @@ var { addFileStatus } = storeToRefs(state);
 const editContent = ref('');
 function editFunc(): void {
   addFileStatus.value = false;
+  codeLanguage.value = null
   editContent.value = '';
   codeTitle.value = '';
   state.state = true;
@@ -208,6 +210,7 @@ function editFunc(): void {
 // 点击“➕”新增代码文件
 async function addCodeFile() {
   addFileStatus.value = true;
+  codeLanguage.value = null
   state.state = true;
   editContent.value = '';
   codeTitle.value = '';
@@ -310,6 +313,7 @@ async function getCode() {
     selectOptions.value = JSON.parse(res.data.data.selectOptions);
     content.value = selectOptions.value[0].value;
     currentLanguage.value = selectOptions.value[0].language;
+    codeChoiced.value = selectOptions.value[0].label; // 设置初始代码label
   }
 }
 
@@ -338,6 +342,7 @@ watch(
   async () => {
     if (route.params.randomValue !== randomValue.value) {
       await getCode();
+
     }
     path.value = route.params.randomValue == 'codetietie' ? false : true;
     getCodeClass(); // 更新代码类型
@@ -417,6 +422,14 @@ const codeOptions = ref([
   {
     label: 'XML',
     value: 'xml',
+  },
+  {
+    label: 'PHP',
+    value: 'php',
+  },
+  {
+    label: 'JSON',
+    value: 'json',
   },
 ]);
 
@@ -570,6 +583,8 @@ pre {
 }
 
 .choice-language {
+  position: relative;
+  right: 3.2rem;
   width: 9.2rem;
 }
 .circle {
