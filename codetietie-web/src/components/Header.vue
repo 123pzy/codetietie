@@ -1,8 +1,12 @@
 <template>
   <div class="header-container">
     <div class="websit-name" @click="goHome">
-      <img src="../assets/logo.svg" alt="" style="height: 2rem;transform: translateY(2.8px);">
-      {{ state.text.website_title }}
+      <img
+        src="../assets/logo.svg"
+        alt=""
+        style="height: 2rem; transform: translateY(2.8px)"
+      />
+      {{ $t('website_title') }}
     </div>
     <div class="btn">
       <div class="theme-box" @click="changeTheme">
@@ -47,7 +51,7 @@
               />
             </n-icon>
           </template>
-          <span> {{ state.text.Github }} </span>
+          <span> {{ $t('Github') }} </span>
         </n-tooltip>
       </div>
       <div class="coffee-icon" @click="openMyByuMecoffee">
@@ -68,7 +72,7 @@
               />
             </n-icon>
           </template>
-          <span> {{ state.text.BuyMeACoffee }} </span>
+          <span>{{ $t('BuyMeACoffee') }}</span>
         </n-tooltip>
       </div>
     </div>
@@ -79,6 +83,7 @@
 import { ref, watch, watchEffect } from 'vue';
 import { NTooltip, NIcon } from 'naive-ui';
 import { useState } from '../stores/state.js';
+import { useI18n } from 'vue-i18n';
 
 defineProps(['name_distance', 'btn_distance']);
 const state = useState();
@@ -115,8 +120,9 @@ watch(
   }
 );
 // 切换中英文
+const { locale } = useI18n();
 function changeCN() {
-  state.CN = state.CN == 'Chinese' ? 'English' : 'Chinese';
+  locale.value = locale.value == 'zh' ? 'en' : 'zh';
 }
 // 跳转到我的GitHub
 function openMyGithub() {

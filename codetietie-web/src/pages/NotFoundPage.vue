@@ -3,11 +3,13 @@
     <Header :name_distance="2" :btn_distance="1.5" />
     <div class="box">
       <p class="code">404</p>
-      <p class="title">{{ state.text.notFoundTitle }}</p>
+      <p class="title">{{ $t('notFoundTitle') }}</p>
       <p class="text">
-        {{ state.text.notFoundDescription }}
+        {{ $t('notFoundDescription') }}
       </p>
-      <CodeButton @click="goHome" fontFamily="'Courier New'">{{ state.text.takeMeHome }}</CodeButton>
+      <CodeButton @click="goHome" fontFamily="'Courier New'">{{
+        $t('takeMeHome')
+      }}</CodeButton>
     </div>
   </div>
 </template>

@@ -3,12 +3,12 @@
     <Header :name_distance="9" :btn_distance="9" />
     <div class="box">
       <div class="font">
-        <p class="introduce" v-html="state.text.website_description"></p>
+        <p class="introduce">{{ $t('website_description') }}</p>
         <p class="text">
-          {{ state.text.website_subject }}
+          {{ $t('website_subject') }}
         </p>
       </div>
-      <div class="start-btn" @click="go">{{ state.text.getStarted }}</div>
+      <div class="start-btn" @click="go">{{ $t('getStarted') }}</div>
       <img
         src="../assets/home-page-Img-dark.png"
         class="home-img"

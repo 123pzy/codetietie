@@ -22,6 +22,9 @@ dependencies:
   vue:
     specifier: ^3.3.11
     version: registry.npmmirror.com/vue@3.3.11
+  vue-i18n:
+    specifier: ^9.9.0
+    version: registry.npmmirror.com/vue-i18n@9.9.0(vue@3.3.11)
   vue-router:
     specifier: ^4.2.5
     version: registry.npmmirror.com/vue-router@4.2.5(vue@3.3.11)
@@ -374,6 +377,33 @@ packages:
     dependencies:
       highlight.js: registry.npmmirror.com/highlight.js@11.9.0
       vue: registry.npmmirror.com/vue@3.3.11
+    dev: false
+
+  registry.npmmirror.com/@intlify/core-base@9.9.0:
+    resolution: {integrity: sha512-C7UXPymDIOlMGSNjAhNLtKgzITc/8BjINK5gNKXg8GiWCTwL6n3MWr55czksxn8RM5wTMz0qcLOFT+adtaVQaA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@intlify/core-base/-/core-base-9.9.0.tgz}
+    name: '@intlify/core-base'
+    version: 9.9.0
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/message-compiler': registry.npmmirror.com/@intlify/message-compiler@9.9.0
+      '@intlify/shared': registry.npmmirror.com/@intlify/shared@9.9.0
+    dev: false
+
+  registry.npmmirror.com/@intlify/message-compiler@9.9.0:
+    resolution: {integrity: sha512-yDU/jdUm9KuhEzYfS+wuyja209yXgdl1XFhMlKtXEgSFTxz4COZQCRXXbbH8JrAjMsaJ7bdoPSLsKlY6mXG2iA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@intlify/message-compiler/-/message-compiler-9.9.0.tgz}
+    name: '@intlify/message-compiler'
+    version: 9.9.0
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/shared': registry.npmmirror.com/@intlify/shared@9.9.0
+      source-map-js: registry.npmmirror.com/source-map-js@1.0.2
+    dev: false
+
+  registry.npmmirror.com/@intlify/shared@9.9.0:
+    resolution: {integrity: sha512-1ECUyAHRrzOJbOizyGufYP2yukqGrWXtkmTu4PcswVnWbkcjzk3YQGmJ0bLkM7JZ0ZYAaohLGdYvBYnTOGYJ9g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@intlify/shared/-/shared-9.9.0.tgz}
+    name: '@intlify/shared'
+    version: 9.9.0
+    engines: {node: '>= 16'}
     dev: false
 
   registry.npmmirror.com/@jridgewell/sourcemap-codec@1.4.15:
@@ -1088,6 +1118,21 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      vue: registry.npmmirror.com/vue@3.3.11
+    dev: false
+
+  registry.npmmirror.com/vue-i18n@9.9.0(vue@3.3.11):
+    resolution: {integrity: sha512-xQ5SxszUAqK5n84N+uUyHH/PiQl9xZ24FOxyAaNonmOQgXeN+rD9z/6DStOpOxNFQn4Cgcquot05gZc+CdOujA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-i18n/-/vue-i18n-9.9.0.tgz}
+    id: registry.npmmirror.com/vue-i18n/9.9.0
+    name: vue-i18n
+    version: 9.9.0
+    engines: {node: '>= 16'}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@intlify/core-base': registry.npmmirror.com/@intlify/core-base@9.9.0
+      '@intlify/shared': registry.npmmirror.com/@intlify/shared@9.9.0
+      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api@6.5.1
       vue: registry.npmmirror.com/vue@3.3.11
     dev: false
 

@@ -1,0 +1,26 @@
+const zh = {
+    website_title: '代码贴贴',
+    website_description: `创建和共享<br>beautiful code`,
+    website_subject: '使用这个工具可以让你快速便捷分享美丽的代码，同时你可以设置过期时间，阅后即焚等功能，并且你还可以使用这个网站把代码转化为图片。',
+    getStarted: '开始',
+    shareCodeBtn: '分享代码',
+    notFoundTitle: '页面不见了',
+    notFoundDescription: '您正在寻找的页面不存在或代码原作者设置了“阅后即焚”。',
+    takeMeHome: '跳转首页',
+    placeholder: '分享你的代码吧...',
+    setDealTime: '设置过期时间：',
+    BurnAfterReading: '阅后即焚',
+    downPNG: '下载为图片',
+    copySuccess: '复制成功！',
+    BuyMeACoffee: '送我杯咖啡~',
+    Github: '欢迎star~⭐',
+    callMe: '关注/联系我：',
+    codeElectricQuantity: '代码剩余电量：',
+    confirmBtn: '确认',
+    cancelBtn: '取消',
+    giveCodeName: '给代码取个名字吧',
+    selectCodeLanguage: '选择代码语言',
+    neverExpire: '永不过期',
+}
+
+export default zh

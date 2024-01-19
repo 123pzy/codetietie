@@ -9,7 +9,7 @@
             <!-- 代码文件选择 -->
             <div class="select-code">
               <n-input
-                placeholder="给代码起个名字吧！"
+                :placeholder="t('giveCodeName')"
                 v-model:value="codeTitle"
                 autosize
                 style="width: 100%"
@@ -41,7 +41,7 @@
           <div class="choice-language" v-show="state.state">
             <n-select
               size="medium"
-              placeholder="选择代码语言"
+              :placeholder="t('selectCodeLanguage')"
               v-model:value="codeLanguage"
               :options="codeOptions"
               :node-props="generateOptionProps"
@@ -65,7 +65,7 @@
                   </div>
                 </template>
                 <img src="../assets/power.svg" alt="" style="height: 16px" />{{
-                  state.text.codeElectricQuantity
+                  $t('codeElectricQuantity')
                 }}{{ timeBar.toFixed(1) }}%
               </n-tooltip>
             </n-space>
@@ -80,7 +80,7 @@
                     v-show="!state.state"
                   />
                 </template>
-                {{ state.text.downPNG }}
+                {{ $t('downPNG') }}
               </n-tooltip>
             </n-space>
             <!-- 复制代码 -->
@@ -118,7 +118,7 @@
             v-model:value="editContent"
             ref="textArea"
             type="textarea"
-            :placeholder="state.text.placeholder"
+            :placeholder="t('placeholder')"
           />
         </n-space>
       </div>
@@ -142,14 +142,12 @@
       <div class="btn">
         <div class="edit-btn" v-show="edit">
           <CodeButton @click="confirmFunc(addFileStatus)">{{
-            state.CN === 'Chinese' ? '确定' : 'Confirm'
+            $t('confirmBtn')
           }}</CodeButton>
-          <CodeButton @click="cancelFunc">{{
-            state.CN === 'Chinese' ? '取消' : 'Cancel'
-          }}</CodeButton>
+          <CodeButton @click="cancelFunc">{{ $t('cancelBtn') }}</CodeButton>
         </div>
         <CodeButton @click="editFunc" v-show="!edit">{{
-          state.text.shareCodeBtn
+          $t('shareCodeBtn')
         }}</CodeButton>
       </div>
     </div>
@@ -175,7 +173,9 @@ import domtoimage from 'dom-to-image';
 import Drawer from './Drawer.vue';
 import { storeToRefs } from 'pinia';
 import CodeButton from './CodeButton.vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const edit: Ref<boolean> = ref(false);
 const content: Ref<string> = ref('');
 const router = useRouter();
@@ -195,7 +195,7 @@ var { addFileStatus } = storeToRefs(state);
 const editContent = ref('');
 function editFunc(): void {
   addFileStatus.value = false;
-  codeLanguage.value = null
+  codeLanguage.value = null;
   editContent.value = '';
   codeTitle.value = '';
   state.state = true;
@@ -210,7 +210,7 @@ function editFunc(): void {
 // 点击“➕”新增代码文件
 async function addCodeFile() {
   addFileStatus.value = true;
-  codeLanguage.value = null
+  codeLanguage.value = null;
   state.state = true;
   editContent.value = '';
   codeTitle.value = '';
@@ -342,7 +342,6 @@ watch(
   async () => {
     if (route.params.randomValue !== randomValue.value) {
       await getCode();
-
     }
     path.value = route.params.randomValue == 'codetietie' ? false : true;
     getCodeClass(); // 更新代码类型
@@ -456,7 +455,7 @@ function copyCode() {
   document.execCommand('copy');
   document.body.removeChild(textarea);
 
-  copyStatus.value = `😎${state.text.copySuccess}`;
+  copyStatus.value = `😎${t('copySuccess')}`;
   showTooltip.value = true;
 
   setTimeout(() => {
@@ -586,7 +585,7 @@ pre {
   position: relative;
   right: 4rem;
   width: 10vw;
-  min-width:6rem;
+  min-width: 6rem;
 }
 .circle {
   height: 11px;

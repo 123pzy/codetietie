@@ -3,7 +3,7 @@
     <div class="options">
       <!-- 设置过期时间 -->
       <div class="deal-line">
-        <div class="deal-line-title">1.{{ state.text.setDealTime }}</div>
+        <div class="deal-line-title">1.{{ $t('setDealTime') }}</div>
         <n-space vertical class="nspace">
           <n-slider
             :default-value="daysToAdd"
@@ -17,7 +17,7 @@
       </div>
       <!-- 设置阅后即焚 -->
       <div class="read-burn">
-        <div class="read-burn-title">2.{{ state.text.BurnAfterReading }}:</div>
+        <div class="read-burn-title">2.{{ $t('BurnAfterReading') }}:</div>
         <n-space>
           <n-switch
             v-model:value="burnActive"
@@ -46,25 +46,27 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, CSSProperties, h } from 'vue';
-import { NSlider, NSpace, NSwitch, NSelect, NTag } from 'naive-ui';
+import { ref, CSSProperties } from 'vue';
+import { NSlider, NSpace, NSwitch } from 'naive-ui';
 import { useState } from '../stores/state.js';
 import { storeToRefs } from 'pinia';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const state = useState();
 var { addFileStatus } = storeToRefs(state);
 // 设置过期时间
-const daysToAdd = ref(80);
+const daysToAdd = ref(50);
 // 设置滑条样式
 function formatTooltip(value: number) {
   if (value !== 100) {
     return value + '天';
   } else {
-    return '永不过期';
+    return `${t('neverExpire')}`;
   }
 }
 const mark = ref({
-  100: '永不过期',
+  100: `${t('neverExpire')}`,
 });
 
 // 过期时间更新之后的回调
