@@ -1,6 +1,6 @@
 const en = {
     website_title: 'codetietie',
-    website_description: 'Create and share beautiful code',
+    website_description: 'Create and share',
     website_subject: 'Using this tool allows you to quickly and easily share beautiful code, you can set expiration time, burn after reading and other features, and you can also use the site to convert code into pictures.',
     getStarted: 'Get Started',
     shareCodeBtn: 'share code',

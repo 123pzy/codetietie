@@ -1,6 +1,6 @@
 const zh = {
     website_title: '代码贴贴',
-    website_description: `创建和共享<br>beautiful code`,
+    website_description: `创建和共享`,
     website_subject: '使用这个工具可以让你快速便捷分享美丽的代码，同时你可以设置过期时间，阅后即焚等功能，并且你还可以使用这个网站把代码转化为图片。',
     getStarted: '开始',
     shareCodeBtn: '分享代码',

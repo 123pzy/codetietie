@@ -4,6 +4,7 @@
     <div class="box">
       <div class="font">
         <p class="introduce">{{ $t('website_description') }}</p>
+        <p class="beautyCode">beautiful code</p>
         <p class="text">
           {{ $t('website_subject') }}
         </p>
@@ -76,6 +77,12 @@ console.log(
   margin-top: 15vh;
   margin-bottom: 1rem;
   justify-self: center;
+}
+.beautyCode {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  margin-top: -1.6rem;
 }
 .text {
   width: 50rem;

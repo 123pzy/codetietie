@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { NTooltip, NIcon } from 'naive-ui';
 import { useState } from '../stores/state.js';
 import { useI18n } from 'vue-i18n';
@@ -103,26 +103,12 @@ watchEffect(() => {
   localStorage.setItem('theme', theme.value);
   state.theme = theme.value;
 });
-watchEffect(() => {
-  localStorage.setItem('CN', state.CN);
-});
 
-if (state.CN === 'Chinese') {
-  state.text = state.text_cn;
-} else {
-  state.text = state.text_en;
-}
-
-watch(
-  () => state.CN,
-  () => {
-    state.changeCN();
-  }
-);
 // 切换中英文
 const { locale } = useI18n();
 function changeCN() {
   locale.value = locale.value == 'zh' ? 'en' : 'zh';
+  localStorage.setItem('CN', locale.value);
 }
 // 跳转到我的GitHub
 function openMyGithub() {
