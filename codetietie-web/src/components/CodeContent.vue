@@ -135,7 +135,7 @@
               </div>
               <div class="code-copy" v-show="!edit" ref="codeHtml">
                 <highlightjs
-                  :autodetect="true"
+                  :autodetect="autodetect"
                   :code="content"
                   :language="currentLanguage"
                 />
