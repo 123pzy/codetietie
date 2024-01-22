@@ -12,9 +12,13 @@
   --call-me-shallow-color: #2b2f32;
   --slider-color: #f1f2f0;
   --slider-rail-color: #283549;
+  --dropdown-bg-color: #2c3034;
+  --dropdown-font-color: #fff;
+  --dropdown-allow-color: #2c3034;
+  --dropdown-option-color: #ced0d1;
 }
 
-:root[data-theme='light'] {
+:root {
   --font-color: #000;
   --bg-color: #f1f2f0;
   --line-color: rgba(0, 0, 0, 0.25);
@@ -28,6 +32,10 @@
   --call-me-shallow-color: #cac7c7;
   --slider-color: #080f14;
   --slider-rail-color: #d5d8db;
+  --dropdown-bg-color: #dcdeda;
+  --dropdown-font-color: #000;
+  --dropdown-allow-color: #dcdeda;
+  --dropdown-option-color: #c2c4c1;
 }
 
 body {

@@ -125,15 +125,21 @@
       <!-- 用来生成图片的DOM -->
       <div>
         <div class="content-copy" ref="codeDOM">
-          <div class="copy-box">
-            <div class="header">
-              <div class="circle"></div>
-              <div class="aside-right">
-                <div class="code-class hljs">{{ codeClass }}</div>
+          <div class="box">
+            <div class="copy-box">
+              <div class="header">
+                <div class="circle"></div>
+                <div class="aside-right">
+                  <div class="code-class hljs">{{ codeClass }}</div>
+                </div>
               </div>
-            </div>
-            <div class="code-copy" v-show="!edit" ref="codeHtml">
-              <highlightjs :autodetect="true" :code="content" />
+              <div class="code-copy" v-show="!edit" ref="codeHtml">
+                <highlightjs
+                  :autodetect="true"
+                  :code="content"
+                  :language="currentLanguage"
+                />
+              </div>
             </div>
             <div class="websit-URL">codetietie.cn</div>
           </div>
@@ -169,11 +175,12 @@ import {
 } from 'naive-ui';
 import { ReceiptOutline, Add } from '@vicons/ionicons5';
 import { useState } from '../stores/state.js';
-import domtoimage from 'dom-to-image';
+import html2canvas from 'html2canvas';
 import Drawer from './Drawer.vue';
 import { storeToRefs } from 'pinia';
 import CodeButton from './CodeButton.vue';
 import { useI18n } from 'vue-i18n';
+import codeOptions from '../data/language-names';
 
 const { t } = useI18n();
 const edit: Ref<boolean> = ref(false);
@@ -379,58 +386,6 @@ function generateOptionProps() {
     },
   };
 }
-// 选择代码类型
-const codeOptions = ref([
-  {
-    label: '自动推断 (默认)',
-    value: '',
-    language: 'java',
-  },
-  {
-    label: 'Java',
-    value: 'java',
-  },
-  {
-    label: 'JavaScript',
-    value: 'javascript',
-  },
-  {
-    label: 'Python',
-    value: 'python',
-  },
-  {
-    label: 'C++',
-    value: 'cpp',
-  },
-  {
-    label: 'C#',
-    value: 'csharp',
-  },
-  {
-    label: 'CSS',
-    value: 'css',
-  },
-  {
-    label: 'Go',
-    value: 'go',
-  },
-  {
-    label: 'Rust',
-    value: 'rust',
-  },
-  {
-    label: 'XML',
-    value: 'xml',
-  },
-  {
-    label: 'PHP',
-    value: 'php',
-  },
-  {
-    label: 'JSON',
-    value: 'json',
-  },
-]);
 
 function changeLanguage(value) {
   codeLanguage.value = value;
@@ -466,15 +421,22 @@ function copyCode() {
 // 下载代码为图片
 var codeDOM = ref(null);
 function downloadImg() {
-  domtoimage.toBlob(codeDOM.value).then(function (blob) {
-    downloadBlob(blob, 'codetietie-img.png');
+  html2canvas(codeDOM.value).then(function (canvas) {
+    // 创建一个临时链接元素
+    var link = document.createElement('a');
+
+    // 将画布转换为图片URL
+    var image = canvas.toDataURL();
+
+    // 设置链接元素的href属性为图片URL
+    link.href = image;
+
+    // 设置链接元素的下载属性为截图.png
+    link.download = '截图.png';
+
+    // 模拟点击链接元素，开始下载
+    link.click();
   });
-}
-function downloadBlob(blob: Blob, fileName: string) {
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = fileName;
-  link.click();
 }
 </script>
 
@@ -519,23 +481,24 @@ function downloadBlob(blob: Blob, fileName: string) {
 .content-copy {
   height: fit-content;
   width: fit-content;
-  min-width: 20vw;
-  padding: 4.5rem;
+  padding: 2.2rem 2.2rem 0.2rem 2.2rem;
   background-image: linear-gradient(to top right, #8720fd, #ffc832);
   position: relative;
   z-index: -1;
   position: fixed;
   top: 0;
   left: 0;
+  transform: scale(2);
 }
 .copy-box {
   height: 100%;
-  width: calc(100% + 0.5px);
+  width: 100%;
+  min-width: 11rem;
+  min-height: 5rem;
   border-radius: 12px;
   overflow: auto;
   background-color: #1e1e1e;
   box-shadow: 0px 20px 15px 5px rgba(34, 34, 36, 0.26);
-  zoom: 2;
 }
 pre {
   margin: -1rem 0 0 0;
@@ -544,10 +507,10 @@ pre {
   font-family: Fira Code, sans-serif;
   font-weight: 700;
   color: rgba(220, 221, 225, 0.8);
-  margin-right: 0.5rem;
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  float: right;
+  margin-top: 0.5rem;
+  position: relative;
+  left: 1rem;
 }
 .code {
   max-height: 68vh;
@@ -713,16 +676,11 @@ pre {
   background: #1e1e1e;
 }
 @media (max-width: 768px) {
-  .code-box {
-    padding-bottom: 3rem;
-  }
   .content-copy {
-    padding: 3rem;
-    min-width: 80vw;
-    display: block;
+    transform: scale(1.8);
   }
-  .copy-box {
-    zoom: 1.5;
+  .code-box {
+    padding-bottom: 2.5rem;
   }
   .select-code {
     width: 20vw;

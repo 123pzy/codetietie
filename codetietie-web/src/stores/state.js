@@ -6,8 +6,8 @@ export const useState = defineStore("state", {
             state: false,
             daysToAdd: 30,
             burn: false,
-            theme: localStorage.getItem('theme') || 'light',
-            addFileStatus: false
+            addFileStatus: false,
+            theme: ''
         };
     },
 });

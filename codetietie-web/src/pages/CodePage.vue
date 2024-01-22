@@ -49,6 +49,7 @@ var { addFileStatus } = storeToRefs(state);
   display: flex;
   height: 100vh;
   width: 100vw;
+  position: relative;
 }
 .weixin-box {
   color: var(--font-color);

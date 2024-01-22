@@ -10,26 +10,37 @@
     </div>
     <div class="btn">
       <div class="theme-box" @click="changeTheme">
-        <img
-          src="../../public/theme-dark.svg"
-          v-show="theme == 'dark'"
-          style="height: 80%"
-        />
-        <img
-          src="../../public/theme-light.svg"
-          v-show="theme == 'light'"
-          style="height: 80%"
-        />
+        <n-dropdown
+          trigger="click"
+          :options="themeOptions"
+          :show-arrow="true"
+          @select="handleSelectTheme"
+          :node-props="generateOptionProps"
+          :menu-props="menuPropsStyle"
+        >
+          <div style="height: 100%; display: flex; align-items: center">
+            <img
+              src="../assets/skin-switch-dark.svg"
+              v-show="state.theme == 'dark'"
+              style="height: 80%"
+            />
+            <img
+              src="../assets/skin-switch-light.svg"
+              v-show="state.theme !== 'dark'"
+              style="height: 80%"
+            />
+          </div>
+        </n-dropdown>
       </div>
       <div class="CN-shift" @click="changeCN">
         <img
           src="../assets/chinese-dark.svg"
-          v-show="theme == 'dark'"
+          v-show="state.theme == 'dark'"
           style="height: 80%"
         />
         <img
           src="../assets/chinese-light.svg"
-          v-show="theme == 'light'"
+          v-show="state.theme !== 'dark'"
           style="height: 80%"
         />
       </div>
@@ -39,13 +50,13 @@
             <n-icon size="30">
               <img
                 src="../assets/github-dark.svg"
-                v-show="theme == 'dark'"
+                v-show="state.theme == 'dark'"
                 alt=""
                 style="height: 80%"
               />
               <img
                 src="../assets/github-light.svg"
-                v-show="theme == 'light'"
+                v-show="state.theme !== 'dark'"
                 alt=""
                 style="height: 80%"
               />
@@ -60,13 +71,13 @@
             <n-icon size="30">
               <img
                 src="../assets/coffee-dark.svg"
-                v-show="theme == 'dark'"
+                v-show="state.theme == 'dark'"
                 alt=""
                 style="height: 80%"
               />
               <img
                 src="../assets/coffee-light.svg"
-                v-show="theme == 'light'"
+                v-show="state.theme !== 'dark'"
                 alt=""
                 style="height: 80%"
               />
@@ -80,29 +91,106 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue';
-import { NTooltip, NIcon } from 'naive-ui';
-import { useState } from '../stores/state.js';
+import { ref, watchEffect, h } from 'vue';
+import { NTooltip, NIcon, NDropdown } from 'naive-ui';
+import { SunnyOutline, MoonOutline, TvOutline } from '@vicons/ionicons5';
+import { useState } from '../stores/state';
 import { useI18n } from 'vue-i18n';
 
-defineProps(['name_distance', 'btn_distance']);
 const state = useState();
+defineProps(['name_distance', 'btn_distance']);
 // 点击图标跳转index页面
 function goHome() {
   window.location.href = '/';
 }
-// 初始主题
-var theme = ref(localStorage.getItem('theme') || 'light');
 // 切换主题
-function changeTheme() {
-  theme.value = theme.value == 'dark' ? 'light' : 'dark';
+const themeOptions = ref([
+  {
+    label: '浅色',
+    icon() {
+      return h(NIcon, null, {
+        default: () => h(SunnyOutline),
+      });
+    },
+    key: 'light',
+  },
+  {
+    label: '深色',
+    icon() {
+      return h(NIcon, null, {
+        default: () => h(MoonOutline),
+      });
+    },
+    key: 'dark',
+  },
+  {
+    label: '跟随系统',
+    icon() {
+      return h(NIcon, null, {
+        default: () => h(TvOutline),
+      });
+    },
+    key: 'system',
+  },
+]);
+// 初始主题
+var theme = ref(localStorage.getItem('theme') || 'system');
+// 跟随系统改变颜色
+const prefers = matchMedia('(prefers-color-scheme: dark)'); // 使用媒介查询获取当前系统颜色
+function changeStateTheme() {
+  document.documentElement.dataset.theme = state.theme;
 }
+function followSystemTheme() {
+  state.theme = prefers.matches ? 'dark' : 'light';
+  changeStateTheme();
+}
+
+function handleSelectTheme(key) {
+  if (key === 'system') {
+    theme.value = key;
+    localStorage.setItem('theme', theme.value);
+    followSystemTheme();
+    prefers.addEventListener('change', followSystemTheme);
+  } else {
+    theme.value = key;
+    changeStateTheme();
+    localStorage.setItem('theme', theme.value);
+    state.theme = theme.value;
+    prefers.removeEventListener('change', followSystemTheme);
+  }
+}
+// 切换主题
+function changeTheme() {}
 // 主题切换后调用
 watchEffect(() => {
-  document.documentElement.dataset.theme = theme.value;
-  localStorage.setItem('theme', theme.value);
-  state.theme = theme.value;
+  if (theme.value === 'system') {
+    followSystemTheme();
+    prefers.addEventListener('change', followSystemTheme);
+  } else {
+    state.theme = theme.value;
+    changeStateTheme();
+  }
 });
+// 设置下拉菜单样式
+function generateOptionProps() {
+  return {
+    style: {
+      '--n-option-text-color': 'var(--dropdown-font-color)',
+      '--n-font-size': '0.86rem',
+      'background-color': 'var(--dropdown-bg-color)',
+      '--n-option-color-hover': 'var(--dropdown-option-color)',
+    },
+  };
+}
+function menuPropsStyle() {
+  return {
+    style: {
+      'font-size': '0.8rem',
+      'background-color': 'var(--dropdown-bg-color)',
+      '--n-color': 'var(--dropdown-allow-color)',
+    },
+  };
+}
 
 // 切换中英文
 const { locale } = useI18n();
@@ -112,7 +200,7 @@ function changeCN() {
 }
 // 跳转到我的GitHub
 function openMyGithub() {
-  window.open('https://github.com/123pzy/codetieite');
+  window.open('https://github.com/123pzy/codetietie');
 }
 // 跳转到我的Buy me a coffee
 function openMyByuMecoffee() {

@@ -13,12 +13,12 @@
       <img
         src="../assets/home-page-Img-dark.png"
         class="home-img"
-        v-show="theme == 'dark'"
+        v-show="theme === 'dark'"
       />
       <img
         src="../assets/home-page-Img-light.png"
         class="home-img"
-        v-show="theme == 'light'"
+        v-show="theme !== 'dark'"
       />
     </div>
     <footer>
@@ -79,6 +79,7 @@ console.log(
   justify-self: center;
 }
 .beautyCode {
+  color: var(--websit-name-bg);
   font-size: 3rem;
   font-weight: 700;
   margin: 0;
