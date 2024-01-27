@@ -152,9 +152,18 @@
           }}</CodeButton>
           <CodeButton @click="cancelFunc">{{ $t('cancelBtn') }}</CodeButton>
         </div>
-        <CodeButton @click="editFunc" v-show="!edit">{{
-          $t('shareCodeBtn')
-        }}</CodeButton>
+        <div class="share-btn">
+          <CodeButton @click="createCode" v-show="!edit"
+            >{{ $t('createCodeBtn') }}
+            <img style="height: 55%" v-show="state.theme !== 'dark'" src="../assets/create-code-light.svg" alt="" />
+            <img style="height: 55%" v-show="state.theme === 'dark'" src="../assets/create-code-dark.svg" alt="" />
+          </CodeButton>
+          <CodeButton @click="shareCode" v-show="!edit"
+            >{{ $t('shareCodeBtn') }}
+            <img style="height: 55%" v-show="state.theme !== 'dark'" src="../assets/share-code-light.svg" alt="" />
+            <img style="height: 55%" v-show="state.theme === 'dark'" src="../assets/share-code-dark.svg" alt="" />
+          </CodeButton>
+        </div>
       </div>
     </div>
   </div>
@@ -173,7 +182,7 @@ import {
   NSelect,
   NTag,
 } from 'naive-ui';
-import { ReceiptOutline, Add } from '@vicons/ionicons5';
+import { ReceiptOutline, Add, Copy } from '@vicons/ionicons5';
 import { useState } from '../stores/state.js';
 import html2canvas from 'html2canvas';
 import Drawer from './Drawer.vue';
@@ -200,7 +209,7 @@ const codeChoiced = ref('Select code');
 const state = useState();
 var { addFileStatus } = storeToRefs(state);
 const editContent = ref('');
-function editFunc(): void {
+function createCode(): void {
   addFileStatus.value = false;
   codeLanguage.value = null;
   editContent.value = '';
@@ -211,6 +220,16 @@ function editFunc(): void {
   // textarea元素自动获取焦点
   nextTick(() => {
     textArea.value.focus();
+  });
+}
+
+// 点击分享按钮
+const message = useMessage();
+function shareCode() {
+  var currentPageUrl = location.href;
+  copyFunc(currentPageUrl);
+  message.warning('链接已复制~', {
+    icon: () => h(NIcon, null, { default: () => h(Copy) }),
   });
 }
 
@@ -229,7 +248,6 @@ async function addCodeFile() {
 }
 
 // 点击确认添加之后
-const message = useMessage();
 async function confirmFunc(val) {
   if (!editContent.value) {
     // 提示不能分享空代码
@@ -402,14 +420,18 @@ watchEffect(() => {
 // 一键复制代码
 const copyStatus = ref('');
 const showTooltip: Ref<boolean> = ref(false);
-function copyCode() {
+
+// 复制功能的函数
+function copyFunc(value) {
   const textarea = document.createElement('textarea');
-  textarea.value = content.value;
+  textarea.value = value;
   document.body.appendChild(textarea);
   textarea.select();
   document.execCommand('copy');
   document.body.removeChild(textarea);
-
+}
+function copyCode() {
+  copyFunc(content.value);
   copyStatus.value = `😎${t('copySuccess')}`;
   showTooltip.value = true;
 
@@ -651,6 +673,7 @@ pre {
   left: 50%;
   transform: translateX(-50%);
 }
+.share-btn,
 .edit-btn {
   display: flex;
   gap: 1.6rem;

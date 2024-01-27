@@ -17,6 +17,9 @@ defineProps(['fontFamily']);
   gap: 1rem;
 }
 .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
   font-family: v-bind(fontFamily), 'Browood-Regular', 'Luckiest_Guy';
   color: var(--btn-color);
   background-color: var(--btn-bg-color);
