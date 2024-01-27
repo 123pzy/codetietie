@@ -195,7 +195,7 @@ function menuPropsStyle() {
 // 切换中英文
 const { locale } = useI18n();
 function changeCN() {
-  locale.value = locale.value == 'zh' ? 'en' : 'zh';
+  locale.value = locale.value == 'zh' ? 'en-US' : 'zh';
   localStorage.setItem('CN', locale.value);
 }
 // 跳转到我的GitHub
