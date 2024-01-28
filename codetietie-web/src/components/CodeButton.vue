@@ -23,14 +23,13 @@ defineProps(['fontFamily']);
   font-family: v-bind(fontFamily), 'Browood-Regular', 'Luckiest_Guy';
   color: var(--btn-color);
   background-color: var(--btn-bg-color);
-  height: 5vh;
+  height: 2.8rem;
   width: fit-content;
-  text-align: center;
+  min-width: 4.5rem;
   line-height: 5vh;
   font-size: 1.05rem;
   padding: 0 1rem 0 1rem;
   border-radius: 2rem;
   cursor: pointer;
-  border: 1.6px solid #000;
 }
 </style>
