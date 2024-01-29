@@ -11,11 +11,6 @@ defineProps(['fontFamily']);
 </script>
 
 <style scoped>
-.btn-box {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1rem;
-}
 .btn {
   width: fit-content;
   color: var(--btn-color);
@@ -27,11 +22,12 @@ defineProps(['fontFamily']);
   font-size: 1rem;
   font-family: v-bind(fontFamily), 'Browood-Regular', 'Luckiest_Guy';
   height: 2.7rem;
-  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.15rem;
+  gap: 0.16rem;
+  width: 100%;
+  transform: translateX(-0.9rem);
   margin: 0 0.9rem 0 0.9rem;
 }
 </style>
