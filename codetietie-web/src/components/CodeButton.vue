@@ -1,7 +1,7 @@
 <template>
   <div class="btn-box">
     <div class="btn">
-      <slot></slot>
+      <div class="content"><slot></slot></div>
     </div>
   </div>
 </template>
@@ -17,19 +17,21 @@ defineProps(['fontFamily']);
   gap: 1rem;
 }
 .btn {
+  width: fit-content;
+  color: var(--btn-color);
+  background-color: var(--btn-bg-color);
+  border-radius: 2rem;
+  cursor: pointer;
+}
+.content {
+  font-size: 1rem;
+  font-family: v-bind(fontFamily), 'Browood-Regular', 'Luckiest_Guy';
+  height: 2.7rem;
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.25rem;
-  font-family: v-bind(fontFamily), 'Browood-Regular', 'Luckiest_Guy';
-  color: var(--btn-color);
-  background-color: var(--btn-bg-color);
-  height: 2.8rem;
-  width: fit-content;
-  line-height: 5vh;
-  font-size: 1.05rem;
-  padding: 0 1rem 0 1rem;
-  border-radius: 2rem;
-  cursor: pointer;
+  gap: 0.15rem;
+  margin: 0 0.9rem 0 0.9rem;
 }
 </style>
