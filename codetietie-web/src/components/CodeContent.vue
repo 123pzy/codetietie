@@ -155,8 +155,6 @@
         <div class="share-btn">
           <CodeButton @click="createCode" v-show="!edit"
             >{{ $t('createCodeBtn') }}
-            <img style="height: 55%" v-show="state.theme !== 'dark'" src="../assets/create-code-light.svg" alt="" />
-            <img style="height: 55%" v-show="state.theme === 'dark'" src="../assets/create-code-dark.svg" alt="" />
           </CodeButton>
           <CodeButton @click="shareCode" v-show="!edit"
             >{{ $t('shareCodeBtn') }}
@@ -182,7 +180,7 @@ import {
   NSelect,
   NTag,
 } from 'naive-ui';
-import { ReceiptOutline, Add, Copy } from '@vicons/ionicons5';
+import { ReceiptOutline, Add, CopyOutline } from '@vicons/ionicons5';
 import { useState } from '../stores/state.js';
 import html2canvas from 'html2canvas';
 import Drawer from './Drawer.vue';
@@ -228,8 +226,8 @@ const message = useMessage();
 function shareCode() {
   var currentPageUrl = location.href;
   copyFunc(currentPageUrl);
-  message.warning('链接已复制~', {
-    icon: () => h(NIcon, null, { default: () => h(Copy) }),
+  message.success(`${t('shareMessage')}`, {
+    icon: () => h(NIcon, null, { default: () => h(CopyOutline) }),
   });
 }
 
