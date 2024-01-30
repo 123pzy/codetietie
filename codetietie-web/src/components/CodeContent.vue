@@ -158,8 +158,18 @@
           </CodeButton>
           <CodeButton @click="shareCode" v-show="!edit"
             >{{ $t('shareCodeBtn') }}
-            <img style="height: 55%" v-show="state.theme !== 'dark'" src="../assets/share-code-light.svg" alt="" />
-            <img style="height: 55%" v-show="state.theme === 'dark'" src="../assets/share-code-dark.svg" alt="" />
+            <img
+              style="height: 55%"
+              v-show="state.theme !== 'dark'"
+              src="../assets/share-code-light.svg"
+              alt=""
+            />
+            <img
+              style="height: 55%"
+              v-show="state.theme === 'dark'"
+              src="../assets/share-code-dark.svg"
+              alt=""
+            />
           </CodeButton>
         </div>
       </div>
@@ -328,7 +338,7 @@ async function getCode() {
     content.value = res.data.msg;
   } else {
     // 计算代码剩余电量
-    const currentTimeStamp = new Date();
+    const currentTimeStamp = new Date().getTime();
     timeBar.value =
       ((res.data.data.timestamp_out - currentTimeStamp) /
         (res.data.data.timestamp_out - res.data.data.timestamp_in)) *
@@ -441,7 +451,7 @@ function copyCode() {
 // 下载代码为图片
 var codeDOM = ref(null);
 function downloadImg() {
-  html2canvas(codeDOM.value).then(function (canvas) {
+  html2canvas(<any>codeDOM.value).then(function (canvas) {
     // 创建一个临时链接元素
     var link = document.createElement('a');
 
