@@ -9,7 +9,6 @@ const messages = {
 
 const i18n = createI18n({
     locale: localStorage.getItem('CN'),
-    fallbackLocale: 'en-US',
     legacy: false,
     messages,
 })

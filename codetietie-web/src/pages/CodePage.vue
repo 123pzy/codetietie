@@ -20,7 +20,7 @@
           </div>
         </template>
         <div style="display: flex; flex-wrap: wrap; width: 10vh">
-          微信公众号：
+          wechat：
           <img
             src="../assets/two_dimensional_code.png"
             alt=""

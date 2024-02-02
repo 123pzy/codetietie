@@ -2,10 +2,14 @@
   <div class="code-content-container">
     <Drawer v-show="edit" />
     <div class="code-box">
-      <div class="content">
+      <div class="content" ref="codeContentDOM">
         <div class="header">
           <div class="aside-left">
-            <div class="circle"></div>
+            <div class="mac-style-box">
+              <div class="red"></div>
+              <div class="yellow"></div>
+              <div class="green"></div>
+            </div>
             <!-- 代码文件选择 -->
             <div class="select-code">
               <n-input
@@ -128,7 +132,7 @@
           <div class="box">
             <div class="copy-box">
               <div class="header">
-                <div class="circle"></div>
+                <div class="mac-style-box"></div>
                 <div class="aside-right">
                   <div class="code-class hljs">{{ codeClass }}</div>
                 </div>
@@ -462,7 +466,7 @@ function downloadImg() {
     link.href = image;
 
     // 设置链接元素的下载属性为截图.png
-    link.download = '截图.png';
+    link.download = 'image-codetietie.png';
 
     // 模拟点击链接元素，开始下载
     link.click();
@@ -560,7 +564,7 @@ pre {
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 3.5rem;
+  gap: 1rem;
   margin-right: 3.2rem;
 }
 
@@ -580,31 +584,51 @@ pre {
   width: 10vw;
   min-width: 6rem;
 }
-.circle {
-  height: 11px;
-  width: 11px;
-  border-radius: 50%;
-  background-color: #fdbc30;
-  position: relative;
-  left: 1.5rem;
+.mac-style-box {
+  color: #000;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.66rem;
 }
-.circle::before {
-  content: '';
-  position: absolute;
-  left: -18px;
-  height: 11px;
-  width: 11px;
+.red {
+  height: 0.8rem;
+  width: 0.8rem;
   border-radius: 50%;
-  background-color: #fe6059;
+  cursor: pointer;
+  background-color: #de4243;
 }
-.circle::after {
-  content: '';
-  position: absolute;
-  left: 18px;
-  height: 11px;
-  width: 11px;
+.yellow {
+  height: 0.8rem;
+  width: 0.8rem;
   border-radius: 50%;
-  background-color: #28c840;
+  cursor: pointer;
+  background-color: #e69e2a;
+}
+.green {
+  height: 0.8rem;
+  width: 0.8rem;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #11a73e;
+}
+.red:hover::before {
+  content: '×';
+}
+.yellow:hover::before {
+  content: '－';
+}
+.green:hover::before {
+  content: '+';
+}
+.red:hover::before,
+.yellow:hover::before,
+.green:hover::before {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .aside-right {

@@ -15,7 +15,7 @@ const en = {
     downPNG: 'Download as PNG',
     copySuccess: 'copyed!',
     BuyMeACoffee: 'Buy me a Coffee',
-    Github: 'Welcome star~⭐',
+    Github: 'Welcome star~',
     callMe: 'follow/contact me:',
     codeElectricQuantity: 'Code remaining power：',
     confirmBtn: 'confirm',
