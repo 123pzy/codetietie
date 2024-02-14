@@ -64,6 +64,7 @@ getRouter.get('/getContent', async (ctx) => {
             ctx.body = {
                 code: -1,
                 msg: `分享已过期！`,
+                data: [{ label: '过期', value: '分享已过期(Share expired).', language: 'markdown' }]
             }
         }
     }

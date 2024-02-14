@@ -6,8 +6,6 @@
   --btn-bg-color: #fff;
   --nslider-color: #fff;
   --websit-name-bg: #f2f5f7;
-  --burn-true-color: #fff;
-  --burn-false-color: #2d333a;
   --call-me-bg-color: #2b2f32;
   --call-me-shallow-color: #2b2f32;
   --slider-color: #f1f2f0;
@@ -26,8 +24,6 @@
   --btn-bg-color: #202021;
   --nslider-color: #202021;
   --websit-name-bg: #000;
-  --burn-true-color: #000;
-  --burn-false-color: #e1e7ef;
   --call-me-bg-color: #dddfda;
   --call-me-shallow-color: #cac7c7;
   --slider-color: #080f14;
@@ -38,6 +34,7 @@
   --dropdown-option-color: #c2c4c1;
 }
 
+html,
 body {
   height: 100%;
   width: 100%;
@@ -45,15 +42,16 @@ body {
   margin: 0;
 }
 
-.hljs {
+.ͼ1 .cm-scroller {
   font-size: 0.9rem;
   font-family: Fira Code, Firacode_Medium;
 }
 
 /* 设置n-select样式 */
-.select-code .n-base-selection {
+.n-base-selection {
   font-size: 0.8rem;
   padding: 0px;
+  --n-text-color: #f2f5f7 !important;
   --n-color: #353535 !important;
   --n-border-hover: 0px solid #36ad6a !important;
   --n-border: 0 !important;
@@ -74,8 +72,8 @@ body {
 
 /* 选择框的初始状态 */
 /* 全局设置，一般大型多人协作项目中不这么写，会影响其他样式 */
-.select-code .n-tag,
-.select-code .n-tag--closable {
+.n-tag,
+.n-tag--closable {
   color: #cfcfcf;
   padding: 0;
   --n-color: #353535 !important;
@@ -120,10 +118,61 @@ body {
   --n-rail-height: 6px;
 }
 
+.ͼ1 .cm-scroller {
+  font-family: Fira Code;
+}
+
+/* .cm-gutters {
+  display: none !important;
+} */
+/* 时间选择器样式 */
+.n-date-picker .n-input--resizable {
+  --n-color: #353535 !important;
+  --n-border: none !important;
+}
+
+/* .n-date-panel {
+  --n-panel-color: #353535 !important;
+} */
+
+.n-button--primary-type {
+  background-color: #f2f5f7 !important;
+  --n-border: none !important;
+  --n-border-hover: none !important;
+  --n-text-color: #000 !important;
+  --n-text-color-hover: #000 !important;
+}
+
+/* 
+.n-date-panel-date__trigger {
+  --n-item-color-active: #eee !important;
+}
+
+.n-input__state-border {
+  --n-border-hover: 1px solid #f2f5f7 !important;
+}
+
+.n-date-panel-month__text {
+  --n-calendar-title-color-hover: blue !important;
+} */
+/* 设置输入框样式 */
+.n-input--autosize {
+  /* 设置文字颜色 */
+  --n-text-color: #f2f5f7 !important;
+  --n-border: none !important;
+  --n-color: #353535 !important;
+  --n-border-hover: none !important;
+  --n-color-focus: #282727 !important;
+  --n-border-focus: none !important;
+  --n-caret-color: #fff !important;
+  /*设置鼠标闪烁样式  */
+  --n-box-shadow-focus: none !important;
+}
+
 @media (max-width: 768px) {
-  .hljs {
-    font-size: 0.85rem;
-    font-family: Firacode_Medium, sans-serif;
+  .ͼ1 .cm-scroller {
+    font-size: 0.86rem;
+    font-family: Fira Code, Firacode_Medium, sans-serif;
   }
 
   .n-tag__content {
