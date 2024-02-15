@@ -2,7 +2,7 @@
   <div class="drawer">
     <img
       @click="activate"
-      src="../assets/drawer-light.svg"
+      src="@/assets/drawer-light.svg"
       alt=""
       style="height: 2rem"
     />
@@ -28,7 +28,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import CodeSettings from '@/CodeSettings/index.vue';
+import CodeSettings from './index.vue';
 import { NDrawer, NDrawerContent } from 'naive-ui';
 
 // 抽屉

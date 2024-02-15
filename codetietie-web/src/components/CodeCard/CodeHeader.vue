@@ -81,7 +81,7 @@ import { getCodeStick } from '@/api/request.ts';
 import { onMounted } from 'vue';
 import { languageNames } from '@/themes/language-names';
 import { LanguageName } from "@uiw/codemirror-extensions-langs";
-import CodeSettings from '@/CodeSettings/index.vue';
+import CodeSettings from '@/components/CodeSettings/index.vue'
 
 const route = useRoute();
 const router = useRouter();

@@ -36,7 +36,7 @@ import CodeMirrorEditor from './CodeMirrorEditor.vue';
 import CodeHeader from './CodeHeader.vue';
 import Button from '@/components/Button/index.vue';
 import CodeCardToImg from '@/components/CodeCardToImg/index.vue';
-import Drawer from '@/CodeSettings/Drawer.vue';
+import Drawer from '@/components/CodeSettings/Drawer.vue'
 import { h } from 'vue';
 import { useState } from '@/stores/state';
 import { storeToRefs } from 'pinia';
