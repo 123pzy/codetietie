@@ -19,7 +19,7 @@ const zh: langInter = {
   copySuccess: '复制成功！',
   BuyMeACoffee: '送我杯咖啡~',
   Custom: '自定义代码卡片主题',
-  callMe: '关注/联系我：',
+  callMe: '联系我',
   codeElectricQuantity: '代码剩余电量：',
   confirmBtn: '确认',
   cancelBtn: '取消',

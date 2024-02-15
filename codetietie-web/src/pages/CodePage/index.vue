@@ -22,7 +22,7 @@
             >
               <img src="@/assets/weixin.svg" style="height: 100%; width: 60%" />
             </n-icon>
-            <span class="weixin-text">联系我</span>
+            <span class="weixin-text">{{ $t('callMe') }}</span>
           </div>
         </template>
         <div class="tooltip-content">

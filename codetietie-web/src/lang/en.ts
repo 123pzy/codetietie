@@ -20,7 +20,7 @@ const en: langInter = {
   copySuccess: 'copyed!',
   BuyMeACoffee: 'Buy me a Coffee',
   Custom: 'Custom code theme',
-  callMe: 'follow/contact me:',
+  callMe: 'contact me',
   codeElectricQuantity: 'Code remaining power：',
   confirmBtn: 'confirm',
   cancelBtn: 'Cancel',
