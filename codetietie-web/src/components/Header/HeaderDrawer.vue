@@ -15,6 +15,7 @@
       :body-style="{ backgroundColor: 'var(--bg-color)' }"
       closable
     >
+      <CodeCardTheme></CodeCardTheme>
     </n-drawer-content>
   </n-drawer>
 </template>
@@ -22,6 +23,7 @@
 <script lang="ts" setup>
 import { useState } from '@/stores/state';
 import { NDrawer, NDrawerContent } from 'naive-ui';
+import CodeCardTheme from '@/components/CodeCardSetting/index.vue';
 
 const state = useState();
 </script>

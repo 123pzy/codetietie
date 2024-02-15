@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const barfTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -113,9 +105,9 @@ const barfHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const barf = [
+const barfTemp = [
   barfTheme,
   /*@__PURE__*/ syntaxHighlighting(barfHighlightStyle),
 ];
-
+const barf = { backgroundColor: background, theme: barfTemp };
 export { color, barf, barfHighlightStyle, barfTheme };

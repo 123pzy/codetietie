@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const coolGlowTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -117,9 +109,10 @@ const coolGlowHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const coolGlow = [
+const coolGlowTemp = [
   coolGlowTheme,
   /*@__PURE__*/ syntaxHighlighting(coolGlowHighlightStyle),
 ];
+const coolGlow = { backgroundColor: background, theme: coolGlowTemp };
 
 export { color, coolGlow, coolGlowHighlightStyle, coolGlowTheme };

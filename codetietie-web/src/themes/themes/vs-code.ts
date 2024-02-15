@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const vsCodeTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -142,9 +134,10 @@ const vsCodeHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const vsCode = [
+const vsCodeTemp = [
   vsCodeTheme,
   /*@__PURE__*/ syntaxHighlighting(vsCodeHighlightStyle),
 ];
+const vsCode = { backgroundColor: background, theme: vsCodeTemp };
 
 export { color, vsCode, vsCodeHighlightStyle, vsCodeTheme };

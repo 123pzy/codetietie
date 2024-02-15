@@ -14,7 +14,7 @@ const chalky = '#e5c07b',
   whiskey = '#d19a66',
   violet = '#c678dd',
   darkBackground = '#21252b',
-  highlightBackground = '#2c313a',
+  highlightBackground = '#3c2b30',
   background = '#3b2627',
   tooltipBackground = '#353a42',
   selection = '#3E4451',
@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const birdsOfParadiseTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -119,9 +111,10 @@ const birdsOfParadiseHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const birdsOfParadise = [
+const birdsOfParadiseTemp = [
   birdsOfParadiseTheme,
   /*@__PURE__*/ syntaxHighlighting(birdsOfParadiseHighlightStyle),
 ];
+const birdsOfParadise = { backgroundColor: background, theme: birdsOfParadiseTemp };
 
 export { color, birdsOfParadise, birdsOfParadiseHighlightStyle, birdsOfParadiseTheme };

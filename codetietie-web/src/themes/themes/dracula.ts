@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const draculaTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -104,9 +96,10 @@ const draculaHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const dracula = [
+const draculaTemp = [
   draculaTheme,
   /*@__PURE__*/ syntaxHighlighting(draculaHighlightStyle),
 ];
+const dracula = { backgroundColor: background, theme: draculaTemp };
 
 export { color, dracula, draculaHighlightStyle, draculaTheme };

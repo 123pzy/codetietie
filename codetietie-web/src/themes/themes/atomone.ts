@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const atomoneTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -90,9 +82,9 @@ const atomoneHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const atomone = [
+const atomoneTemp = [
   atomoneTheme,
   /*@__PURE__*/ syntaxHighlighting(atomoneHighlightStyle),
 ];
-
+const atomone = { backgroundColor: background, theme: atomoneTemp };
 export { color, atomone, atomoneHighlightStyle, atomoneTheme };

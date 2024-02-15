@@ -14,7 +14,7 @@ const chalky = '#e5c07b',
   whiskey = '#d19a66',
   violet = '#c678dd',
   darkBackground = '#21252b',
-  highlightBackground = '#2c313a',
+  highlightBackground = '#f1f8fc',
   background = '#fcfcfc',
   tooltipBackground = '#353a42',
   selection = '#3E4451',
@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const ayuLightTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -68,72 +60,72 @@ The highlighting style for code in the One Dark theme.
 const ayuLightHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
   {
     tag: t.comment,
-    color: "#787b8099",
+    color: '#787b8099',
   },
   {
     tag: t.string,
-    color: "#86b300",
+    color: '#86b300',
   },
   {
     tag: t.regexp,
-    color: "#4cbf99",
+    color: '#4cbf99',
   },
   {
     tag: [t.number, t.bool, t.null],
-    color: "#ffaa33",
+    color: '#ffaa33',
   },
   {
     tag: t.variableName,
-    color: "#5c6166",
+    color: '#5c6166',
   },
   {
     tag: [t.definitionKeyword, t.modifier],
-    color: "#fa8d3e",
+    color: '#fa8d3e',
   },
   {
     tag: [t.keyword, t.special(t.brace)],
-    color: "#fa8d3e",
+    color: '#fa8d3e',
   },
   {
     tag: t.operator,
-    color: "#ed9366",
+    color: '#ed9366',
   },
   {
     tag: t.separator,
-    color: "#5c6166b3",
+    color: '#5c6166b3',
   },
   {
     tag: t.punctuation,
-    color: "#5c6166",
+    color: '#5c6166',
   },
   {
     tag: [t.definition(t.propertyName), t.function(t.variableName)],
-    color: "#f2ae49",
+    color: '#f2ae49',
   },
   {
     tag: [t.className, t.definition(t.typeName)],
-    color: "#22a4e6",
+    color: '#22a4e6',
   },
   {
     tag: [t.tagName, t.typeName, t.self, t.labelName],
-    color: "#55b4d4",
+    color: '#55b4d4',
   },
   {
     tag: t.angleBracket,
-    color: "#55b4d480",
+    color: '#55b4d480',
   },
   {
     tag: t.attributeName,
-    color: "#f2ae49",
+    color: '#f2ae49',
   },
 ]);
 /**
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const ayuLight = [
+const ayuLightTemp = [
   ayuLightTheme,
   /*@__PURE__*/ syntaxHighlighting(ayuLightHighlightStyle),
 ];
-
+const ayuLight = { backgroundColor: background, theme: ayuLightTemp };
 export { color, ayuLight, ayuLightHighlightStyle, ayuLightTheme };

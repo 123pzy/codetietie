@@ -1,7 +1,10 @@
 <template>
   <div
     class="homepage-container"
-    :class="{ 'to-short': state.customStatus, 'to-long': !state.customStatus }"
+    :class="{
+      'to-short': state.customStatus,
+      'to-long': toLong,
+    }"
   >
     <Header :name_distance="2" :btn_distance="1.5" />
     <n-message-provider>
@@ -34,12 +37,20 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, watch } from 'vue';
 import Header from '@/components/Header/index.vue';
 import CodeCard from '@/components/CodeCard/index.vue';
 import { NMessageProvider, NTooltip } from 'naive-ui';
 import { useState } from '@/stores/state';
 
 const state = useState();
+const toLong = ref(false);
+watch(
+  () => state.customStatus,
+  (newVal) => {
+    toLong.value = !newVal;
+  }
+);
 </script>
 
 <style lang="less" scoped>
@@ -84,10 +95,10 @@ const state = useState();
   }
 }
 .to-short {
-  animation: short 0.32s forwards;
+  animation: short 0.285s forwards 0.03s;
 }
 .to-long {
-  animation: long 0.22s forwards;
+  animation: long 0.222s forwards ease-in-out;
 }
 @keyframes short {
   0% {

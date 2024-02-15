@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const xCodeLightTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -66,23 +58,24 @@ const xCodeLightTheme = data(
 The highlighting style for code in the One Dark theme.
 */
 const xCodeLightHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
-  { tag: [t.comment, t.quote], color: "#707F8D" },
-  { tag: [t.typeName, t.typeOperator], color: "#aa0d91" },
-  { tag: [t.keyword], color: "#aa0d91", fontWeight: "bold" },
-  { tag: [t.string, t.meta], color: "#D23423" },
-  { tag: [t.name], color: "#032f62" },
-  { tag: [t.typeName], color: "#522BB2" },
-  { tag: [t.variableName], color: "#23575C" },
-  { tag: [t.definition(t.variableName)], color: "#327A9E" },
-  { tag: [t.regexp, t.link], color: "#0e0eff" },
+  { tag: [t.comment, t.quote], color: '#707F8D' },
+  { tag: [t.typeName, t.typeOperator], color: '#aa0d91' },
+  { tag: [t.keyword], color: '#aa0d91', fontWeight: 'bold' },
+  { tag: [t.string, t.meta], color: '#D23423' },
+  { tag: [t.name], color: '#032f62' },
+  { tag: [t.typeName], color: '#522BB2' },
+  { tag: [t.variableName], color: '#23575C' },
+  { tag: [t.definition(t.variableName)], color: '#327A9E' },
+  { tag: [t.regexp, t.link], color: '#0e0eff' },
 ]);
 /**
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const xCodeLight = [
+const xCodeLightTemp = [
   xCodeLightTheme,
   /*@__PURE__*/ syntaxHighlighting(xCodeLightHighlightStyle),
 ];
+const xCodeLight = { backgroundColor: background, theme: xCodeLightTemp };
 
 export { color, xCodeLight, xCodeLightHighlightStyle, xCodeLightTheme };

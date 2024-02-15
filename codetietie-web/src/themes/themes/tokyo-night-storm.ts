@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const tokyoNightStormTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -100,9 +92,10 @@ const tokyoNightStormHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const tokyoNightStorm = [
+const tokyoNightStormTemp = [
   tokyoNightStormTheme,
   /*@__PURE__*/ syntaxHighlighting(tokyoNightStormHighlightStyle),
 ];
+const tokyoNightStorm = { backgroundColor: background, theme: tokyoNightStormTemp };
 
 export { color, tokyoNightStorm, tokyoNightStormHighlightStyle, tokyoNightStormTheme };

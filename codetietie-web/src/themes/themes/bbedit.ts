@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const bbeditTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -84,9 +76,10 @@ const bbeditHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const bbedit = [
+
+const bbeditTemp = [
   bbeditTheme,
   /*@__PURE__*/ syntaxHighlighting(bbeditHighlightStyle),
 ];
-
+const bbedit = { backgroundColor: background, theme: bbeditTemp };
 export { color, bbedit, bbeditHighlightStyle, bbeditTheme };

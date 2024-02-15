@@ -44,3 +44,27 @@ export {
   ayuLight,
   andromeda,
 };
+
+export const themes = {
+  aura: aura,
+  atomone: atomone,
+  tokyoNight: tokyoNight,
+  tokyoNightStorm: tokyoNightStorm,
+  dracula: dracula,
+  bbedit: bbedit,
+  duotoneLight: duotoneLight,
+  duotoneDark: duotoneDark,
+  githubLight: githubLight,
+  githubDark: githubDark,
+  vsCode: vsCode,
+  xCodeLight: xCodeLight,
+  xCodeDark: xCodeDark,
+  barf: barf,
+  birdsOfParadise: birdsOfParadise,
+  tomorrow: tomorrow,
+  cobalt: cobalt,
+  solarizedLight: solarizedLight,
+  coolGlow: coolGlow,
+  ayuLight: ayuLight,
+  andromeda: andromeda,
+};

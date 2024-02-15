@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const githubDarkTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -92,9 +84,10 @@ const githubDarkHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const githubDark = [
+const githubDarkTemp = [
   githubDarkTheme,
   /*@__PURE__*/ syntaxHighlighting(githubDarkHighlightStyle),
 ];
+const githubDark = { backgroundColor: background, theme: githubDarkTemp };
 
 export { color, githubDark, githubDarkHighlightStyle, githubDarkTheme };

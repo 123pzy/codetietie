@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const xCodeDarkTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -79,9 +71,10 @@ const xCodeDarkHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const xCodeDark = [
+const xCodeDarkTemp = [
   xCodeDarkTheme,
   /*@__PURE__*/ syntaxHighlighting(xCodeDarkHighlightStyle),
 ];
+const xCodeDark = { backgroundColor: background, theme: xCodeDarkTemp };
 
 export { color, xCodeDark, xCodeDarkHighlightStyle, xCodeDarkTheme };

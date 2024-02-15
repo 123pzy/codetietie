@@ -30,11 +30,16 @@ import { langs } from '@uiw/codemirror-extensions-langs';
 import { LanguageName } from '@uiw/codemirror-extensions-langs';
 import { ref, watch } from 'vue';
 import { languageNames } from '@/themes/language-names';
-import { vsCode } from '@/themes/themes/index';
+import { themes } from '@/themes/themes/index';
 
 const state = useState();
-const { currentCode, minHeight, minWidth, currentCodeLanguage } =
-  storeToRefs(state);
+const {
+  currentCode,
+  minHeight,
+  minWidth,
+  currentCodeLanguage,
+  currentCodeTheme,
+} = storeToRefs(state);
 defineProps<codeMirrorEditorPrpps>();
 const extensions = ref();
 // 动态修改代码语言
@@ -44,14 +49,23 @@ watch(
     if (currentCodeLanguage.value in languageNames) {
       extensions.value = [
         langs[currentCodeLanguage.value as LanguageName](),
-        vsCode,
+        themes[currentCodeTheme.value].theme,
       ];
     } else {
-      extensions.value = [langs['javascript'](), vsCode];
+      extensions.value = [
+        langs['javascript'](),
+        themes[currentCodeTheme.value].theme,
+      ];
     }
   },
   { immediate: true }
 );
+watch(currentCodeTheme, () => {
+  extensions.value = [
+    langs[currentCodeLanguage.value as LanguageName](),
+    themes[currentCodeTheme.value].theme,
+  ];
+  console.log(themes[currentCodeTheme.value].theme);
+});
 </script>
 <style lang="less" scoped></style>
-@/themes/themes/testTheme @/themes/themes/V

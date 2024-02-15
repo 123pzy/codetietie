@@ -30,6 +30,8 @@ const zh: langInter = {
   setEditCodeLanguage: '设置代码语言：',
   setEditCodeExpireTime: '设置过期时间：',
   editCodeExpireTimePlaceholder: '设置过期时间（默认30天）',
+  selectCodeThemeTitle: '设置代码主题',
+  selectCodeTheme: '选择主题',
 };
 
 export default zh;

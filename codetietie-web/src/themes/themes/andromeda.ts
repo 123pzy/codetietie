@@ -41,45 +41,37 @@ const color = {
   cursor,
 };
 const c = {
-  background: "#23262E",
-  foreground: "#D5CED9",
-  selection: "#db45a280",
-  selectionMatch: "#db45a280",
-  cursor: "#FFF",
-  dropdownBackground: "#2b303b",
-  dropdownBorder: "#363c49",
-  activeLine: "#596a992e",
-  matchingBracket: "#746f77",
-  keyword: "#c74ded",
-  storage: "#c74ded",
-  variable: "#00e8c6",
-  parameter: "#00e8c6",
-  function: "#FFE66D",
-  string: "#96E072",
-  constant: "#ee5d43",
-  type: "#FFE66D",
-  class: "#FFE66D",
-  number: "#ee5d43",
-  comment: "#A0A1A7cc",
-  heading: "#ff00aa",
+  background: '#23262E',
+  foreground: '#D5CED9',
+  selection: '#db45a280',
+  selectionMatch: '#db45a280',
+  cursor: '#FFF',
+  dropdownBackground: '#2b303b',
+  dropdownBorder: '#363c49',
+  activeLine: '#596a992e',
+  matchingBracket: '#746f77',
+  keyword: '#c74ded',
+  storage: '#c74ded',
+  variable: '#00e8c6',
+  parameter: '#00e8c6',
+  function: '#FFE66D',
+  string: '#96E072',
+  constant: '#ee5d43',
+  type: '#FFE66D',
+  class: '#FFE66D',
+  number: '#ee5d43',
+  comment: '#A0A1A7cc',
+  heading: '#ff00aa',
   invalid: null,
-  regexp: "#96E072",
-  tag: "#f92672",
+  regexp: '#96E072',
+  tag: '#f92672',
 };
 /**
 The editor theme styles for One Dark.
 */
 const andromedaTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -96,12 +88,7 @@ const andromedaHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
   { tag: [t.name, t.deleted, t.character, t.macroName], color: c.variable },
   { tag: [t.propertyName], color: c.function },
   {
-    tag: [
-      t.processingInstruction,
-      t.string,
-      t.inserted,
-      t.special(t.string),
-    ],
+    tag: [t.processingInstruction, t.string, t.inserted, t.special(t.string)],
     color: c.string,
   },
   { tag: [t.function(t.variableName), t.labelName], color: c.function },
@@ -112,14 +99,7 @@ const andromedaHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
   { tag: [t.definition(t.name), t.separator], color: c.variable },
   { tag: [t.className], color: c.class },
   {
-    tag: [
-      t.number,
-      t.changed,
-      t.annotation,
-      t.modifier,
-      t.self,
-      t.namespace,
-    ],
+    tag: [t.number, t.changed, t.annotation, t.modifier, t.self, t.namespace],
     color: c.number,
   },
   { tag: [t.typeName], color: c.type, fontStyle: c.type },
@@ -127,13 +107,13 @@ const andromedaHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
   { tag: [t.url, t.escape, t.regexp, t.link], color: c.regexp },
   { tag: [t.meta, t.comment], color: c.comment },
   { tag: t.tagName, color: c.tag },
-  { tag: t.strong, fontWeight: "bold" },
-  { tag: t.emphasis, fontStyle: "italic" },
-  { tag: t.link, textDecoration: "underline" },
-  { tag: t.heading, fontWeight: "bold", color: c.heading },
+  { tag: t.strong, fontWeight: 'bold' },
+  { tag: t.emphasis, fontStyle: 'italic' },
+  { tag: t.link, textDecoration: 'underline' },
+  { tag: t.heading, fontWeight: 'bold', color: c.heading },
   { tag: [t.atom, t.special(t.variableName)], color: c.variable },
   { tag: t.invalid, color: c.invalid },
-  { tag: t.strikethrough, textDecoration: "line-through" },
+  { tag: t.strikethrough, textDecoration: 'line-through' },
   {
     tag: [t.operatorKeyword, t.bool, t.null, t.variableName],
     color: c.constant,
@@ -143,9 +123,12 @@ const andromedaHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const andromeda = [
+var andromedaTemp = [
   andromedaTheme,
   /*@__PURE__*/ syntaxHighlighting(andromedaHighlightStyle),
 ];
-
+var andromeda: { backgroundColor: string; theme: any } = {
+  backgroundColor: background,
+  theme: andromedaTemp,
+};
 export { color, andromeda, andromedaHighlightStyle, andromedaTheme };

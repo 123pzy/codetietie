@@ -9,6 +9,9 @@ export interface CodeContent {
 export interface codeLanguageTeamInter {
   [propsNames: string]: string;
 }
+export interface codeThemeTeamInter {
+  [propsNames: string]: string;
+}
 export interface langInter {
   website_title: string;
   website_description: string;
@@ -39,4 +42,6 @@ export interface langInter {
   setEditCodeLanguage: string;
   setEditCodeExpireTime: string;
   editCodeExpireTimePlaceholder: string;
+  selectCodeThemeTitle: string;
+  selectCodeTheme: string;
 }

@@ -37,6 +37,7 @@ export const useState = defineStore('state', {
       randomValue: '',
       datePickerDisabled: false,
       customStatus: false,
+      currentCodeTheme: localStorage.getItem('code-theme') || 'vsCode',
     };
   },
   getters: {

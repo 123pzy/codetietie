@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const duotoneLightTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -92,9 +84,10 @@ const duotoneLightHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const duotoneLight = [
+const duotoneLightTemp = [
   duotoneLightTheme,
   /*@__PURE__*/ syntaxHighlighting(duotoneLightHighlightStyle),
 ];
+const duotoneLight = { backgroundColor: background, theme: duotoneLightTemp };
 
 export { color, duotoneLight, duotoneLightHighlightStyle, duotoneLightTheme };

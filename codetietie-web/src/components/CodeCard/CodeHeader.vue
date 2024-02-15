@@ -1,5 +1,10 @@
 <template>
-  <div class="code-header-container">
+  <div
+    class="code-header-container"
+    :style="{
+      backgroundColor: backgroundColor,
+    }"
+  >
     <div class="code-header-left">
       <!-- Mac风格 -->
       <div class="mac-style-box">
@@ -80,8 +85,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { getCodeStick } from '@/api/request.ts';
 import { onMounted } from 'vue';
 import { languageNames } from '@/themes/language-names';
-import { LanguageName } from "@uiw/codemirror-extensions-langs";
-import CodeSettings from '@/components/CodeSettings/index.vue'
+import { LanguageName } from '@uiw/codemirror-extensions-langs';
+import CodeSettings from '@/components/CodeSettings/index.vue';
+import { themes } from '@/themes/themes/index';
 
 const route = useRoute();
 const router = useRouter();
@@ -99,7 +105,15 @@ const {
   downloadToImgDOM,
   randomValue,
   datePickerDisabled,
+  currentCodeTheme,
 } = storeToRefs(state);
+var backgroundColor = ref(themes[currentCodeTheme.value].backgroundColor);
+watch(currentCodeTheme, () => {
+  backgroundColor.value = themes[currentCodeTheme.value].backgroundColor;
+  localStorage.setItem('code-theme', currentCodeTheme.value);
+});
+console.log(backgroundColor);
+
 const renderTag = ({
   option,
   handleClose,
@@ -213,7 +227,7 @@ onMounted(async () => {
   height: 2.9rem;
   width: 100%;
   box-sizing: border-box;
-  background-color: #1e1e1e;
+  // background-color: #1e1e1e;
   display: flex;
   justify-content: space-between;
   border-radius: 15px 15px 0 0;

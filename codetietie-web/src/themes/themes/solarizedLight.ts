@@ -44,16 +44,8 @@ const color = {
 The editor theme styles for One Dark.
 */
 const solarizedLightTheme = data(
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -129,9 +121,10 @@ const solarizedLightHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
 Extension to enable the One Dark theme (both the editor theme and
 the highlight style).
 */
-const solarizedLight = [
+const solarizedLightTemp = [
   solarizedLightTheme,
   /*@__PURE__*/ syntaxHighlighting(solarizedLightHighlightStyle),
 ];
+const solarizedLight = { backgroundColor: background, theme: solarizedLightTemp };
 
 export { color, solarizedLight, solarizedLightHighlightStyle, solarizedLightTheme };

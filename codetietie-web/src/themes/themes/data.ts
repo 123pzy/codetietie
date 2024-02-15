@@ -1,16 +1,8 @@
 import { EditorView } from '@codemirror/view';
 
 export const data: (
-  chalky: string,
-  coral: string,
-  cyan: string,
-  invalid: string,
   ivory: string,
   stone: string,
-  malibu: string,
-  sage: string,
-  whiskey: string,
-  violet: string,
   darkBackground: string,
   highlightBackground: string,
   background: string,
@@ -18,16 +10,8 @@ export const data: (
   selection: string,
   cursor: string
 ) => any = function (
-  chalky,
-  coral,
-  cyan,
-  invalid,
   ivory,
   stone,
-  malibu,
-  sage,
-  whiskey,
-  violet,
   darkBackground,
   highlightBackground,
   background,
@@ -35,25 +19,6 @@ export const data: (
   selection,
   cursor
 ) {
-  console.log(
-    chalky,
-    coral,
-    cyan,
-    invalid,
-    ivory,
-    stone,
-    malibu,
-    sage,
-    whiskey,
-    violet,
-    darkBackground,
-    highlightBackground,
-    background,
-    tooltipBackground,
-    selection,
-    cursor
-  );
-
   const oneDarkTheme = /*@__PURE__*/ EditorView.theme(
     {
       '&': {

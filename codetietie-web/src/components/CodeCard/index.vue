@@ -114,7 +114,6 @@ function cancelAddCode() {
     linear-gradient(360deg, var(--line-color) 2.5%, rgba(0, 0, 0, 0) 3%);
   background-size: 20px 20px;
   background-position: center center;
-  padding-bottom: 4rem;
   background-color: var(--bg-color);
   box-sizing: border-box;
 }
@@ -144,8 +143,11 @@ function cancelAddCode() {
   max-width: 90vw;
   height: fit-content;
   width: fit-content;
-  /* border: 8px solid #1e1e1e; */
-  border-radius: 15px;
+  /* transform: translateY(-2rem); */
+  /* height: 100vh;
+  width: 100vw;
+  position: sticky;
+  bottom:0; */
 }
 .btn-team {
   position: absolute;

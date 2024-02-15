@@ -31,6 +31,8 @@ const en: langInter = {
   setEditCodeLanguage: 'Set code language:',
   setEditCodeExpireTime: 'Set expiration time:',
   editCodeExpireTimePlaceholder: 'Set expiration time(default: 30 days)',
+  selectCodeThemeTitle:'Select code Theme',
+  selectCodeTheme: 'Select Theme',
 };
 
 export default en;
