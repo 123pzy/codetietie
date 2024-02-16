@@ -20,7 +20,7 @@
         <CodeMirrorEditor :disabled="true"></CodeMirrorEditor>
       </div>
     </div>
-    <span class="url">{{ url }}</span>
+    <span class="url">{{ currentURL.split('//')[1] }}</span>
   </div>
 </template>
 
@@ -38,6 +38,7 @@ const {
   currentCodeLanguage,
   downloadToImgDOM,
   backgroundColor,
+  currentURL
 } = storeToRefs(state);
 const codeDOM = ref();
 function downLoad() {

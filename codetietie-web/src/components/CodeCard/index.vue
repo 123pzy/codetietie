@@ -36,7 +36,7 @@ import CodeMirrorEditor from './CodeMirrorEditor.vue';
 import CodeHeader from './CodeHeader.vue';
 import Button from '@/components/Button/index.vue';
 import CodeCardToImg from '@/components/CodeCardToImg/index.vue';
-import Drawer from '@/components/CodeSettings/Drawer.vue'
+import Drawer from '@/components/CodeSettings/Drawer.vue';
 import { h } from 'vue';
 import { useState } from '@/stores/state';
 import { storeToRefs } from 'pinia';
@@ -60,12 +60,13 @@ const {
   minWidth,
   currentCodeLanguage,
   datePickerDisabled,
+  backgroundColor,
+  currentURL
 } = storeToRefs(state);
 // 点击分享按钮
 const message = useMessage();
 function shareCode() {
-  var currentPageUrl = location.href;
-  state.copyFunc(currentPageUrl);
+  state.copyFunc(currentURL.value);
   message.success(`${t('shareMessage')}`, {
     icon: () => h(NIcon, null, { default: () => h(CopyOutline) }),
   });
@@ -90,7 +91,6 @@ function confirmAddCode() {
 // 取消增加代码
 function cancelAddCode() {
   editStatus.value = false;
-  console.log(currentCode.value);
   currentCode.value = codeContentTeam.value[0].value;
   currentCodeLanguage.value = codeContentTeam.value[0].language;
   minHeight.value = 0;
@@ -143,11 +143,9 @@ function cancelAddCode() {
   max-width: 90vw;
   height: fit-content;
   width: fit-content;
-  /* transform: translateY(-2rem); */
-  /* height: 100vh;
-  width: 100vw;
-  position: sticky;
-  bottom:0; */
+  transform: translateY(-2rem);
+  background-color: v-bind(backgroundColor);
+  border-radius: 15px;
 }
 .btn-team {
   position: absolute;

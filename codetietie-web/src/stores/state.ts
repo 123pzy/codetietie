@@ -44,6 +44,7 @@ export const useState = defineStore('state', {
         (localStorage.getItem('code-theme') as string) in themes
           ? localStorage.getItem('code-theme')
           : 'vsCode',
+      currentURL: location.href,
     };
   },
   getters: {
@@ -142,7 +143,6 @@ export const useState = defineStore('state', {
       this.currentCode = temp.value; // 点击确认之后自动显示刚刚添加的代码
       this.selectedCodeTitle = temp.label; // 自动显示刚刚添加的代码label
       this.currentCodeLanguage = temp.language;
-      console.log('this.currentCodeLanguage::', this.currentCodeLanguage);
       this.editStatus = false;
       this.minHeight = 0;
       this.minWidth = 0;

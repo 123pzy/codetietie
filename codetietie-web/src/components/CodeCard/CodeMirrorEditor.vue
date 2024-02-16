@@ -56,7 +56,6 @@ watch(
 );
 watch(currentCodeTheme, () => {
   extensions.value = [codeLanguage.value, codeTheme.value];
-  console.log(codeTheme.value);
 });
 </script>
 <style lang="less" scoped></style>

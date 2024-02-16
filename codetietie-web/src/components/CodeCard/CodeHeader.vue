@@ -14,21 +14,12 @@
       </div>
       <div class="before-edit" v-if="!editStatus">
         <!-- 代码文件选择 -->
-        <div class="select-code">
-          <n-space vertical>
-            <n-select
-              v-model:value="selectedCodeTitle"
-              size="small"
-              filterable
-              :placeholder="$t('selectCodeFile')"
-              :options="codeContentTeam"
-              :render-tag="renderTag"
-              :node-props="generateOptionProps"
-              :show-checkmark="false"
-              @update:value="changeCodeContent"
-            />
-          </n-space>
-        </div>
+        <Selector
+          valueIndex="selectedCodeTitle"
+          optionsIndex="codeContentTeam"
+          :placeholder="$t('selectCodeFile')"
+          updateValueIndex="changeCodeContent"
+        ></Selector>
         <!-- “+” -->
         <div class="add-code-file-btn" v-if="path">
           <n-icon size="25" style="cursor: pointer" @click="addCodeFile">
@@ -75,8 +66,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, h, Ref, watch } from 'vue';
-import { NSpace, NSelect, NTag, SelectOption, NIcon, NTooltip } from 'naive-ui';
+import { ref, Ref, watch } from 'vue';
+import { NSpace, NIcon, NTooltip } from 'naive-ui';
 import { Add } from '@vicons/ionicons5';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
@@ -87,6 +78,7 @@ import { onMounted } from 'vue';
 import { languageNames } from '@/themes/language-names';
 import { LanguageName } from '@uiw/codemirror-extensions-langs';
 import CodeSettings from '@/components/CodeSettings/index.vue';
+import Selector from '@/components/Selector/index.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -99,64 +91,17 @@ const {
   editStatus,
   codeContentTeam,
   addStatus,
-  currentCodeLanguageByHljs,
-  selectedCodeTitle,
   downloadToImgDOM,
   randomValue,
   datePickerDisabled,
   currentCodeTheme,
   backgroundColor,
+  currentURL
 } = storeToRefs(state);
 watch(currentCodeTheme, () => {
   localStorage.setItem('code-theme', currentCodeTheme.value as string);
 });
 
-const renderTag = ({
-  option,
-  handleClose,
-}: {
-  option: SelectOption;
-  handleClose: () => void;
-}) => {
-  return h(
-    NTag,
-    {
-      type: option.type as 'success' | 'warning' | 'error',
-      closable: false,
-      onMousedown: (e: FocusEvent) => {
-        e.preventDefault();
-      },
-      onClose: (e: MouseEvent) => {
-        e.stopPropagation();
-        handleClose();
-      },
-    },
-    { default: () => option.label }
-  );
-};
-
-// 下拉框的样式
-function generateOptionProps() {
-  return {
-    style: {
-      color: '#cfcfcf',
-      'font-size': '0.8rem',
-      'background-color': '#353535',
-      '--n-option-color-pending': 'rgb(68, 68, 68)',
-    },
-  };
-}
-// 选择代码
-function changeCodeContent(value: string, option: SelectOption) {
-  currentCode.value = value; // 修改代码展示
-  currentCodeLanguage.value = (option.language as string)
-    ? (option.language as string)
-    : (currentCodeLanguageByHljs.value as string); // 修改展示代码的语言
-  currentCodeLanguage.value = currentCodeLanguage.value
-    ? currentCodeLanguage.value
-    : 'markdown';
-  //   getCodeClass();
-}
 // 添加代码段
 function addCodeFile() {
   datePickerDisabled.value = true;
@@ -165,6 +110,7 @@ function addCodeFile() {
 }
 // 下载为图片
 function downloadCodeToImg() {
+  currentURL.value = location.href
   downloadToImgDOM.value = !downloadToImgDOM.value;
 }
 
@@ -209,6 +155,7 @@ watch(
     if (route.params.randomValue !== randomValue.value) {
       await getCode();
     }
+    currentURL.value = location.href
     randomValue.value = '';
     path.value = route.params.randomValue == 'codetietie' ? false : true;
     // getCodeClass(); // 更新代码类型
@@ -290,17 +237,18 @@ onMounted(async () => {
   margin-right: 0.3rem;
 }
 .add-code-file-btn {
-  height: 68%;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f1f2f0;
   border-radius: 5px;
-  padding-left: 3px;
-  padding-right: 3px;
-  &:hover {
-    background-color: #272b31;
-  }
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-left: 5px;
+  // &:hover {
+  //   background-color: #292929;
+  // }
 }
 .code-header-right {
   display: flex;

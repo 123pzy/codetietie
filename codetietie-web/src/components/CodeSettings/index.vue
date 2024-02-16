@@ -13,20 +13,16 @@
       />
     </div>
     <!-- 选择代码语言 -->
-    <div class="select-language">
-      <span class="select-language-title">{{ t('setEditCodeLanguage') }}</span>
-      <n-select
-        size="small"
-        v-model:value="editCodeLanguage"
-        :placeholder="t('selectCodeLanguage')"
-        :show-checkmark="false"
-        filterable
-        :options="codeLanguageTeam"
-        :render-tag="renderTag"
-        :node-props="generateOptionProps"
-        @update:value="changeEditCodeLang"
-      />
-    </div>
+    <Selector
+      class="select-language"
+      valueIndex="editCodeLanguage"
+      optionsIndex="codeLanguageTeam"
+      :placeholder="t('selectCodeLanguage')"
+      updateValueIndex="changeEditCodeLang"
+      ><span class="select-language-title">{{
+        t('setEditCodeLanguage')
+      }}</span></Selector
+    >
     <!-- 选择过期时间 -->
     <div class="deadline-select" v-show="!datePickerDisabled">
       <span class="deadline-select-title">{{
@@ -74,64 +70,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, h, CSSProperties } from 'vue';
-import {
-  NSpace,
-  NSelect,
-  NTag,
-  SelectOption,
-  NInput,
-  NDatePicker,
-  NSwitch,
-} from 'naive-ui';
+import { ref, CSSProperties } from 'vue';
+import { NSpace, NInput, NDatePicker, NSwitch } from 'naive-ui';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
 import { useState } from '@/stores/state';
+import Selector from '@/components/Selector/index.vue';
 // import { useRoute, useRouter } from 'vue-router';
-import { codeLanguageTeam } from '@/themes/language-names';
 
 // const route = useRoute();
 // const router = useRouter();
 // const path = ref(route.params.randomValue == 'codetietie' ? false : true);
 const { t } = useI18n();
 const state = useState();
-const {
-  currentCodeLanguage,
-  editStatus,
-  editCodeTitle,
-  editCodeLanguage,
-  deadlineTime,
-  burn,
-  datePickerDisabled,
-} = storeToRefs(state);
+const { editStatus, editCodeTitle, deadlineTime, burn, datePickerDisabled } =
+  storeToRefs(state);
 const format = ref('yyyy/MM/dd - HH:mm');
-const renderTag = ({
-  option,
-  handleClose,
-}: {
-  option: SelectOption;
-  handleClose: () => void;
-}) => {
-  return h(
-    NTag,
-    {
-      type: option.type as 'success' | 'warning' | 'error',
-      closable: false,
-      onMousedown: (e: FocusEvent) => {
-        e.preventDefault();
-      },
-      onClose: (e: MouseEvent) => {
-        e.stopPropagation();
-        handleClose();
-      },
-    },
-    { default: () => option.label }
-  );
-};
-// 修改创建代码的语言
-function changeEditCodeLang(value: string): void {
-  currentCodeLanguage.value = value;
-}
+
 // 设置过期时间
 function setDeadlineTime(v: any) {
   console.log(v, deadlineTime.value);
@@ -162,17 +117,6 @@ const railStyle = ({
 // 更改是否阅后即焚之后的回调
 function changeBurnActive(value: boolean) {
   burn.value = value;
-}
-// 下拉框的样式
-function generateOptionProps() {
-  return {
-    style: {
-      color: '#cfcfcf',
-      'font-size': '0.8rem',
-      'background-color': '#353535',
-      '--n-option-color-pending': 'rgb(68, 68, 68)',
-    },
-  };
 }
 </script>
 
