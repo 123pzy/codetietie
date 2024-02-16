@@ -95,22 +95,22 @@ watch(
   }
 }
 .to-short {
-  animation: short 0.285s forwards 0.03s;
+  animation: short 0.283s forwards 0.03s;
 }
 .to-long {
-  animation: long 0.222s forwards ease-in-out;
+  animation: long 0.221s forwards ease-in-out;
 }
 @keyframes short {
   0% {
     width: 100vw;
   }
   100% {
-    width: calc(100vw - 300px);
+    width: calc(100vw - 320px);
   }
 }
 @keyframes long {
   0% {
-    width: calc(100vw - 300px);
+    width: calc(100vw - 320px);
   }
   100% {
     width: 100vw;

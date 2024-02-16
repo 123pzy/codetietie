@@ -41,7 +41,7 @@ export const data: (
       '.cm-searchMatch.cm-searchMatch-selected': {
         backgroundColor: '#6199ff2f',
       },
-      '.cm-activeLine': { backgroundColor: '#6699ff0b' },
+      '.cm-activeLine': { backgroundColor: 'transparent' },
       '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
       '&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket': {
         backgroundColor: '#bad0f847',

@@ -87,7 +87,6 @@ import { onMounted } from 'vue';
 import { languageNames } from '@/themes/language-names';
 import { LanguageName } from '@uiw/codemirror-extensions-langs';
 import CodeSettings from '@/components/CodeSettings/index.vue';
-import { themes } from '@/themes/themes/index';
 
 const route = useRoute();
 const router = useRouter();
@@ -106,13 +105,11 @@ const {
   randomValue,
   datePickerDisabled,
   currentCodeTheme,
+  backgroundColor,
 } = storeToRefs(state);
-var backgroundColor = ref(themes[currentCodeTheme.value].backgroundColor);
 watch(currentCodeTheme, () => {
-  backgroundColor.value = themes[currentCodeTheme.value].backgroundColor;
-  localStorage.setItem('code-theme', currentCodeTheme.value);
+  localStorage.setItem('code-theme', currentCodeTheme.value as string);
 });
-console.log(backgroundColor);
 
 const renderTag = ({
   option,

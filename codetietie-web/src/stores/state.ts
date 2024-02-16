@@ -3,6 +3,9 @@ import { CodeContent } from '@/types/index';
 import { addCodeFolder, updateCodeFile } from '@/api/request';
 import hljs from 'highlight.js';
 import { languageNames } from '@/themes/language-names';
+import { themes } from '@/themes/themes/index';
+import { langs } from '@uiw/codemirror-extensions-langs';
+import { LanguageName } from '@uiw/codemirror-extensions-langs';
 
 interface test {
   [propsNames: string]: string;
@@ -37,13 +40,26 @@ export const useState = defineStore('state', {
       randomValue: '',
       datePickerDisabled: false,
       customStatus: false,
-      currentCodeTheme: localStorage.getItem('code-theme') || 'vsCode',
+      currentCodeTheme:
+        (localStorage.getItem('code-theme') as string) in themes
+          ? localStorage.getItem('code-theme')
+          : 'vsCode',
     };
   },
   getters: {
     currentCodeLanguageByHljs() {
       const { language } = hljs.highlightAuto(this.currentCode);
       return (language as string) ? (language as string) : 'markdown';
+    },
+    backgroundColor(state) {
+      return themes[state.currentCodeTheme as keyof typeof themes]
+        .backgroundColor;
+    },
+    codeTheme(state) {
+      return themes[state.currentCodeTheme as keyof typeof themes].theme;
+    },
+    codeLanguage(state) {
+      return langs[state.currentCodeLanguage as LanguageName]();
     },
   },
   actions: {

@@ -32,11 +32,13 @@ import CodeMirrorEditor from '@/components/CodeCard/CodeMirrorEditor.vue';
 import html2canvas from 'html2canvas';
 import { languageNames } from '@/themes/language-names';
 import { LanguageName } from '@uiw/codemirror-extensions-langs';
-import { themes } from '@/themes/themes/index';
 
 const state = useState();
-const { currentCodeLanguage, downloadToImgDOM, currentCodeTheme } =
-  storeToRefs(state);
+const {
+  currentCodeLanguage,
+  downloadToImgDOM,
+  backgroundColor,
+} = storeToRefs(state);
 const codeDOM = ref();
 function downLoad() {
   html2canvas(<any>codeDOM.value).then(function (canvas) {
@@ -59,12 +61,6 @@ function downLoad() {
 const url = ref(location.href);
 watch(downloadToImgDOM, () => {
   downLoad();
-});
-// 设置代码卡片header背景色
-var backgroundColor = ref(themes[currentCodeTheme.value].backgroundColor);
-watch(currentCodeTheme, () => {
-  backgroundColor.value = themes[currentCodeTheme.value].backgroundColor;
-  localStorage.setItem('code-theme', currentCodeTheme.value);
 });
 </script>
 

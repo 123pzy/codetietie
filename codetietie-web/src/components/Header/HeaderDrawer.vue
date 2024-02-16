@@ -1,6 +1,6 @@
 <template>
   <n-drawer
-    :width="300"
+    :width="320"
     v-model:show="state.customStatus"
     placement="left"
     :mask-closable="false"

@@ -27,10 +27,8 @@ import { storeToRefs } from 'pinia';
 import { useState } from '@/stores/state';
 import type { codeMirrorEditorPrpps } from '@/types/index';
 import { langs } from '@uiw/codemirror-extensions-langs';
-import { LanguageName } from '@uiw/codemirror-extensions-langs';
 import { ref, watch } from 'vue';
 import { languageNames } from '@/themes/language-names';
-import { themes } from '@/themes/themes/index';
 
 const state = useState();
 const {
@@ -39,6 +37,8 @@ const {
   minWidth,
   currentCodeLanguage,
   currentCodeTheme,
+  codeTheme,
+  codeLanguage,
 } = storeToRefs(state);
 defineProps<codeMirrorEditorPrpps>();
 const extensions = ref();
@@ -47,25 +47,16 @@ watch(
   currentCodeLanguage,
   () => {
     if (currentCodeLanguage.value in languageNames) {
-      extensions.value = [
-        langs[currentCodeLanguage.value as LanguageName](),
-        themes[currentCodeTheme.value].theme,
-      ];
+      extensions.value = [codeLanguage.value, codeTheme.value];
     } else {
-      extensions.value = [
-        langs['javascript'](),
-        themes[currentCodeTheme.value].theme,
-      ];
+      extensions.value = [langs['javascript'](), codeTheme.value];
     }
   },
   { immediate: true }
 );
 watch(currentCodeTheme, () => {
-  extensions.value = [
-    langs[currentCodeLanguage.value as LanguageName](),
-    themes[currentCodeTheme.value].theme,
-  ];
-  console.log(themes[currentCodeTheme.value].theme);
+  extensions.value = [codeLanguage.value, codeTheme.value];
+  console.log(codeTheme.value);
 });
 </script>
 <style lang="less" scoped></style>

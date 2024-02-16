@@ -7,14 +7,14 @@ const chalky = '#e5c07b',
   coral = '#e06c75',
   cyan = '#56b6c2',
   invalid = '#23262b',
-  ivory = '#abb2bf',
+  ivory = '#b29764',
   stone = '#7d8799', // Brightened compared to original to increase contrast
   malibu = '#61afef',
   sage = '#98c379',
   whiskey = '#d19a66',
   violet = '#c678dd',
   darkBackground = '#21252b',
-  highlightBackground = '#2c313a',
+  highlightBackground = 'transparent',
   background = '#faf8f5',
   tooltipBackground = '#353a42',
   selection = '#3E4451',
@@ -58,27 +58,19 @@ const duotoneLightTheme = data(
 The highlighting style for code in the One Dark theme.
 */
 const duotoneLightHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
-  { tag: [t.standard(t.tagName), t.tagName], color: '#116329' },
-  { tag: [t.comment, t.bracket], color: '#6a737d' },
-  { tag: [t.className, t.propertyName], color: '#6f42c1' },
+  { tag: [t.comment, t.bracket], color: '#b6ad9a' },
   {
-    tag: [t.variableName, t.attributeName, t.number, t.operator],
-    color: '#005cc5',
+    tag: [t.atom, t.number, t.keyword, t.link, t.attributeName, t.quote],
+    color: '#063289',
   },
   {
-    tag: [t.keyword, t.typeName, t.typeOperator, t.typeName],
-    color: '#d73a49',
+    tag: [t.emphasis, t.heading, t.tagName, t.propertyName, t.variableName],
+    color: '#2d2006',
   },
-  { tag: [t.string, t.meta, t.regexp], color: '#032f62' },
-  { tag: [t.name, t.quote], color: '#22863a' },
-  { tag: [t.heading], color: '#24292e', fontWeight: 'bold' },
-  { tag: [t.emphasis], color: '#24292e', fontStyle: 'italic' },
-  { tag: [t.deleted], color: '#b31d28', backgroundColor: 'ffeef0' },
-  { tag: [t.atom, t.bool, t.special(t.variableName)], color: '#e36209' },
-  { tag: [t.url, t.escape, t.regexp, t.link], color: '#032f62' },
-  { tag: t.link, textDecoration: 'underline' },
-  { tag: t.strikethrough, textDecoration: 'line-through' },
-  { tag: t.invalid, color: '#cb2431' },
+  { tag: [t.typeName, t.url, t.string], color: '#896724' },
+  { tag: [t.operator, t.string], color: '#1659df' },
+  { tag: [t.propertyName], color: '#b29762' },
+  { tag: [t.unit, t.punctuation], color: '#063289' },
 ]);
 /**
 Extension to enable the One Dark theme (both the editor theme and
