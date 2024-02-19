@@ -14,11 +14,13 @@
   --dropdown-font-color: #fff;
   --dropdown-allow-color: #2c3034;
   --dropdown-option-color: #ced0d1;
+  --homePage-func-item-bg-color: #2f2f2f;
+  --homePage-func-item-font-color: #9f9f9f;
 }
 
 :root {
   --font-color: #000;
-  --bg-color: #f1f2f0;
+  --bg-color: #fff;
   --line-color: rgba(0, 0, 0, 0.25);
   --btn-color: #fff;
   --btn-bg-color: #202021;
@@ -32,6 +34,8 @@
   --dropdown-font-color: #000;
   --dropdown-allow-color: #dcdeda;
   --dropdown-option-color: #c2c4c1;
+  --homePage-func-item-bg-color: #f1efef;
+  --homePage-func-item-font-color: #747474;
 }
 
 html,
