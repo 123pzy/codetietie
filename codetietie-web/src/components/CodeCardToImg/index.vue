@@ -43,23 +43,13 @@ const {
 const codeDOM = ref();
 function downLoad() {
   html2canvas(<any>codeDOM.value).then(function (canvas) {
-    // 创建一个临时链接元素
     var link = document.createElement('a');
-
-    // 将画布转换为图片URL
     var image = canvas.toDataURL();
-
-    // 设置链接元素的href属性为图片URL
     link.href = image;
-
-    // 设置链接元素的下载属性为截图.png
     link.download = 'image-codetietie.png';
-
-    // 模拟点击链接元素，开始下载
     link.click();
   });
 }
-const url = ref(location.href);
 watch(downloadToImgDOM, () => {
   downLoad();
 });
