@@ -109,16 +109,19 @@ const wh = ref(false);
 const codeCard = ref();
 var height: Ref<number> = ref(0);
 var width: Ref<number> = ref(0);
+const codeHeight = ref(70);
 function toBig() {
   big.value = true;
   small.value = false;
   height.value = codeCard.value.offsetHeight;
   width.value = codeCard.value.offsetWidth;
+  codeHeight.value = 95;
 }
 function toSmall() {
   if (!small.value && big.value) {
     big.value = false;
     small.value = true;
+    codeHeight.value = 70;
     setTimeout(() => {
       wh.value = true;
       small.value = false;
@@ -149,7 +152,7 @@ function toSmall() {
 .codeMirror-content {
   width: 100%;
   background-color: #1e1e1e;
-  max-height: 70vh;
+  max-height: v-bind(codeHeight + 'vh');
   overflow: auto;
   border-radius: 0 0 15px 15px;
 }
