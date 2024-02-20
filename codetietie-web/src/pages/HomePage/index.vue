@@ -4,8 +4,8 @@
     <div class="homePage-content">
       <div class="main">
         <div class="text">
-          <div class="text-name">代码贴贴</div>
-          <div class="text-info">一个快速分享代码的网站。</div>
+          <div class="text-name">{{ $t('website_title') }}</div>
+          <div class="text-info">{{ $t('website_subject') }}</div>
           <div class="start-btn" @click="go">{{ $t('getStarted') }}</div>
         </div>
         <div class="image">
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="func-items">
-        <div class="func-item" v-for="item in funcContent">
+        <div class="func-item" v-for="item in JSON.parse(t('funcItems'))">
           <div class="title">{{ item.title }}</div>
           <div class="content">{{ item.content }}</div>
         </div>
@@ -36,11 +36,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import Header from '@/components/Header/index.vue';
 import { useState } from '@/stores/state.ts';
 import { storeToRefs } from 'pinia';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const state = useState();
 const { theme } = storeToRefs(state);
 function go() {
@@ -49,28 +51,6 @@ function go() {
 function jumpICP() {
   window.open('https://beian.miit.gov.cn');
 }
-const funcContent = ref([
-  {
-    title: '一键分享代码',
-    content: '快速分享创建好的代码',
-  },
-  {
-    title: '同时创建多段代码',
-    content: '支持一条链接同时分享多段代码',
-  },
-  {
-    title: '一键复制代码',
-    content: '遇见感兴趣的代码片段，一键复制快速“为你所用”',
-  },
-  {
-    title: '切换代码主题',
-    content: '多种代码主题色任意切换',
-  },
-  {
-    title: '下载为图片',
-    content: '不仅仅支持分享链接，同时满足用户将代码转化为图片分享的习惯',
-  },
-]);
 console.log(
   '%c欢迎关注公众号：学编程的GISer',
   'color:skyblue;font-size:20px;font-weight:700;border:2px dashed skyblue;padding:5px;'
@@ -81,6 +61,7 @@ console.log(
 .homePage-container {
   color: var(--font-color);
   min-height: 100vh;
+  height: fit-content;
   background-color: var(--bg-color);
   display: flex;
   justify-content: center;
@@ -143,7 +124,7 @@ console.log(
   align-items: center;
   box-sizing: border-box;
   .home-img {
-    height: 100%;
+    width: 100%;
   }
 }
 .func-items {
@@ -160,14 +141,25 @@ console.log(
   border-radius: 1rem;
   padding: 1.5rem;
   box-sizing: border-box;
+  overflow: hidden;
+}
+// 设置限制显示行数
+.ellipsis(@textNum) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @textNum;
+  -webkit-box-orient: vertical;
 }
 .title {
   font-size: 1rem;
   font-weight: 700;
+  .ellipsis(2);
 }
 .content {
   color: var(--homePage-func-item-font-color);
   margin-top: 0.6rem;
+  .ellipsis(4);
 }
 footer {
   color: var(--font-color);
@@ -182,35 +174,50 @@ footer > span {
     justify-content: center;
     transform: translateY(10vh);
     flex-wrap: wrap;
-    height: 50vh;
+    height: fit-content;
   }
   .text {
     height: 50%;
     width: 100%;
-    &-name{
+    gap: 1rem;
+    &-name {
       font-size: 2rem;
     }
     &-info {
-    width: 100%;
-    font-size: 1rem;
-    text-align: center;
+      width: 100%;
+      font-size: 1rem;
+      text-align: center;
+    }
   }
-  }
-  .text-name{
+  .text-name {
     margin: 0;
   }
+  .start-btn {
+    width: fit-content;
+    padding: 0.2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 2rem;
+  }
   .image {
-    height: 50%;
+    height: fit-content;
     width: 90%;
     display: flex;
     justify-content: center;
+    align-items: start;
+    .home-img {
+      max-width: 96%; /* 设置最大宽度为父元素的100% */
+      height: auto; /* 让高度自动调整，以保持原始宽高比 */
+    }
   }
   .func-items {
+    margin-top: 13.2vh;
+    height: fit-content;
     flex-wrap: wrap;
     gap: 1rem;
   }
   .func-item {
-    height: 70%;
+    height: fit-content;
     width: 98%;
     padding: 1.2rem;
   }

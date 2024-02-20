@@ -44,4 +44,5 @@ export interface langInter {
   editCodeExpireTimePlaceholder: string;
   selectCodeThemeTitle: string;
   selectCodeTheme: string;
+  funcItems: string;
 }

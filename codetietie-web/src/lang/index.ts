@@ -6,7 +6,8 @@ type messagesObj = {
   [propsName: string]: any;
 };
 
-localStorage.setItem('CN', 'zh');
+const currentLang = localStorage.getItem('CN');
+if (!currentLang) localStorage.setItem('CN', 'zh');
 const defaultLang: any = localStorage.getItem('CN');
 const messages: messagesObj = {
   zh: zh,

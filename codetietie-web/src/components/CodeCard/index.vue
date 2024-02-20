@@ -1,8 +1,12 @@
 <template>
   <div class="code-card-container">
     <Drawer v-show="editStatus"></Drawer>
-    <div class="code-card">
-      <CodeHeader></CodeHeader>
+    <div
+      class="code-card"
+      :class="{ tobig: big, tosmall: small, towh: wh }"
+      ref="codeCard"
+    >
+      <CodeHeader :toBig="toBig" :toSmall="toSmall"></CodeHeader>
       <div class="codeMirror-content">
         <CodeMirrorEditor :disabled="disabled"></CodeMirrorEditor>
       </div>
@@ -37,13 +41,14 @@ import CodeHeader from './CodeHeader.vue';
 import Button from '@/components/Button/index.vue';
 import CodeCardToImg from '@/components/CodeCardToImg/index.vue';
 import Drawer from '@/components/CodeSettings/Drawer.vue';
-import { h } from 'vue';
+import { h, ref } from 'vue';
 import { useState } from '@/stores/state';
 import { storeToRefs } from 'pinia';
 import { useMessage, NIcon } from 'naive-ui';
 import { CopyOutline, ReceiptOutline } from '@vicons/ionicons5';
 import { useI18n } from 'vue-i18n';
 import { useRouter, useRoute } from 'vue-router';
+import { Ref } from 'vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -61,7 +66,7 @@ const {
   currentCodeLanguage,
   datePickerDisabled,
   backgroundColor,
-  currentURL
+  currentURL,
 } = storeToRefs(state);
 // 点击分享按钮
 const message = useMessage();
@@ -96,6 +101,30 @@ function cancelAddCode() {
   minHeight.value = 0;
   minWidth.value = 0;
   disabled.value = true;
+}
+// 最大化代码
+const big = ref(false);
+const small = ref(false);
+const wh = ref(false);
+const codeCard = ref();
+var height: Ref<number> = ref(0);
+var width: Ref<number> = ref(0);
+function toBig() {
+  big.value = true;
+  small.value = false;
+  height.value = codeCard.value.offsetHeight;
+  width.value = codeCard.value.offsetWidth;
+}
+function toSmall() {
+  if (!small.value && big.value) {
+    big.value = false;
+    small.value = true;
+    setTimeout(() => {
+      wh.value = true;
+      small.value = false;
+      console.log(codeCard.value.classList);
+    }, 300);
+  }
 }
 </script>
 
@@ -146,6 +175,44 @@ function cancelAddCode() {
   transform: translateY(-2rem);
   background-color: v-bind(backgroundColor);
   border-radius: 15px;
+}
+@keyframes tobig {
+  0% {
+    height: v-bind(height + 'px');
+    width: v-bind(width + 'px');
+  }
+  100% {
+    height: 100vh;
+    width: 100vw;
+    transform: translateY(0);
+    border-radius: 0px;
+  }
+}
+@keyframes tosmall {
+  0% {
+    height: 100vh;
+    width: 100vw;
+  }
+  100% {
+    height: v-bind(height + 'px');
+    width: v-bind(width + 'px');
+    max-width: 90vw;
+    transform: translateY(-2rem);
+    border-radius: 15px;
+  }
+}
+.tobig {
+  max-width: 100vw;
+  animation: tobig 0.29s forwards;
+  z-index: 100;
+}
+.tosmall {
+  animation: tosmall 0.29s forwards;
+  z-index: 0;
+}
+.towh {
+  height: fit-content;
+  width: fit-content;
 }
 .btn-team {
   position: absolute;

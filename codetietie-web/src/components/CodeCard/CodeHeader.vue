@@ -9,8 +9,8 @@
       <!-- Mac风格 -->
       <div class="mac-style-box">
         <div class="red"></div>
-        <div class="yellow"></div>
-        <div class="green"></div>
+        <div class="yellow" @click="props.toSmall"></div>
+        <div class="green" @click="props.toBig"></div>
       </div>
       <div class="before-edit" v-if="!editStatus">
         <!-- 代码文件选择 -->
@@ -96,8 +96,9 @@ const {
   datePickerDisabled,
   currentCodeTheme,
   backgroundColor,
-  currentURL
+  currentURL,
 } = storeToRefs(state);
+const props = defineProps(['toBig', 'toSmall']);
 watch(currentCodeTheme, () => {
   localStorage.setItem('code-theme', currentCodeTheme.value as string);
 });
@@ -110,7 +111,7 @@ function addCodeFile() {
 }
 // 下载为图片
 function downloadCodeToImg() {
-  currentURL.value = location.href
+  currentURL.value = location.href;
   downloadToImgDOM.value = !downloadToImgDOM.value;
 }
 
@@ -148,6 +149,7 @@ async function getCode() {
   }
 }
 
+// 最大化code-card
 // 动态路由参数变化时重新拉取代码并更新代码类型
 watch(
   () => route.params,
@@ -155,7 +157,7 @@ watch(
     if (route.params.randomValue !== randomValue.value) {
       await getCode();
     }
-    currentURL.value = location.href
+    currentURL.value = location.href;
     randomValue.value = '';
     path.value = route.params.randomValue == 'codetietie' ? false : true;
     // getCodeClass(); // 更新代码类型
