@@ -1,26 +1,4 @@
 import { langInter } from '@/types/index';
-const funcItems = JSON.stringify([
-  {
-    title: '一键分享代码',
-    content: '快速分享创建好的代码',
-  },
-  {
-    title: '同时创建多段代码',
-    content: '支持一条链接同时分享多段代码',
-  },
-  {
-    title: '一键复制代码',
-    content: '遇见感兴趣的代码片段，一键复制快速“为你所用”',
-  },
-  {
-    title: '切换代码主题',
-    content: '多种代码主题色任意切换',
-  },
-  {
-    title: '下载为图片',
-    content: '不仅仅支持分享链接，同时满足用户将代码转化为图片分享的习惯',
-  },
-]);
 const zh: langInter = {
   website_title: '代码贴贴',
   website_description: `创建和共享`,
@@ -53,7 +31,7 @@ const zh: langInter = {
   editCodeExpireTimePlaceholder: '设置过期时间（默认30天）',
   selectCodeThemeTitle: '设置代码主题',
   selectCodeTheme: '选择主题',
-  funcItems: funcItems,
+  funcItems:'zh'
 };
 
 export default zh;

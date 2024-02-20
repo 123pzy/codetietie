@@ -1,28 +1,4 @@
 import { langInter } from '@/types/index';
-const funcItems = JSON.stringify([
-  {
-    title: 'Share code with one click',
-    content: 'Quickly share the created code',
-  },
-  {
-    title: 'Create multiple pieces of code at the same time',
-    content: 'Support for sharing multiple pieces of code with one link',
-  },
-  {
-    title: 'Copy the code with one click',
-    content:
-      'Meet code snippets of interest, one click copy quickly "for your use"',
-  },
-  {
-    title: 'Switch code topic',
-    content: 'Multiple code theme colors can be switched arbitrarily',
-  },
-  {
-    title: 'Download as picture',
-    content:
-      "Not only support the sharing of links, but also meet the user's habit of converting code into image sharing",
-  },
-]);
 const en: langInter = {
   website_title: 'codetietie',
   website_description: 'Create and share',
@@ -56,7 +32,7 @@ const en: langInter = {
   editCodeExpireTimePlaceholder: 'Set expiration time(default: 30 days)',
   selectCodeThemeTitle: 'Select code Theme',
   selectCodeTheme: 'Select Theme',
-  funcItems: funcItems,
+  funcItems: 'en',
 };
 
 export default en;

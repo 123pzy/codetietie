@@ -22,7 +22,10 @@
         </div>
       </div>
       <div class="func-items">
-        <div class="func-item" v-for="item in JSON.parse(t('funcItems'))">
+        <div
+          class="func-item"
+          v-for="item in t('funcItems') === 'zh' ? funcItemZh : funcItemEn"
+        >
           <div class="title">{{ item.title }}</div>
           <div class="content">{{ item.content }}</div>
         </div>
@@ -36,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-// import { ref } from 'vue';
+import { ref } from 'vue';
 import Header from '@/components/Header/index.vue';
 import { useState } from '@/stores/state.ts';
 import { storeToRefs } from 'pinia';
@@ -51,6 +54,52 @@ function go() {
 function jumpICP() {
   window.open('https://beian.miit.gov.cn');
 }
+const funcItemZh = ref([
+  {
+    title: '一键分享代码',
+    content: '快速分享创建好的代码',
+  },
+  {
+    title: '同时创建多段代码',
+    content: '支持一条链接同时分享多段代码',
+  },
+  {
+    title: '一键复制代码',
+    content: '遇见感兴趣的代码片段，一键复制快速“为你所用”',
+  },
+  {
+    title: '切换代码主题',
+    content: '多种代码主题色任意切换',
+  },
+  {
+    title: '下载为图片',
+    content: '不仅仅支持分享链接，同时满足用户将代码转化为图片分享的习惯',
+  },
+]);
+const funcItemEn = ref([
+  {
+    title: 'Share code with one click',
+    content: 'Quickly share the created code',
+  },
+  {
+    title: 'Create multiple pieces of code at the same time',
+    content: 'Support for sharing multiple pieces of code with one link',
+  },
+  {
+    title: 'Copy the code with one click',
+    content:
+      'Meet code snippets of interest, one click copy quickly "for your use"',
+  },
+  {
+    title: 'Switch code topic',
+    content: 'Multiple code theme colors can be switched arbitrarily',
+  },
+  {
+    title: 'Download as picture',
+    content:
+      "Not only support the sharing of links, but also meet the user's habit of converting code into image sharing",
+  },
+]);
 console.log(
   '%c欢迎关注公众号：学编程的GISer',
   'color:skyblue;font-size:20px;font-weight:700;border:2px dashed skyblue;padding:5px;'

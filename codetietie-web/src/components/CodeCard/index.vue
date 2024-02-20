@@ -203,11 +203,11 @@ function toSmall() {
 }
 .tobig {
   max-width: 100vw;
-  animation: tobig 0.29s forwards;
+  animation: tobig 0.3s forwards;
   z-index: 100;
 }
 .tosmall {
-  animation: tosmall 0.29s forwards;
+  animation: tosmall 0.3s forwards;
   z-index: 0;
 }
 .towh {
