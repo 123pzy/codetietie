@@ -8,7 +8,7 @@
           <div class="text-info">{{ $t('website_subject') }}</div>
           <div class="start-btn" @click="go">{{ $t('getStarted') }}</div>
         </div>
-        <div class="image">
+        <div class="image-content">
           <img
             src="@/assets/home-page-Img-dark.png"
             class="home-img"
@@ -26,8 +26,8 @@
           class="func-item"
           v-for="item in t('funcItems') === 'zh' ? funcItemZh : funcItemEn"
         >
-          <div class="title">{{ item.title }}</div>
-          <div class="content">{{ item.content }}</div>
+          <div class="func-item-title">{{ item.title }}</div>
+          <div class="func-item-content">{{ item.content }}</div>
         </div>
       </div>
     </div>
@@ -126,8 +126,9 @@ console.log(
 }
 .main {
   display: flex;
-  transform: translateY(15vh);
-  height: 70vh;
+  transform: translateY(10vh);
+  height: fit-content;
+  align-self: start;
 }
 .text {
   height: 55vh;
@@ -165,32 +166,24 @@ console.log(
   transform: translateX(-50%);
   cursor: pointer;
 }
-.image {
+.image-content {
   height: 55vh;
-  width: 57vw;
+  width: 60vw;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
   .home-img {
-    width: 100%;
+    max-height: 100%; /* 设置图片的最大宽度为父容器的100% */
+    max-width: 100%; /* 设置高度为auto，以保持原始比例 */
   }
 }
 .func-items {
   height: 20vh;
   width: 90vw;
+  align-self: flex-end;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-}
-.func-item {
-  width: 18.8%;
-  height: 90%;
-  background-color: var(--homePage-func-item-bg-color);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-sizing: border-box;
-  overflow: hidden;
 }
 // 设置限制显示行数
 .ellipsis(@textNum) {
@@ -200,20 +193,30 @@ console.log(
   -webkit-line-clamp: @textNum;
   -webkit-box-orient: vertical;
 }
-.title {
-  font-size: 1rem;
-  font-weight: 700;
-  .ellipsis(2);
+.func-item {
+  width: 18.8%;
+  height: 90%;
+  background-color: var(--homePage-func-item-bg-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  &-title {
+    font-size: 1rem;
+    font-weight: 700;
+    .ellipsis(2);
+  }
+  &-content {
+    color: var(--homePage-func-item-font-color);
+    margin-top: 0.6rem;
+    .ellipsis(4);
+  }
 }
-.content {
-  color: var(--homePage-func-item-font-color);
-  margin-top: 0.6rem;
-  .ellipsis(4);
-}
+
 footer {
   color: var(--font-color);
   position: absolute;
-  bottom: 1vh;
+  bottom: 0vh;
 }
 footer > span {
   font-size: 0.68rem;
@@ -248,7 +251,7 @@ footer > span {
     padding-right: 1rem;
     border-radius: 2rem;
   }
-  .image {
+  .image-content {
     height: fit-content;
     width: 90%;
     display: flex;
