@@ -138,13 +138,9 @@ function toSmall() {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(
-      90deg,
-      var(--line-color) 2.5%,
-      rgba(0, 0, 0, 0) 3%
-    ),
-    linear-gradient(360deg, var(--line-color) 2.5%, rgba(0, 0, 0, 0) 3%);
-  background-size: 20px 20px;
+  background-image: linear-gradient(var(--bg-color) 14px, transparent 1px),
+    linear-gradient(90deg, transparent 14px, #424447 1px);
+  background-size: 15px 15px;
   background-position: center center;
   background-color: var(--bg-color);
   box-sizing: border-box;

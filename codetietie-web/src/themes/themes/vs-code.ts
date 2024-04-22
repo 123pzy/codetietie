@@ -126,7 +126,7 @@ const vsCodeHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
   { tag: t.strong, fontWeight: 'bold' },
   { tag: t.emphasis, fontStyle: 'italic' },
   { tag: t.strikethrough, textDecoration: 'line-through' },
-  { tag: [t.meta, t.comment], color: '#6a9955' },
+  { tag: [t.meta, t.comment], color: '#6a9955', fontStyle: 'italic' },
   { tag: t.link, color: '#6a9955', textDecoration: 'underline' },
   { tag: t.invalid, color: '#ff0000' },
 ]);
